@@ -8,24 +8,32 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
-// client.on('voiceStateUpdate', async (oldMember, newMember) => {
-//   if (oldMember.channel) {
-//     if (oldMember.channel.members.get('845750059843846144')) {
-//       if (oldMember.channel.members.size === 1) {
-//         // oot yksin puhelus kallu
-//         return oldMember.channel.leave();
-//       }
-//     }
-//   }
-//   if (newMember.channel) {
-//     if (newMember.channel.members.get('845750059843846144')) {
-//       if (newMember.channel.members.size === 1) {
-//         // oot yksin puhelus kallu
-//         newMember.channel.leave();
-//       }
-//     }
-//   }
-// });
+client.on('voiceStateUpdate', async (oldMember, newMember) => {
+  if (oldMember.channel) {
+    if (oldMember.channel.members.get('845750059843846144')) {
+      if (oldMember.channel.members.size === 1) {
+        // oot yksin puhelus kallu
+        return oldMember.channel.leave();
+      }
+    }
+  }
+  if (newMember.channel) {
+    if (newMember.channel.members.get('845750059843846144')) {
+      if (newMember.channel.members.size === 1) {
+        // oot yksin puhelus kallu
+        newMember.channel.leave();
+      }
+    }
+  }
+});
+
+client.on('voiceStateUpdate', async (oldMember, newMember) => {
+  if (!oldMember.guild) return;
+  if (!oldMember.channel) return;
+  if (oldMember.channel.members.size === 1) {
+    oldMember.channel.leave();
+  }
+});
 
 client.on('interaction', async (interaction) => {
   if (!interaction.isCommand()) return;

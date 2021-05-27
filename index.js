@@ -6,6 +6,43 @@ const client = new Discord.Client({ intents: Discord.Intents.ALL });
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
+
+  // client.guilds.cache
+  //   .get('229499178018013184')
+  //   .channels.cache.get('229499178018013184')
+  //   .send({ files: [{ attachment: 'kamverus.png' }] });
+
+  client.api.channels['229499178018013184'].messages.post({
+    data: {
+      content: 'Nappuloita JOTKA JYTÄÄ vika kerta',
+      components: [
+        {
+          type: 1,
+          components: [
+            {
+              type: 2,
+              label: 'Bängereitä heti!',
+              style: 1,
+              custom_id: 'play',
+            },
+            {
+              type: 2,
+              label: 'vittuun täältä!',
+              style: 4,
+              custom_id: 'stop',
+            },
+            {
+              type: 2,
+              label: 'kontent paikka!',
+              style: 5,
+              disabled: true,
+              url: 'https://pornhub.com/gay?aapo=onsus',
+            },
+          ],
+        },
+      ],
+    },
+  });
 });
 
 client.on('voiceStateUpdate', async (oldMember, newMember) => {
@@ -35,7 +72,66 @@ client.on('voiceStateUpdate', async (oldMember, newMember) => {
   }
 });
 
+client.ws.on('INTERACTION_CREATE', async (interaction) => {
+  console.log(interaction, 'WS EVENT');
+
+  if (interaction.type !== 3) return;
+
+  if (interaction.data.custom_id == 'play') {
+    client.api.interactions(interaction.id, interaction.token).callback.post({
+      data: {
+        type: 4,
+        data: {
+          content: 'LAITETAA JYTÄÄ',
+          flags: 64,
+        },
+      },
+    });
+
+    const guild = await client.guilds.fetch(interaction.guild_id);
+    const guildUser = await guild.members.fetch(interaction.member.user.id);
+
+    if (!guildUser.voice.channel) return console.log('ei jytää');
+
+    if (guildUser.voice.connection) return;
+
+    const connection = await guildUser.voice.channel.join();
+
+    const dispatcher = connection.play('wiskari.mp3');
+    dispatcher.setVolume(0.4);
+
+    return;
+  }
+
+  if (interaction.data.custom_id == 'stop') {
+    const guild = await client.guilds.fetch(interaction.guild_id);
+    if (guild.me.voice.connection) {
+      guild.me.voice.connection.disconnect();
+      client.api.interactions(interaction.id, interaction.token).callback.post({
+        data: {
+          type: 4,
+          data: {
+            content: 'HIMAAN',
+            flags: 64,
+          },
+        },
+      });
+    } else {
+      client.api.interactions(interaction.id, interaction.token).callback.post({
+        data: {
+          type: 4,
+          data: {
+            content: 'en voi lähtee himaa jos oon jo himassa',
+            flags: 64,
+          },
+        },
+      });
+    }
+  }
+});
+
 client.on('interaction', async (interaction) => {
+  console.log('INTERACTION');
   if (!interaction.isCommand()) return;
   if (interaction.commandName === 'trollage') {
     await interaction.reply('<:troll:837372281554599956>');

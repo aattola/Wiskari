@@ -1,6 +1,8 @@
 /* eslint-disable no-useless-concat */
 require('dotenv').config();
 const Discord = require('discord.js');
+const fetch = require('node-fetch');
+const { Board, RandomChoice } = require('tictactoe-game-modules');
 
 const client = new Discord.Client({ intents: Discord.Intents.ALL });
 
@@ -40,11 +42,140 @@ client.on('voiceStateUpdate', async (oldMember, newMember) => {
   }
 });
 
+function dataBuilder(board, disable = false) {
+  const comps = board.map((pick, i) => {
+    if (pick == 'X') {
+      return {
+        type: 2,
+        style: 3,
+        disabled: true,
+        label: 'X',
+        custom_id: `tictac_${i + 1}_2`,
+      };
+    }
+    if (pick == 'O') {
+      return {
+        type: 2,
+        style: 4,
+        disabled: true,
+        label: 'O',
+        custom_id: `tictac_${i + 1}_3`,
+      };
+    }
+
+    return {
+      type: 2,
+      style: 2,
+      disabled: disable,
+      label: ' ',
+      custom_id: `tictac_${i + 1}_1`,
+    };
+  });
+
+  const sortedComps = [
+    {
+      type: 1,
+      components: [comps[0], comps[1], comps[2]],
+    },
+    {
+      type: 1,
+      components: [comps[3], comps[4], comps[5]],
+    },
+    {
+      type: 1,
+      components: [comps[6], comps[7], comps[8]],
+    },
+  ];
+
+  return sortedComps;
+}
+
+function parseComponentsToGrid(comp) {
+  const components = [];
+  comp.forEach((c) => {
+    c.components.forEach((a) => {
+      components.push(a);
+    });
+  });
+
+  const returnComp = components.map((co) => {
+    if (co.label == ' ') return '';
+    return co.label;
+  });
+
+  return returnComp;
+}
+
+function gameOver(parsedBoard, interaction) {
+  console.log('peli done');
+  console.log(parsedBoard.winningPlayer());
+  const data2 = dataBuilder(parsedBoard.grid, true);
+  client.api.interactions(interaction.id, interaction.token).callback.post({
+    data: {
+      type: 4,
+      data: {
+        // flags: 64,
+        content: `PELI LOPPU ${
+          parsedBoard.winningPlayer() == 'X'
+            ? `<@${interaction.member.user.id}> VOITIT`
+            : 'WISKARI VOITTI'
+        } `,
+        components: data2,
+      },
+    },
+  });
+}
+
 client.ws.on('INTERACTION_CREATE', async (interaction) => {
   console.log(interaction, 'WS EVENT');
 
   if (interaction.type !== 3) return;
 
+  if (interaction.data.custom_id.startsWith('tictac_')) {
+    // tictac roskaa
+    const blockId = interaction.data.custom_id.split('_')[1];
+    const blockChoice = interaction.data.custom_id.split('_')[2];
+
+    // console.log(blockId, blockChoice, interaction.message, 'KJISSA');
+
+    const { components } = await client.api.channels[
+      interaction.channel_id
+    ].messages[interaction.message.id].get();
+
+    // console.log(components);
+
+    const parsed = parseComponentsToGrid(components);
+
+    let parsedBoard = new Board(parsed);
+
+    parsedBoard = parsedBoard.makeMove(blockId, 'X');
+
+    if (parsedBoard.isGameOver()) {
+      return gameOver(parsedBoard, interaction);
+    }
+
+    const random = new RandomChoice(parsedBoard);
+    const randomIndex = random.findRandomMove(parsedBoard);
+
+    parsedBoard = parsedBoard.makeMove(randomIndex, 'O');
+
+    if (parsedBoard.isGameOver()) {
+      return gameOver(parsedBoard, interaction);
+    }
+
+    const data = dataBuilder(parsedBoard.grid);
+
+    client.api.interactions(interaction.id, interaction.token).callback.post({
+      data: {
+        type: 4,
+        data: {
+          // flags: 64,
+          content: 'Video peliä',
+          components: data,
+        },
+      },
+    });
+  }
   if (interaction.data.custom_id == 'play') {
     client.api.interactions(interaction.id, interaction.token).callback.post({
       data: {
@@ -101,6 +232,88 @@ client.ws.on('INTERACTION_CREATE', async (interaction) => {
 client.on('interaction', async (interaction) => {
   console.log('INTERACTION');
   if (!interaction.isCommand()) return;
+
+  if (interaction.commandName === 'tictactoe') {
+    client.api.interactions(interaction.id, interaction.token).callback.post({
+      data: {
+        type: 4,
+        data: {
+          content: 'Videopeli discordissa',
+          components: [
+            {
+              type: 1,
+              components: [
+                {
+                  type: 2,
+                  style: 2,
+                  label: ' ',
+                  custom_id: 'tictac_1_1',
+                },
+                {
+                  type: 2,
+                  style: 2,
+                  label: ' ',
+                  custom_id: 'tictac_2_1',
+                },
+                {
+                  type: 2,
+                  style: 2,
+                  label: ' ',
+                  custom_id: 'tictac_3_1',
+                },
+              ],
+            },
+            {
+              type: 1,
+              components: [
+                {
+                  type: 2,
+                  style: 2,
+                  label: ' ',
+                  custom_id: 'tictac_4_1',
+                },
+                {
+                  type: 2,
+                  style: 2,
+                  label: ' ',
+                  custom_id: 'tictac_5_1',
+                },
+                {
+                  type: 2,
+                  style: 2,
+                  label: ' ',
+                  custom_id: 'tictac_6_1',
+                },
+              ],
+            },
+            {
+              type: 1,
+              components: [
+                {
+                  type: 2,
+                  style: 2,
+                  label: ' ',
+                  custom_id: 'tictac_7_1',
+                },
+                {
+                  type: 2,
+                  style: 2,
+                  label: ' ',
+                  custom_id: 'tictac_8_1',
+                },
+                {
+                  type: 2,
+                  style: 2,
+                  label: ' ',
+                  custom_id: 'tictac_9_1',
+                },
+              ],
+            },
+          ],
+        },
+      },
+    });
+  }
 
   if (interaction.commandName === 'nappulat') {
     client.api.interactions(interaction.id, interaction.token).callback.post({
@@ -212,9 +425,14 @@ client.on('message', async (message) => {
     //   ],
     // };
 
+    // const data = {
+    //   name: 'nappulat',
+    //   description: 'uusia dc nappuloita (toimii vaan kun botti päällä)',
+    // };
+
     const data = {
-      name: 'nappulat',
-      description: 'uusia dc nappuloita (toimii vaan kun botti päällä)',
+      name: 'tictactoe',
+      description: 'videopeli discordissa',
     };
 
     const command = await client.guilds.cache

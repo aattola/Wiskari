@@ -11,38 +11,6 @@ client.on('ready', () => {
   //   .get('229499178018013184')
   //   .channels.cache.get('229499178018013184')
   //   .send({ files: [{ attachment: 'kamverus.png' }] });
-
-  client.api.channels['229499178018013184'].messages.post({
-    data: {
-      content: 'Nappuloita JOTKA JYTÄÄ vika kerta',
-      components: [
-        {
-          type: 1,
-          components: [
-            {
-              type: 2,
-              label: 'Bängereitä heti!',
-              style: 1,
-              custom_id: 'play',
-            },
-            {
-              type: 2,
-              label: 'vittuun täältä!',
-              style: 4,
-              custom_id: 'stop',
-            },
-            {
-              type: 2,
-              label: 'kontent paikka!',
-              style: 5,
-              disabled: true,
-              url: 'https://pornhub.com/gay?aapo=onsus',
-            },
-          ],
-        },
-      ],
-    },
-  });
 });
 
 client.on('voiceStateUpdate', async (oldMember, newMember) => {
@@ -133,6 +101,44 @@ client.ws.on('INTERACTION_CREATE', async (interaction) => {
 client.on('interaction', async (interaction) => {
   console.log('INTERACTION');
   if (!interaction.isCommand()) return;
+
+  if (interaction.commandName === 'nappulat') {
+    client.api.interactions(interaction.id, interaction.token).callback.post({
+      data: {
+        type: 4,
+        data: {
+          content: 'Nappuloita JOTKA JYTÄÄ ',
+          components: [
+            {
+              type: 1,
+              components: [
+                {
+                  type: 2,
+                  label: 'Bängereitä heti!',
+                  style: 1,
+                  custom_id: 'play',
+                },
+                {
+                  type: 2,
+                  label: 'vittuun täältä!',
+                  style: 4,
+                  custom_id: 'stop',
+                },
+                {
+                  type: 2,
+                  label: 'kontent paikka!',
+                  style: 5,
+                  disabled: false,
+                  url: 'https://pornhub.com/gay?aapo=onsus',
+                },
+              ],
+            },
+          ],
+        },
+      },
+    });
+  }
+
   if (interaction.commandName === 'trollage') {
     await interaction.reply('<:troll:837372281554599956>');
     const { member } = interaction.options[0];
@@ -193,17 +199,22 @@ client.on('message', async (message) => {
     message.content.toLowerCase() === '!deploy' &&
     message.author.id === '214760917810937856'
   ) {
+    // const data = {
+    //   name: 'trollage',
+    //   description: 'we do a little trolling',
+    //   options: [
+    //     {
+    //       name: 'ukko',
+    //       type: 'USER',
+    //       description: 'Ketä jekutetaan',
+    //       required: true,
+    //     },
+    //   ],
+    // };
+
     const data = {
-      name: 'trollage',
-      description: 'we do a little trolling',
-      options: [
-        {
-          name: 'ukko',
-          type: 'USER',
-          description: 'Ketä jekutetaan',
-          required: true,
-        },
-      ],
+      name: 'nappulat',
+      description: 'uusia dc nappuloita (toimii vaan kun botti päällä)',
     };
 
     const command = await client.guilds.cache

@@ -2,7 +2,7 @@
 require('dotenv').config();
 const Discord = require('discord.js');
 const fetch = require('node-fetch');
-const { Board, RandomChoice } = require('tictactoe-game-modules');
+const { Board, RandomChoice, Minimax } = require('tictactoe-game-modules');
 
 const client = new Discord.Client({ intents: Discord.Intents.ALL });
 
@@ -110,21 +110,39 @@ function gameOver(parsedBoard, interaction) {
   console.log('peli done');
   console.log(parsedBoard.winningPlayer());
   const data2 = dataBuilder(parsedBoard.grid, true);
+
+  if (parsedBoard.isGameDraw()) {
+    console.log('draw');
+    client.api.interactions(interaction.id, interaction.token).callback.post({
+      data: {
+        type: 4,
+        data: {
+          // flags: 64,
+          content: `Peli loppui tasapeliin`,
+          components: data2,
+        },
+      },
+    });
+    return;
+  }
+
   client.api.interactions(interaction.id, interaction.token).callback.post({
     data: {
       type: 4,
       data: {
         // flags: 64,
-        content: `PELI LOPPU ${
+        content: `Peli loppui ${
           parsedBoard.winningPlayer() == 'X'
-            ? `<@${interaction.member.user.id}> VOITIT`
-            : 'WISKARI VOITTI'
+            ? `SINÄ <@${interaction.member.user.id}> VOITIT`
+            : '<@845750059843846144> voitti'
         } `,
         components: data2,
       },
     },
   });
 }
+
+const games = {};
 
 client.ws.on('INTERACTION_CREATE', async (interaction) => {
   console.log(interaction, 'WS EVENT');
@@ -154,8 +172,12 @@ client.ws.on('INTERACTION_CREATE', async (interaction) => {
       return gameOver(parsedBoard, interaction);
     }
 
-    const random = new RandomChoice(parsedBoard);
-    const randomIndex = random.findRandomMove(parsedBoard);
+    // const random = new RandomChoice(parsedBoard);
+    // const randomIndex = random.findRandomMove(parsedBoard);
+
+    const minimax = new Minimax('X', 'O');
+
+    const randomIndex = minimax.findBestMove(parsedBoard);
 
     parsedBoard = parsedBoard.makeMove(randomIndex, 'O');
 
@@ -164,6 +186,16 @@ client.ws.on('INTERACTION_CREATE', async (interaction) => {
     }
 
     const data = dataBuilder(parsedBoard.grid);
+
+    // const data = await client.api
+    //   .webhooks(client.user.id, interaction.token)
+    //   .messages('@original')
+    //   .get();
+
+    // console.log(data);
+
+    // const { token, id } = games[interaction.member.user.id];
+    // console.log('TOKEN', token, id);
 
     client.api.interactions(interaction.id, interaction.token).callback.post({
       data: {
@@ -176,6 +208,7 @@ client.ws.on('INTERACTION_CREATE', async (interaction) => {
       },
     });
   }
+
   if (interaction.data.custom_id == 'play') {
     client.api.interactions(interaction.id, interaction.token).callback.post({
       data: {
@@ -238,7 +271,7 @@ client.on('interaction', async (interaction) => {
       data: {
         type: 4,
         data: {
-          content: 'Videopeli discordissa',
+          content: 'Tic Tac Toe',
           components: [
             {
               type: 1,
@@ -313,43 +346,64 @@ client.on('interaction', async (interaction) => {
         },
       },
     });
+
+    // games[interaction.member.user.id] = {
+    //   token: interaction.token,
+    //   id: interaction.id,
+    // };
   }
 
   if (interaction.commandName === 'nappulat') {
-    client.api.interactions(interaction.id, interaction.token).callback.post({
-      data: {
-        type: 4,
-        data: {
-          content: 'Nappuloita JOTKA JYTÄÄ ',
-          components: [
-            {
-              type: 1,
-              components: [
-                {
-                  type: 2,
-                  label: 'Bängereitä heti!',
-                  style: 1,
-                  custom_id: 'play',
-                },
-                {
-                  type: 2,
-                  label: 'vittuun täältä!',
-                  style: 4,
-                  custom_id: 'stop',
-                },
-                {
-                  type: 2,
-                  label: 'kontent paikka!',
-                  style: 5,
-                  disabled: false,
-                  url: 'https://pornhub.com/gay?aapo=onsus',
-                },
-              ],
-            },
-          ],
-        },
-      },
-    });
+    const row = new Discord.MessageActionRow()
+      .addComponent(
+        new Discord.MessageButton()
+          .setCustomID('play')
+          .setLabel('Bängereitä heti!')
+          .setStyle('PRIMARY')
+      )
+      .addComponent(
+        new Discord.MessageButton()
+          .setCustomID('stop')
+          .setLabel('vittuun täältä!')
+          .setStyle('PRIMARY')
+      );
+
+    await interaction.reply({ content: 'Pong!', components: [row] });
+    return;
+    // client.api.interactions(interaction.id, interaction.token).callback.post({
+    //   data: {
+    //     type: 4,
+    //     data: {
+    //       content: 'Nappuloita JOTKA JYTÄÄ ',
+    //       components: [
+    //         {
+    //           type: 1,
+    //           components: [
+    //             {
+    //               type: 2,
+    //               label: 'Bängereitä heti!',
+    //               style: 1,
+    //               custom_id: 'play',
+    //             },
+    //             {
+    //               type: 2,
+    //               label: 'vittuun täältä!',
+    //               style: 4,
+    //               custom_id: 'stop',
+    //             },
+    //             {
+    //               type: 2,
+    //               label: 'kontent paikka!',
+    //               style: 5,
+    //               disabled: false,
+    //               url: 'https://pornhub.com/gay?aapo=onsus',
+    //             },
+    //           ],
+    //         },
+    //       ],
+    //     },
+    //   },
+    // });
   }
 
   if (interaction.commandName === 'trollage') {

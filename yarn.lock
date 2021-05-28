@@ -1822,9 +1822,9 @@ detect-libc@^1.0.3:
   resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-1.0.3.tgz#fa137c4bd698edf55cd5cd02ac559f91a4c4ba9b"
   integrity sha1-+hN8S9aY7fVc1c0CrFWfkaTEups=
 
-discord.js@discordjs/discord.js:
+"discord.js@github:monbrey/discord.js#message-components":
   version "13.0.0-dev"
-  resolved "https://codeload.github.com/discordjs/discord.js/tar.gz/b376f31af9881b9cd3f82ac4a42a468947cce482"
+  resolved "https://codeload.github.com/monbrey/discord.js/tar.gz/b8d7977705d0eb145e6810dac64862affdcb4f2f"
   dependencies:
     "@discordjs/collection" "^0.1.6"
     "@discordjs/form-data" "^3.0.1"

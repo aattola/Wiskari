@@ -107,6 +107,10 @@ function parseComponentsToGrid(comp) {
 }
 
 function gameOver(parsedBoard, interaction) {
+  client.api
+    .webhooks(client.user.id, interaction.token)
+    .messages(interaction.message.id)
+    .delete();
   console.log('peli done');
   console.log(parsedBoard.winningPlayer());
   const data2 = dataBuilder(parsedBoard.grid, true);
@@ -145,7 +149,7 @@ function gameOver(parsedBoard, interaction) {
 const games = {};
 
 client.ws.on('INTERACTION_CREATE', async (interaction) => {
-  console.log(interaction, 'WS EVENT');
+  console.log(interaction.data, 'WS EVENT');
 
   if (interaction.type !== 3) return;
 
@@ -197,12 +201,17 @@ client.ws.on('INTERACTION_CREATE', async (interaction) => {
     // const { token, id } = games[interaction.member.user.id];
     // console.log('TOKEN', token, id);
 
+    client.api
+      .webhooks(client.user.id, interaction.token)
+      .messages(interaction.message.id)
+      .delete();
+
     client.api.interactions(interaction.id, interaction.token).callback.post({
       data: {
         type: 4,
         data: {
           // flags: 64,
-          content: 'Video peliä',
+          content: `Video peliä <@${interaction.member.user.id}> ukon kanssa.`,
           components: data,
         },
       },
@@ -271,7 +280,7 @@ client.on('interaction', async (interaction) => {
       data: {
         type: 4,
         data: {
-          content: 'Tic Tac Toe',
+          content: `Video peliä <@${interaction.member.user.id}> ukon kanssa.`,
           components: [
             {
               type: 1,
@@ -366,9 +375,15 @@ client.on('interaction', async (interaction) => {
           .setCustomID('stop')
           .setLabel('vittuun täältä!')
           .setStyle('PRIMARY')
+      )
+      .addComponent(
+        new Discord.MessageButton()
+          .setURL('https://pornhub.com/gay?aapo=onsus')
+          .setLabel('kontent paikka!')
+          .setStyle('LINK')
       );
 
-    await interaction.reply({ content: 'Pong!', components: [row] });
+    await interaction.reply({ content: 'Ota nappulas', components: [row] });
     return;
     // client.api.interactions(interaction.id, interaction.token).callback.post({
     //   data: {
@@ -469,14 +484,14 @@ client.on('message', async (message) => {
     // const data = {
     //   name: 'trollage',
     //   description: 'we do a little trolling',
-    //   options: [
-    //     {
-    //       name: 'ukko',
-    //       type: 'USER',
-    //       description: 'Ketä jekutetaan',
-    //       required: true,
-    //     },
-    //   ],
+    // options: [
+    //   {
+    //     name: 'ukko',
+    //     type: 'USER',
+    //     description: 'Ketä jekutetaan',
+    //     required: true,
+    //   },
+    // ],
     // };
 
     // const data = {
@@ -487,6 +502,14 @@ client.on('message', async (message) => {
     const data = {
       name: 'tictactoe',
       description: 'videopeli discordissa',
+      options: [
+        {
+          name: 'ukko',
+          type: 'USER',
+          description: 'Ketä vastaan taistelemme.',
+          required: false,
+        },
+      ],
     };
 
     const command = await client.guilds.cache
@@ -515,10 +538,11 @@ client.on('message', async (message) => {
     message.author.id === '214760917810937856'
   ) {
     console.log('poistetaan', message.content.toLowerCase().split(' ')[1]);
-    const commands = await client.application?.commands.delete(
-      message.content.toLowerCase().split(' ')[1]
-    );
-    console.log(commands);
+
+    const command = await client.guilds.cache
+      .get(message.guild.id)
+      ?.commands.delete(message.content.toLowerCase().split(' ')[1]);
+    console.log(command);
   }
 });
 

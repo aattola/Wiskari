@@ -5,6 +5,7 @@ const fetch = require('node-fetch');
 const { Board, RandomChoice, Minimax } = require('tictactoe-game-modules');
 
 const client = new Discord.Client({ intents: Discord.Intents.ALL });
+// const disbut = require('discord-buttons')(client);
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -15,210 +16,69 @@ client.on('ready', () => {
   //   .send({ files: [{ attachment: 'kamverus.png' }] });
 });
 
-client.on('voiceStateUpdate', async (oldMember, newMember) => {
-  if (oldMember.channel) {
-    if (oldMember.channel.members.get('845750059843846144')) {
-      if (oldMember.channel.members.size === 1) {
-        // oot yksin puhelus kallu
-        return oldMember.channel.leave();
-      }
+/**
+ *
+ * @param {Discord.MessageComponentInteraction} interaction
+ */
+async function updateGrid(interaction) {
+  /** @type {Discord.Message} message */
+  const { message } = interaction;
+
+  let xs = 0;
+  let os = 0;
+
+  for (const actionRow of message.components) {
+    for (const button of actionRow.components) {
+      if (button.label === 'X') xs++;
+      else if (button.label === 'O') os++;
     }
   }
-  if (newMember.channel) {
-    if (newMember.channel.members.get('845750059843846144')) {
-      if (newMember.channel.members.size === 1) {
-        // oot yksin puhelus kallu
-        newMember.channel.leave();
-      }
-    }
-  }
-});
 
-client.on('voiceStateUpdate', async (oldMember, newMember) => {
-  if (!oldMember.guild) return;
-  if (!oldMember.channel) return;
-  if (oldMember.channel.members.size === 1) {
-    oldMember.channel.leave();
-  }
-});
+  const XsTurn = xs <= os;
+  const i = parseInt(interaction.customID[3]);
+  const j = parseInt(interaction.customID[4]);
 
-function dataBuilder(board, disable = false) {
-  const comps = board.map((pick, i) => {
-    if (pick == 'X') {
-      return {
-        type: 2,
-        style: 3,
-        disabled: true,
-        label: 'X',
-        custom_id: `tictac_${i + 1}_2`,
-      };
-    }
-    if (pick == 'O') {
-      return {
-        type: 2,
-        style: 4,
-        disabled: true,
-        label: 'O',
-        custom_id: `tictac_${i + 1}_3`,
-      };
-    }
+  const buttonPressed = message.components[i - 1].components[j - 1];
 
-    return {
-      type: 2,
-      style: 2,
-      disabled: disable,
-      label: ' ',
-      custom_id: `tictac_${i + 1}_1`,
-    };
-  });
+  if (buttonPressed.label !== ' ')
+    return interaction.reply('Älä laita tällästä', {
+      ephemeral: true,
+    });
 
-  const sortedComps = [
-    {
-      type: 1,
-      components: [comps[0], comps[1], comps[2]],
-    },
-    {
-      type: 1,
-      components: [comps[3], comps[4], comps[5]],
-    },
-    {
-      type: 1,
-      components: [comps[6], comps[7], comps[8]],
-    },
-  ];
+  buttonPressed.label = XsTurn ? 'X' : 'O';
+  buttonPressed.style = XsTurn ? 'SUCCESS' : 'DANGER';
 
-  return sortedComps;
-}
+  const styleToNumber = (style) =>
+    // eslint-disable-next-line no-nested-ternary
+    style === 'SECONDARY' ? 2 : style === 'SUCCESS' ? 3 : 4;
 
-function parseComponentsToGrid(comp) {
   const components = [];
-  comp.forEach((c) => {
-    c.components.forEach((a) => {
-      components.push(a);
-    });
-  });
 
-  const returnComp = components.map((co) => {
-    if (co.label == ' ') return '';
-    return co.label;
-  });
-
-  return returnComp;
-}
-
-function gameOver(parsedBoard, interaction) {
-  client.api
-    .webhooks(client.user.id, interaction.token)
-    .messages(interaction.message.id)
-    .delete();
-  console.log('peli done');
-  console.log(parsedBoard.winningPlayer());
-  const data2 = dataBuilder(parsedBoard.grid, true);
-
-  if (parsedBoard.isGameDraw()) {
-    console.log('draw');
-    client.api.interactions(interaction.id, interaction.token).callback.post({
-      data: {
-        type: 4,
-        data: {
-          // flags: 64,
-          content: `Peli loppui tasapeliin`,
-          components: data2,
-        },
-      },
-    });
-    return;
+  for (const actionRow of message.components) {
+    components.push({ type: 1, components: [] });
+    for (const button of actionRow.components) {
+      components[components.length - 1].components.push({
+        type: 2,
+        label: button.label,
+        style: styleToNumber(button.style),
+        custom_id: button.customID,
+      });
+    }
   }
 
-  client.api.interactions(interaction.id, interaction.token).callback.post({
-    data: {
-      type: 4,
-      data: {
-        // flags: 64,
-        content: `Peli loppui ${
-          parsedBoard.winningPlayer() == 'X'
-            ? `SINÄ <@${interaction.member.user.id}> VOITIT`
-            : '<@845750059843846144> voitti'
-        } `,
-        components: data2,
-      },
-    },
-  });
-}
+  // console.log(components);
 
-const games = {};
+  await message.edit({ components });
+
+  await interaction.deferUpdate();
+}
 
 client.ws.on('INTERACTION_CREATE', async (interaction) => {
-  console.log(interaction.data, 'WS EVENT');
+  // console.log(interaction.data, 'WS EVENT');
 
   if (interaction.type !== 3) return;
 
-  if (interaction.data.custom_id.startsWith('tictac_')) {
-    // tictac roskaa
-    const blockId = interaction.data.custom_id.split('_')[1];
-    const blockChoice = interaction.data.custom_id.split('_')[2];
-
-    // console.log(blockId, blockChoice, interaction.message, 'KJISSA');
-
-    const { components } = await client.api.channels[
-      interaction.channel_id
-    ].messages[interaction.message.id].get();
-
-    // console.log(components);
-
-    const parsed = parseComponentsToGrid(components);
-
-    let parsedBoard = new Board(parsed);
-
-    parsedBoard = parsedBoard.makeMove(blockId, 'X');
-
-    if (parsedBoard.isGameOver()) {
-      return gameOver(parsedBoard, interaction);
-    }
-
-    // const random = new RandomChoice(parsedBoard);
-    // const randomIndex = random.findRandomMove(parsedBoard);
-
-    const minimax = new Minimax('X', 'O');
-
-    const randomIndex = minimax.findBestMove(parsedBoard);
-
-    parsedBoard = parsedBoard.makeMove(randomIndex, 'O');
-
-    if (parsedBoard.isGameOver()) {
-      return gameOver(parsedBoard, interaction);
-    }
-
-    const data = dataBuilder(parsedBoard.grid);
-
-    // const data = await client.api
-    //   .webhooks(client.user.id, interaction.token)
-    //   .messages('@original')
-    //   .get();
-
-    // console.log(data);
-
-    // const { token, id } = games[interaction.member.user.id];
-    // console.log('TOKEN', token, id);
-
-    client.api
-      .webhooks(client.user.id, interaction.token)
-      .messages(interaction.message.id)
-      .delete();
-
-    client.api.interactions(interaction.id, interaction.token).callback.post({
-      data: {
-        type: 4,
-        data: {
-          // flags: 64,
-          content: `Video peliä <@${interaction.member.user.id}> ukon kanssa.`,
-          components: data,
-        },
-      },
-    });
-  }
-
-  if (interaction.data.custom_id == 'play') {
+  if (interaction.data.custom_id === 'play') {
     client.api.interactions(interaction.id, interaction.token).callback.post({
       data: {
         type: 4,
@@ -244,7 +104,7 @@ client.ws.on('INTERACTION_CREATE', async (interaction) => {
     return;
   }
 
-  if (interaction.data.custom_id == 'stop') {
+  if (interaction.data.custom_id === 'stop') {
     const guild = await client.guilds.fetch(interaction.guild_id);
     if (guild.me.voice.connection) {
       guild.me.voice.connection.disconnect();
@@ -272,95 +132,43 @@ client.ws.on('INTERACTION_CREATE', async (interaction) => {
 });
 
 client.on('interaction', async (interaction) => {
-  console.log('INTERACTION');
-  if (!interaction.isCommand()) return;
-
   if (interaction.commandName === 'tictactoe') {
-    client.api.interactions(interaction.id, interaction.token).callback.post({
-      data: {
-        type: 4,
-        data: {
-          content: `Video peliä <@${interaction.member.user.id}> ukon kanssa.`,
+    interaction.reply('gaming', {
+      components: [
+        {
+          type: 1,
           components: [
-            {
-              type: 1,
-              components: [
-                {
-                  type: 2,
-                  style: 2,
-                  label: ' ',
-                  custom_id: 'tictac_1_1',
-                },
-                {
-                  type: 2,
-                  style: 2,
-                  label: ' ',
-                  custom_id: 'tictac_2_1',
-                },
-                {
-                  type: 2,
-                  style: 2,
-                  label: ' ',
-                  custom_id: 'tictac_3_1',
-                },
-              ],
-            },
-            {
-              type: 1,
-              components: [
-                {
-                  type: 2,
-                  style: 2,
-                  label: ' ',
-                  custom_id: 'tictac_4_1',
-                },
-                {
-                  type: 2,
-                  style: 2,
-                  label: ' ',
-                  custom_id: 'tictac_5_1',
-                },
-                {
-                  type: 2,
-                  style: 2,
-                  label: ' ',
-                  custom_id: 'tictac_6_1',
-                },
-              ],
-            },
-            {
-              type: 1,
-              components: [
-                {
-                  type: 2,
-                  style: 2,
-                  label: ' ',
-                  custom_id: 'tictac_7_1',
-                },
-                {
-                  type: 2,
-                  style: 2,
-                  label: ' ',
-                  custom_id: 'tictac_8_1',
-                },
-                {
-                  type: 2,
-                  style: 2,
-                  label: ' ',
-                  custom_id: 'tictac_9_1',
-                },
-              ],
-            },
+            { type: 2, label: ' ', style: 2, custom_id: 'ttt11' },
+            { type: 2, label: ' ', style: 2, custom_id: 'ttt12' },
+            { type: 2, label: ' ', style: 2, custom_id: 'ttt13' },
           ],
         },
-      },
+        {
+          type: 1,
+          components: [
+            { type: 2, label: ' ', style: 2, custom_id: 'ttt21' },
+            { type: 2, label: ' ', style: 2, custom_id: 'ttt22' },
+            { type: 2, label: ' ', style: 2, custom_id: 'ttt23' },
+          ],
+        },
+        {
+          type: 1,
+          components: [
+            { type: 2, label: ' ', style: 2, custom_id: 'ttt31' },
+            { type: 2, label: ' ', style: 2, custom_id: 'ttt32' },
+            { type: 2, label: ' ', style: 2, custom_id: 'ttt33' },
+          ],
+        },
+      ],
     });
-
-    // games[interaction.member.user.id] = {
-    //   token: interaction.token,
-    //   id: interaction.id,
-    // };
+  } else if (
+    interaction.isMessageComponent() &&
+    interaction.customID.startsWith('ttt')
+  ) {
+    await updateGrid(interaction);
   }
+
+  if (!interaction.isCommand()) return;
 
   if (interaction.commandName === 'nappulat') {
     const row = new Discord.MessageActionRow()

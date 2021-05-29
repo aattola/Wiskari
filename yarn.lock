@@ -1822,6 +1822,11 @@ detect-libc@^1.0.3:
   resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-1.0.3.tgz#fa137c4bd698edf55cd5cd02ac559f91a4c4ba9b"
   integrity sha1-+hN8S9aY7fVc1c0CrFWfkaTEups=
 
+discord-buttons@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/discord-buttons/-/discord-buttons-2.4.1.tgz#220bef222e05f7d8722d72c2a7334687f339d9c1"
+  integrity sha512-oJkG0TpFtgL4UiFc+y4nFVSm62KxU4zX+cH/UPCq1cIy05etfN7swGh80j9AIDxRMf8HJEWNSbvd3HNuZWeZVg==
+
 "discord.js@github:monbrey/discord.js#message-components":
   version "13.0.0-dev"
   resolved "https://codeload.github.com/monbrey/discord.js/tar.gz/b8d7977705d0eb145e6810dac64862affdcb4f2f"

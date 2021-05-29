@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "@discordjs/opus": "^0.5.0",
+    "discord-buttons": "^2.4.1",
     "discord.js": "github:monbrey/discord.js#message-components",
     "dotenv": "^10.0.0",
     "ffmpeg-static": "^4.3.0",

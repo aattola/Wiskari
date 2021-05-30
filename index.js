@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-useless-concat */
 require('dotenv').config();
 const Discord = require('discord.js');
@@ -66,9 +67,13 @@ async function updateGrid(interaction) {
     }
   }
 
-  // console.log(components);
+  const { id } = interaction.member.user;
 
-  await message.edit({ components });
+  await message.edit(
+    `${`<@${id}> laittoi ${buttonPressed.label} paikkaan: ` + '`'}${i}\`` +
+      `x\`${j}\``,
+    { components }
+  );
 
   await interaction.deferUpdate();
 }
@@ -131,9 +136,42 @@ client.ws.on('INTERACTION_CREATE', async (interaction) => {
   }
 });
 
+function* times(x) {
+  for (let i = 0; i < x; i++) yield i;
+}
+
 client.on('interaction', async (interaction) => {
   if (interaction.commandName === 'tictactoe') {
-    interaction.reply('gaming', {
+    if (interaction.options[0]) {
+      if (interaction.options[0].name === 'numero') {
+        const { value } = interaction.options[0];
+
+        const things = [];
+
+        for (const i of times(value)) {
+          const components = [];
+
+          for (const i2 of times(value)) {
+            components.push({
+              type: 2,
+              label: ' ',
+              style: 2,
+              custom_id: `ttt${i + 1}${i2 + 1}`,
+            });
+          }
+
+          things.push({
+            type: 1,
+            components,
+          });
+        }
+
+        return interaction.reply('Tic Tac Toe', {
+          components: things,
+        });
+      }
+    }
+    interaction.reply('Tic Tac Toe', {
       components: [
         {
           type: 1,
@@ -171,27 +209,56 @@ client.on('interaction', async (interaction) => {
   if (!interaction.isCommand()) return;
 
   if (interaction.commandName === 'nappulat') {
-    const row = new Discord.MessageActionRow()
-      .addComponent(
-        new Discord.MessageButton()
-          .setCustomID('play')
-          .setLabel('Bängereitä heti!')
-          .setStyle('PRIMARY')
-      )
-      .addComponent(
-        new Discord.MessageButton()
-          .setCustomID('stop')
-          .setLabel('vittuun täältä!')
-          .setStyle('PRIMARY')
-      )
-      .addComponent(
-        new Discord.MessageButton()
-          .setURL('https://pornhub.com/gay?aapo=onsus')
-          .setLabel('kontent paikka!')
-          .setStyle('LINK')
-      );
+    const row = new Discord.MessageActionRow().addComponents([
+      new Discord.MessageButton()
+        .setCustomID('play')
+        .setLabel('Bängereitä heti!')
+        .setStyle('PRIMARY'),
 
-    await interaction.reply({ content: 'Ota nappulas', components: [row] });
+      new Discord.MessageButton()
+        .setCustomID('stop')
+        .setLabel('vittuun täältä!')
+        .setStyle('PRIMARY'),
+
+      new Discord.MessageButton()
+        .setURL('https://pornhub.com/gay?aapo=onsus')
+        .setLabel('kontent paikka!')
+        .setStyle('LINK'),
+    ]);
+
+    const row2 = new Discord.MessageActionRow().addComponents([
+      new Discord.MessageSelectMenu()
+        .addOptions([
+          {
+            label: 'Huutis',
+            value: 1,
+            description: 'Huutonauris',
+          },
+          {
+            label: 'Kääkkis',
+            value: 3,
+            description: 'Kääkkistä vammasille',
+          },
+          {
+            label: 'Pärskis',
+            value: 4,
+            description: 'Huutiainen',
+          },
+        ])
+        .setCustomID('sheesh')
+        .setPlaceholder('valitse jotain vammane'),
+    ]);
+
+    await interaction.reply({
+      content: 'Ota nappulas',
+      components: [row],
+    });
+
+    await interaction.reply({
+      content: 'Ja tosta tommoset (jos näkyy vielä)',
+      components: [row2],
+    });
+
     return;
     // client.api.interactions(interaction.id, interaction.token).callback.post({
     //   data: {
@@ -309,12 +376,30 @@ client.on('message', async (message) => {
 
     const data = {
       name: 'tictactoe',
-      description: 'videopeli discordissa',
+      description: 'videopelaamista discordissa',
       options: [
         {
-          name: 'ukko',
-          type: 'USER',
-          description: 'Ketä vastaan taistelemme.',
+          name: 'numero',
+          type: 'INTEGER',
+          description: 'Kuinka iso pelialue',
+          choices: [
+            {
+              name: '2x2',
+              value: 2,
+            },
+            {
+              name: '3x3',
+              value: 3,
+            },
+            {
+              name: '4x4',
+              value: 4,
+            },
+            {
+              name: '5x5',
+              value: 5,
+            },
+          ],
           required: false,
         },
       ],

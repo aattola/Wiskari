@@ -254,7 +254,7 @@ client.on('interaction', async (interaction) => {
       components: [row],
     });
 
-    await interaction.reply({
+    await interaction.followUp({
       content: 'Ja tosta tommoset (jos näkyy vielä)',
       components: [row2],
     });

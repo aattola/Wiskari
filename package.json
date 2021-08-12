@@ -5,9 +5,12 @@
   "license": "MIT",
   "dependencies": {
     "@discordjs/opus": "^0.5.0",
-    "discord.js": "github:monbrey/discord.js#droppybois",
+    "crc": "^3.8.0",
+    "discord.js": "^13.1.0-dev.1628770069.d9456a1",
     "dotenv": "^10.0.0",
     "ffmpeg-static": "^4.3.0",
+    "firebase-admin": "^9.11.0",
+    "get-urls": "^10.0.0",
     "node-fetch": "^2.6.1",
     "tictactoe-game-modules": "^1.0.0"
   },

@@ -2,11 +2,11 @@
 /* eslint-disable no-useless-concat */
 require('dotenv').config();
 const Discord = require('discord.js');
-const { crc32 } = require('crc');
+const {crc32} = require('crc');
 
-const { MessageActionRow, MessageSelectMenu } = Discord;
+const {MessageActionRow, MessageSelectMenu} = Discord;
 const fetch = require('node-fetch');
-const { Board, RandomChoice, Minimax } = require('tictactoe-game-modules');
+const {Board, RandomChoice, Minimax} = require('tictactoe-game-modules');
 const getUrls = require('get-urls');
 
 const client = new Discord.Client({
@@ -76,7 +76,7 @@ client.on('interactionCreate', async (interaction) => {
           ephemeral: true,
         });
       }
-      const { value } = interaction.options.get('hash');
+      const {value} = interaction.options.get('hash');
 
       const urls = getUrls(value);
       const urlArray = [...urls];
@@ -134,7 +134,7 @@ client.on('interactionCreate', async (interaction) => {
           ephemeral: true,
         });
       }
-      const { message } = interaction.options.get('message');
+      const {message} = interaction.options.get('message');
       const urls = getUrls(message.content);
       const urlArray = [...urls];
 
@@ -195,7 +195,7 @@ client.on('interactionCreate', async (interaction) => {
     const dmChan = await target.message.author
       .createDM()
       .catch((err) =>
-        interaction.reply({ content: 'ei tollasta', ephemeral: true })
+        interaction.reply({content: 'ei tollasta', ephemeral: true})
       );
 
     dmChan

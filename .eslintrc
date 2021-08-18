@@ -1,5 +1,25 @@
 {
   "extends": [
-    "wesbos"
-  ]
+    "@abhijithvijayan/eslint-config/typescript",
+    "@abhijithvijayan/eslint-config/node"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "sourceType": "module"
+  },
+  "rules": {
+    "object-curly-spacing": ["error", "always"],
+    "linebreak-style": 0,
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "node/no-unsupported-features/es-syntax": 0,
+    "no-console": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "bracketSpacing": true,
+        "singleQuote": true
+      }
+    ]
+  }
 }

@@ -23,15 +23,27 @@ const interactionFiles = fs
   .readdirSync(`${__dirname}\\interactions`)
   .filter((file) => file.endsWith('.ts'));
 
+const eventFiles = fs
+  .readdirSync(`${__dirname}\\events`)
+  .filter((file) => file.endsWith('.ts'));
+
 async function registerInteractions() {
   for (const file of commandFiles) {
     const { default: command } = await import(`./commands/${file}`);
+    // console.log(command, file);
     commands.set(command.data.name, command);
   }
 
   for (const file of interactionFiles) {
     const { default: interaction } = await import(`./interactions/${file}`);
     interactions.set(interaction.data.name, interaction);
+  }
+
+  for (const file of eventFiles) {
+    const { default: event } = await import(`./events/${file}`);
+
+    client.on(event.data.name, event.execute);
+    // interactions.set(event.data.name, interaction);
   }
 }
 
@@ -56,13 +68,22 @@ client.on('interactionCreate', async (interaction) => {
 
   if (interaction.isContextMenu()) {
     try {
-      const inter = interactions.get('contextmenu');
+      const inter = interactions.get(interaction.commandName);
+      if (!inter) {
+        await interaction.reply({
+          content:
+            'Virhe contextissa. Tuollaista nappulaa ei ole koodattu' +
+            ' (ei löytynyt interaction kansiosta oikealla nimellä)',
+          ephemeral: true,
+        });
+        return;
+      }
       // @ts-ignore
       await inter.execute(interaction);
     } catch (error) {
       console.error(error);
       await interaction.reply({
-        content: 'Virhe contextissa',
+        content: 'Virhe contextissa. ',
         ephemeral: true,
       });
     }
@@ -98,7 +119,7 @@ client.on('interactionCreate', async (interaction) => {
   } catch (error) {
     console.error(error);
     await interaction.reply({
-      content: 'There was an error while executing this command!',
+      content: 'Virhe tapahtu kun tätä komentoa mietittiin',
       ephemeral: true,
     });
   }

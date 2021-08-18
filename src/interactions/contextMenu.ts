@@ -1,12 +1,14 @@
-import { SlashCommandBuilder } from '@discordjs/builders';
-import { ContextMenuInteraction } from 'discord.js';
+import {SlashCommandBuilder} from '@discordjs/builders';
+import {ContextMenuInteraction} from 'discord.js';
+import BlockGif from '../blockGif';
 
 const Button = {
-  data: new SlashCommandBuilder()
-    .setName('contextmenu')
-    .setDescription('huutinen'),
-  async execute(interaction: ContextMenuInteraction) {
-    await interaction.reply('contextMenu');
+  data: {
+    name: 'Lisää blokkilistalle',
+  },
+  async execute(interaction: ContextMenuInteraction): Promise<void> {
+    // BlockGif.block();
+    await BlockGif.block(interaction);
   },
 };
 

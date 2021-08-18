@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5abfb048-9840-4c85-80b2-b75d154c1a93" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/TANAAN.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/kamverus.png" beforeDir="false" />
+    <list default="true" id="5abfb048-9840-4c85-80b2-b75d154c1a93" name="Changes" comment="Uusi event ja interaction logiikka">
+      <change beforePath="$PROJECT_DIR$/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interactions/contextMenu.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interactions/contextMenu.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +53,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.standard" value="" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Console Font" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="ts.external.directory.path" value="C:\Users\andre\Desktop\Koodia\Wiskari\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -85,7 +89,12 @@
       <workItem from="1629293133928" duration="2070000" />
       <workItem from="1629296299536" duration="2557000" />
       <workItem from="1629299087125" duration="10000" />
-      <workItem from="1629299217262" duration="198000" />
+      <workItem from="1629299217262" duration="3713000" />
+      <workItem from="1629312379236" duration="4014000" />
+      <workItem from="1629316435870" duration="490000" />
+      <workItem from="1629316943092" duration="181000" />
+      <workItem from="1629317209068" duration="2229000" />
+      <workItem from="1629319457030" duration="870000" />
     </task>
     <servers />
   </component>
@@ -103,6 +112,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Uusi event ja interaction logiikka" />
+    <option name="LAST_COMMIT_MESSAGE" value="Uusi event ja interaction logiikka" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

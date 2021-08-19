@@ -36,7 +36,7 @@ const Aktiiviteetti = {
     const guild = await client.guilds.fetch(guildId);
     const guildMember = await guild.members.fetch(interaction.user.id);
 
-    if (!guildMember.voice) {
+    if (!guildMember.voice.channel) {
       return interaction.reply({
         content: 'Mene äänikanavaan eka',
         ephemeral: true,

@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5abfb048-9840-4c85-80b2-b75d154c1a93" name="Changes" comment="Discordin aktiiviteetit komennossa">
-      <change afterPath="$PROJECT_DIR$/src/commands/aktiiviteetti.ts" afterDir="false" />
+    <list default="true" id="5abfb048-9840-4c85-80b2-b75d154c1a93" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/blockGif.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/blockGif.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/aktiiviteetti.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/aktiiviteetti.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/commands/nappulat.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/nappulat.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/messageCreate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/messageCreate.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +48,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/interactions" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/events" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -55,8 +60,12 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\andre\Desktop\Koodia\Wiskari\src\events" />
       <recent name="C:\Users\andre\Desktop\Koodia\Wiskari\src\interactions" />
       <recent name="C:\Users\andre\Desktop\Koodia\Wiskari\src\commands" />
+    </key>
+    <key name="es6.move.members.recent.items">
+      <recent name="C:\Users\andre\Desktop\Koodia\Wiskari\src\analytics.ts" />
     </key>
   </component>
   <component name="RunManager">
@@ -91,7 +100,8 @@
       <workItem from="1629316943092" duration="181000" />
       <workItem from="1629317209068" duration="2229000" />
       <workItem from="1629319457030" duration="1121000" />
-      <workItem from="1629375781394" duration="2343000" />
+      <workItem from="1629375781394" duration="4025000" />
+      <workItem from="1629388537385" duration="5938000" />
     </task>
     <task id="LOCAL-00001" summary="Uusi event ja interaction logiikka">
       <created>1629320333093</created>
@@ -107,7 +117,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629320466464</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Discordin aktiiviteetit komennossa">
+      <created>1629378142279</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1629378142279</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

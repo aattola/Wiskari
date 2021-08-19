@@ -1,8 +1,8 @@
-import dotenv from 'dotenv';
 import Discord, { Collection } from 'discord.js';
+
 import fs from 'fs';
 
-dotenv.config();
+import { runAnalytics } from './analytics';
 
 const client = new Discord.Client({
   intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_INVITES', 'GUILD_VOICE_STATES'],
@@ -53,6 +53,8 @@ client.on('interactionCreate', async (interaction) => {
   if (interaction.isButton()) {
     try {
       const inter = interactions.get('button');
+
+      runAnalytics('button', interaction.customId, interaction);
       // @ts-ignore
       await inter.execute(interaction);
     } catch (error) {
@@ -78,6 +80,9 @@ client.on('interactionCreate', async (interaction) => {
         });
         return;
       }
+
+      runAnalytics('contextMenu', interaction.commandName, interaction);
+
       // @ts-ignore
       await inter.execute(interaction);
     } catch (error) {
@@ -94,6 +99,9 @@ client.on('interactionCreate', async (interaction) => {
   if (interaction.isSelectMenu()) {
     try {
       const inter = interactions.get('selectmenu');
+
+      runAnalytics('selectMenu', interaction.customId, interaction);
+
       // @ts-ignore
       await inter.execute(interaction);
     } catch (error) {
@@ -114,6 +122,8 @@ client.on('interactionCreate', async (interaction) => {
   if (!command) return;
 
   try {
+    runAnalytics('command', interaction.commandName, interaction);
+
     // @ts-ignore
     await command.execute(interaction, client);
   } catch (error) {

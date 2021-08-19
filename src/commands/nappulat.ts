@@ -10,7 +10,7 @@ const Test = {
   data: new SlashCommandBuilder()
     .setName('nappulat')
     .setDescription('huutinen'),
-  async execute(interaction: CommandInteraction) {
+  async execute(interaction: CommandInteraction): Promise<void> {
     const row = new MessageActionRow().addComponents(
       new MessageButton()
         .setCustomId('primary')

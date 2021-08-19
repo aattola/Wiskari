@@ -88,6 +88,7 @@ class BlockGif {
 
       return interaction.reply({
         content: `Ihan ok mut [toi](${message.url}) meni estolistalle`,
+        ephemeral: true,
       });
     }
     return interaction.reply({

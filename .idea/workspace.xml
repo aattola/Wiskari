@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5abfb048-9840-4c85-80b2-b75d154c1a93" name="Changes" comment="Uusi event ja interaction logiikka">
-      <change afterPath="$PROJECT_DIR$/build/src/blockGif.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/src/commands/nappulat.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/src/commands/poistablock.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/src/commands/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/src/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/src/interactions/button.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/src/interactions/contextMenu.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/src/interactions/selectMenu.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/blockGif.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/commands/poistablock.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/events/messageCreate.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="5abfb048-9840-4c85-80b2-b75d154c1a93" name="Changes" comment="Discordin aktiiviteetit komennossa">
+      <change afterPath="$PROJECT_DIR$/src/commands/aktiiviteetti.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/nappulat.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/nappulat.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +90,8 @@
       <workItem from="1629316435870" duration="490000" />
       <workItem from="1629316943092" duration="181000" />
       <workItem from="1629317209068" duration="2229000" />
-      <workItem from="1629319457030" duration="958000" />
+      <workItem from="1629319457030" duration="1121000" />
+      <workItem from="1629375781394" duration="2343000" />
     </task>
     <task id="LOCAL-00001" summary="Uusi event ja interaction logiikka">
       <created>1629320333093</created>
@@ -107,7 +100,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629320333093</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Uusi event logiikka">
+      <created>1629320466464</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1629320466464</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -127,7 +127,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Uusi event ja interaction logiikka" />
-    <option name="LAST_COMMIT_MESSAGE" value="Uusi event ja interaction logiikka" />
+    <MESSAGE value="Uusi event logiikka" />
+    <MESSAGE value="Discordin aktiiviteetit komennossa" />
+    <option name="LAST_COMMIT_MESSAGE" value="Discordin aktiiviteetit komennossa" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -14,7 +14,7 @@ jobs:
       uses: getsentry/action-release@v1
       env:
         SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-        SENTRY_ORG: discord
+        SENTRY_ORG: jeffe
         SENTRY_PROJECT: wiskari
       with:
         environment: production

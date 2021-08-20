@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5abfb048-9840-4c85-80b2-b75d154c1a93" name="Changes" comment="Webstorm config tiedostoja">
-      <change beforePath="$PROJECT_DIR$/src/blockGif.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/blockGif.ts" afterDir="false" />
-    </list>
+    <list default="true" id="5abfb048-9840-4c85-80b2-b75d154c1a93" name="Changes" comment="Firebase conf enviin" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -123,7 +121,7 @@
       <workItem from="1629474142100" duration="173000" />
       <workItem from="1629474328677" duration="7101000" />
       <workItem from="1629487211217" duration="1522000" />
-      <workItem from="1629494509354" duration="89000" />
+      <workItem from="1629494509354" duration="129000" />
     </task>
     <task id="LOCAL-00001" summary="Uusi event ja interaction logiikka">
       <created>1629320333093</created>
@@ -188,7 +186,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629481913185</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Firebase conf enviin">
+      <created>1629494631094</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1629494631094</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -216,7 +221,8 @@
     <MESSAGE value="Github actioni päivitystä v2" />
     <MESSAGE value="Musiikkia interactioneilla ja dynaamiset interaction rekisteröinnit" />
     <MESSAGE value="Webstorm config tiedostoja" />
-    <option name="LAST_COMMIT_MESSAGE" value="Webstorm config tiedostoja" />
+    <MESSAGE value="Firebase conf enviin" />
+    <option name="LAST_COMMIT_MESSAGE" value="Firebase conf enviin" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

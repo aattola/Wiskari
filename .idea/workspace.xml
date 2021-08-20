@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5abfb048-9840-4c85-80b2-b75d154c1a93" name="Changes" comment="">
+    <list default="true" id="5abfb048-9840-4c85-80b2-b75d154c1a93" name="Changes" comment="Github actioni päivitystä v2">
+      <change afterPath="$PROJECT_DIR$/src/commands/skip.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/commands/soita.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/commands/volume.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logging/sentry.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/music/errors.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/music/player.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Wiskari.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Wiskari.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/discord.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/analytics.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/logging/analytics.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/blockGif.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/blockGif.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/commands/aktiiviteetti.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/aktiiviteetti.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/commands/nappulat.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/nappulat.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/poistablock.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/poistablock.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/test.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/messageCreate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/messageCreate.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/presenceUpdate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/presenceUpdate.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/voiceStateUpdate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/voiceStateUpdate.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
@@ -54,7 +68,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.standard" value="" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="discord-application" />
     <property name="ts.external.directory.path" value="C:\Users\andre\Desktop\Koodia\Wiskari\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -67,8 +81,11 @@
     <key name="es6.move.members.recent.items">
       <recent name="C:\Users\andre\Desktop\Koodia\Wiskari\src\analytics.ts" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\andre\Desktop\Koodia\Wiskari\src\logging" />
+    </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="dev" type="js.build_tools.npm" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -77,9 +94,28 @@
       </scripts>
       <node-interpreter value="project" />
       <package-manager value="yarn" />
-      <envs />
+      <envs>
+        <env name="NODE_ENV" value="development" />
+      </envs>
       <method v="2" />
     </configuration>
+    <configuration name="prod" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="prod" />
+      </scripts>
+      <node-interpreter value="project" />
+      <package-manager value="yarn" />
+      <envs>
+        <env name="NODE_ENV" value="production" />
+      </envs>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="npm.dev" />
+      <item itemvalue="npm.prod" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -101,7 +137,13 @@
       <workItem from="1629317209068" duration="2229000" />
       <workItem from="1629319457030" duration="1121000" />
       <workItem from="1629375781394" duration="4025000" />
-      <workItem from="1629388537385" duration="5938000" />
+      <workItem from="1629388537385" duration="6579000" />
+      <workItem from="1629462664847" duration="10609000" />
+      <workItem from="1629473643045" duration="154000" />
+      <workItem from="1629473809748" duration="65000" />
+      <workItem from="1629473891626" duration="238000" />
+      <workItem from="1629474142100" duration="173000" />
+      <workItem from="1629474328677" duration="6104000" />
     </task>
     <task id="LOCAL-00001" summary="Uusi event ja interaction logiikka">
       <created>1629320333093</created>
@@ -124,7 +166,35 @@
       <option name="project" value="LOCAL" />
       <updated>1629378142279</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Analytiikkaa interactioneihin ja muualle">
+      <created>1629395928976</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1629395928976</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Github actioni">
+      <created>1629469270917</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1629469270917</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Github actioni päivitystä">
+      <created>1629469865168</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1629469865168</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Github actioni päivitystä v2">
+      <created>1629470036264</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1629470036264</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,7 +216,11 @@
     <MESSAGE value="Uusi event ja interaction logiikka" />
     <MESSAGE value="Uusi event logiikka" />
     <MESSAGE value="Discordin aktiiviteetit komennossa" />
-    <option name="LAST_COMMIT_MESSAGE" value="Discordin aktiiviteetit komennossa" />
+    <MESSAGE value="Analytiikkaa interactioneihin ja muualle" />
+    <MESSAGE value="Github actioni" />
+    <MESSAGE value="Github actioni päivitystä" />
+    <MESSAGE value="Github actioni päivitystä v2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Github actioni päivitystä v2" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

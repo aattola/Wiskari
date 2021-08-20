@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5abfb048-9840-4c85-80b2-b75d154c1a93" name="Changes" comment="Webstorm config tiedostoja">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/blockGif.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/blockGif.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,6 +123,7 @@
       <workItem from="1629474142100" duration="173000" />
       <workItem from="1629474328677" duration="7101000" />
       <workItem from="1629487211217" duration="1522000" />
+      <workItem from="1629494509354" duration="89000" />
     </task>
     <task id="LOCAL-00001" summary="Uusi event ja interaction logiikka">
       <created>1629320333093</created>

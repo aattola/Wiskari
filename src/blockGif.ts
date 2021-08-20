@@ -5,7 +5,7 @@ import { crc32 } from 'crc';
 
 // @ts-ignore eslint-disable-next-line node/no-unpublished-import
 // eslint-disable-next-line node/no-unpublished-import
-import serviceAccount from '../firebase.json';
+const serviceAccount = JSON.parse(process.env.firebase);
 
 firebase.initializeApp({
   credential: firebase.credential.cert(<any>serviceAccount),

@@ -38,17 +38,17 @@ const eventFiles = fs
 
 async function registerInteractions() {
   for (const file of commandFiles) {
-    const { default: command } = await import(`./commands/${file}`);
+    const { default: command } = await import(`.\\commands\\${file}`);
     commands.set(command.data.name, command);
   }
 
   for (const file of interactionFiles) {
-    const { default: interaction } = await import(`./interactions/${file}`);
+    const { default: interaction } = await import(`.\\interactions\\${file}`);
     interactions.set(interaction.data.name, interaction);
   }
 
   for (const file of eventFiles) {
-    const { default: event } = await import(`./events/${file}`);
+    const { default: event } = await import(`.\\events\\${file}`);
     client.on(event.data.name, event.execute);
   }
 }

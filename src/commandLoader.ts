@@ -13,7 +13,7 @@ const loadCommands = async (client: Client) => {
 
   const botCommands: ApplicationCommandData[] = [];
   for (const file of commandFiles) {
-    const de = await import(`./commands/${file}`);
+    const de = await import(`.\\commands\\${file}`);
     const command: SlashCommand = de.default;
     botCommands.push(command.data);
   }

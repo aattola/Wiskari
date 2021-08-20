@@ -1,15 +1,23 @@
-import Discord, { Collection } from 'discord.js';
+import Discord, {
+  Collection,
+  CommandInteraction,
+  TextChannel,
+} from 'discord.js';
 
 import fs from 'fs';
 
-import { runAnalytics } from './analytics';
+import { runAnalytics } from './logging/analytics';
+import { Sentry } from './logging/sentry';
+import { loadCommands } from './commandLoader';
 
 const client = new Discord.Client({
   intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_INVITES', 'GUILD_VOICE_STATES'],
 });
 
 client.on('ready', () => {
-  console.log('Kirjauduttu sisään ja valmiina. Wiskari');
+  console.log('[Discord] Kirjauduttu sisään ja valmiina. Wiskari');
+
+  loadCommands(client);
 });
 
 const commands = new Collection();
@@ -30,7 +38,6 @@ const eventFiles = fs
 async function registerInteractions() {
   for (const file of commandFiles) {
     const { default: command } = await import(`./commands/${file}`);
-    // console.log(command, file);
     commands.set(command.data.name, command);
   }
 
@@ -41,15 +48,72 @@ async function registerInteractions() {
 
   for (const file of eventFiles) {
     const { default: event } = await import(`./events/${file}`);
-
     client.on(event.data.name, event.execute);
-    // interactions.set(event.data.name, interaction);
   }
 }
 
 registerInteractions();
 
+function handleInteractionError(interaction, error) {
+  console.error(error);
+  Sentry.captureException(error, {
+    user: interaction.user,
+    tags: {
+      bug: 'interaction',
+    },
+    extra: {
+      interaction,
+    },
+  });
+  interaction.reply({
+    content: `Virhe interactionissa: ${interaction.id} ${interaction.type}`,
+    ephemeral: true,
+  });
+}
+
 client.on('interactionCreate', async (interaction) => {
+  Sentry.setUser({
+    username: interaction.user.username,
+    id: interaction.user.id,
+    avatar: interaction.user.avatarURL(),
+  });
+
+  const sentryInteraction = {
+    id: interaction.id,
+    type: interaction.type,
+    token: interaction.token,
+    channel: {
+      id: interaction.channel.id,
+      name: (interaction.channel as TextChannel).name,
+    },
+    guild: {
+      id: interaction.guild.id,
+      name: interaction.guild.name,
+    },
+    user: {
+      id: interaction.user.id,
+      name: interaction.user.username,
+    },
+    options: (interaction as CommandInteraction).options
+      ? (interaction as CommandInteraction).options.data
+      : 'Ei optionei',
+  };
+
+  const transaction = Sentry.startTransaction({
+    op: `interaction@${interaction.type}`,
+    name: interaction.id,
+    data: {
+      interaction: sentryInteraction,
+    },
+  });
+
+  Sentry.addBreadcrumb({
+    category: 'interaction',
+    message: `Uusi interaction jonka id: ${interaction.id}`,
+    level: Sentry.Severity.Info,
+    data: interaction,
+  });
+
   if (interaction.isButton()) {
     try {
       const inter = interactions.get('button');
@@ -57,14 +121,12 @@ client.on('interactionCreate', async (interaction) => {
       runAnalytics('button', interaction.customId, interaction);
       // @ts-ignore
       await inter.execute(interaction);
+      transaction.setStatus('ok');
     } catch (error) {
-      console.error(error);
-      await interaction.reply({
-        content: 'Virhe nappulassa',
-        ephemeral: true,
-      });
+      handleInteractionError(interaction, error);
     }
 
+    transaction.finish();
     return;
   }
 
@@ -85,14 +147,12 @@ client.on('interactionCreate', async (interaction) => {
 
       // @ts-ignore
       await inter.execute(interaction);
+      transaction.setStatus('ok');
     } catch (error) {
-      console.error(error);
-      await interaction.reply({
-        content: 'Virhe contextissa. ',
-        ephemeral: true,
-      });
+      handleInteractionError(interaction, error);
     }
 
+    transaction.finish();
     return;
   }
 
@@ -104,14 +164,12 @@ client.on('interactionCreate', async (interaction) => {
 
       // @ts-ignore
       await inter.execute(interaction);
+      transaction.setStatus('ok');
     } catch (error) {
-      console.error(error);
-      await interaction.reply({
-        content: 'Virhe valintavalikossa',
-        ephemeral: true,
-      });
+      handleInteractionError(interaction, error);
     }
 
+    transaction.finish();
     return;
   }
 
@@ -126,13 +184,14 @@ client.on('interactionCreate', async (interaction) => {
 
     // @ts-ignore
     await command.execute(interaction, client);
+    transaction.setStatus('ok');
   } catch (error) {
-    console.error(error);
-    await interaction.reply({
-      content: 'Virhe tapahtu kun tätä komentoa mietittiin',
-      ephemeral: true,
-    });
+    handleInteractionError(interaction, error);
   }
+
+  transaction.finish();
 });
 
 client.login(process.env.token);
+
+export { client };

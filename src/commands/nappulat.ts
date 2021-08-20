@@ -5,11 +5,13 @@ import {
   MessageButton,
   MessageSelectMenu,
 } from 'discord.js';
+import { SlashCommand } from '../types/command';
 
-const Test = {
-  data: new SlashCommandBuilder()
-    .setName('nappulat')
-    .setDescription('huutinen'),
+const Test: SlashCommand = {
+  data: {
+    name: 'testnappulat',
+    description: 'DEV',
+  },
   async execute(interaction: CommandInteraction): Promise<void> {
     const row = new MessageActionRow().addComponents(
       new MessageButton()

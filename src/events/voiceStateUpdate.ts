@@ -1,5 +1,5 @@
 import { Message, User, VoiceState } from 'discord.js';
-import { analytics } from '../analytics';
+import { analytics } from '../logging/analytics';
 
 const messageCreate = {
   data: {

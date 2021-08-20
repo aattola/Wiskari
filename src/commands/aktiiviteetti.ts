@@ -1,4 +1,5 @@
 import { Client, CommandInteraction, Invite, VoiceChannel } from 'discord.js';
+import { SlashCommand } from '../types/command';
 
 const embedGames = [
   {
@@ -23,9 +24,19 @@ const embedGames = [
   },
 ];
 
-const Aktiiviteetti = {
+const Aktiiviteetti: SlashCommand = {
   data: {
     name: 'aktiiviteetti',
+    description: 'Hassuja hupsuja pelejä',
+    options: [
+      {
+        type: 'STRING',
+        name: 'aktiiviteetti',
+        description: 'Mikä aktiiviteetti otetaan',
+        required: true,
+        choices: embedGames,
+      },
+    ],
   },
   async execute(
     interaction: CommandInteraction,

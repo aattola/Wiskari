@@ -1,6 +1,6 @@
 import { Message } from 'discord.js';
 import BlockGif from '../blockGif';
-import { analytics } from '../analytics';
+import { analytics } from '../logging/analytics';
 
 const messageCreate = {
   data: {

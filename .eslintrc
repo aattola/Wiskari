@@ -8,6 +8,7 @@
     "sourceType": "module"
   },
   "rules": {
+    "consistent-return": "off",
     "@typescript-eslint/no-explicit-any": "warn",
     "object-curly-spacing": ["error", "always"],
     "linebreak-style": 0,
@@ -19,7 +20,8 @@
       "error",
       {
         "bracketSpacing": true,
-        "singleQuote": true
+        "singleQuote": true,
+        "endOfLine": "crlf"
       }
     ]
   }

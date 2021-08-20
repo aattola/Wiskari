@@ -3,11 +3,12 @@ import { CommandInteraction, Message } from 'discord.js';
 import getUrls from 'get-urls';
 import { crc32 } from 'crc';
 
-// eslint-disable-next-line import/no-unresolved,node/no-unpublished-require,@typescript-eslint/no-var-requires
-const serviceAccount = require('../firebase.json');
+// @ts-ignore eslint-disable-next-line node/no-unpublished-import
+// eslint-disable-next-line node/no-unpublished-import
+import serviceAccount from '../firebase.json';
 
 firebase.initializeApp({
-  credential: firebase.credential.cert(serviceAccount),
+  credential: firebase.credential.cert(<any>serviceAccount),
   databaseURL: 'https://sleier-b857e.firebaseio.com',
 });
 

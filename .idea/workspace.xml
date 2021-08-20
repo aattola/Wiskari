@@ -1,30 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5abfb048-9840-4c85-80b2-b75d154c1a93" name="Changes" comment="Github actioni päivitystä v2">
-      <change afterPath="$PROJECT_DIR$/src/commands/skip.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/commands/soita.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/commands/volume.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/logging/sentry.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/music/errors.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/music/player.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Wiskari.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Wiskari.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/discord.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
+    <list default="true" id="5abfb048-9840-4c85-80b2-b75d154c1a93" name="Changes" comment="Webstorm config tiedostoja">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/analytics.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/logging/analytics.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/blockGif.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/blockGif.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/aktiiviteetti.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/aktiiviteetti.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/nappulat.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/nappulat.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/poistablock.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/poistablock.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/messageCreate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/messageCreate.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/presenceUpdate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/presenceUpdate.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/voiceStateUpdate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/voiceStateUpdate.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +65,7 @@
       <recent name="C:\Users\andre\Desktop\Koodia\Wiskari\src\logging" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="npm.prod">
     <configuration name="dev" type="js.build_tools.npm" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -143,7 +123,8 @@
       <workItem from="1629473809748" duration="65000" />
       <workItem from="1629473891626" duration="238000" />
       <workItem from="1629474142100" duration="173000" />
-      <workItem from="1629474328677" duration="6104000" />
+      <workItem from="1629474328677" duration="7101000" />
+      <workItem from="1629487211217" duration="1522000" />
     </task>
     <task id="LOCAL-00001" summary="Uusi event ja interaction logiikka">
       <created>1629320333093</created>
@@ -194,7 +175,21 @@
       <option name="project" value="LOCAL" />
       <updated>1629470036264</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Musiikkia interactioneilla ja dynaamiset interaction rekisteröinnit">
+      <created>1629481888443</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1629481888443</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Webstorm config tiedostoja">
+      <created>1629481913185</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1629481913185</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -220,7 +215,9 @@
     <MESSAGE value="Github actioni" />
     <MESSAGE value="Github actioni päivitystä" />
     <MESSAGE value="Github actioni päivitystä v2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Github actioni päivitystä v2" />
+    <MESSAGE value="Musiikkia interactioneilla ja dynaamiset interaction rekisteröinnit" />
+    <MESSAGE value="Webstorm config tiedostoja" />
+    <option name="LAST_COMMIT_MESSAGE" value="Webstorm config tiedostoja" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

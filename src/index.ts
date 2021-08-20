@@ -23,9 +23,10 @@ client.on('ready', () => {
 const commands = new Collection();
 const interactions = new Collection();
 
-const commandFiles = fs
-  .readdirSync(`${__dirname}\\commands`)
-  .filter((file) => file.endsWith('.ts'));
+const commandFiles = fs.readdirSync(`${__dirname}\\commands`).filter((file) => {
+  if (file.endsWith('.ts')) return file;
+  if (file.endsWith('.js')) return file;
+});
 
 const interactionFiles = fs
   .readdirSync(`${__dirname}\\interactions`)

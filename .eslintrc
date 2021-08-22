@@ -8,6 +8,7 @@
     "sourceType": "module"
   },
   "rules": {
+    "array-callback-return": "off",
     "consistent-return": "off",
     "@typescript-eslint/no-explicit-any": "warn",
     "object-curly-spacing": ["error", "always"],

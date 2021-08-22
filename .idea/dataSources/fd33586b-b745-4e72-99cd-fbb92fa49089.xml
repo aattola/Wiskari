@@ -784,7 +784,7 @@ false YEKT
 false Z
 false Zulu
 </TimeZones>
-      <IntrospectionStateNumber>521</IntrospectionStateNumber>
+      <IntrospectionStateNumber>552</IntrospectionStateNumber>
       <StartupTime>1629633337</StartupTime>
     </root>
     <database id="2" parent="1" name="postgres">
@@ -797,17 +797,13 @@ false Zulu
       <Grants>11||10|C|G
 11||-9223372036854775808|U|G
 11||10|U|G
-2200||-9223372036854775808|C|G
-2200||10|C|G
-2200||-9223372036854775808|U|G
-2200||10|U|G
 13158||10|C|G
 13158||-9223372036854775808|U|G
 13158||10|U|G</Grants>
       <Owner>bob</Owner>
-      <IntrospectionStateNumber>522</IntrospectionStateNumber>
+      <IntrospectionStateNumber>553</IntrospectionStateNumber>
       <Current>1</Current>
-      <Relations>sequence|table|16409|16411|1
+      <Relations>sequence|table|16482|16484|1
 </Relations>
     </database>
     <role id="4" parent="1" name="bob">
@@ -876,11 +872,10 @@ false Zulu
       <Owner>postgres</Owner>
     </schema>
     <schema id="18" parent="3" name="public">
-      <ObjectId>2200</ObjectId>
-      <Comment>standard public schema</Comment>
-      <StateNumber>287</StateNumber>
-      <Owner>postgres</Owner>
-      <IntrospectionStateNumber>522</IntrospectionStateNumber>
+      <ObjectId>16422</ObjectId>
+      <StateNumber>530</StateNumber>
+      <Owner>bob</Owner>
+      <IntrospectionStateNumber>553</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="19" parent="3" name="plpgsql">
@@ -982,41 +977,42 @@ false Zulu
       <HandlerId>334</HandlerId>
     </access-method>
     <sequence id="31" parent="18" name="kindacringedoe_id_seq">
-      <ObjectId>16409</ObjectId>
+      <ObjectId>16482</ObjectId>
       <Owner>bob</Owner>
-      <StateNumber>509</StateNumber>
+      <StateNumber>550</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
     <table id="32" parent="18" name="kindacringedoe">
-      <ObjectId>16411</ObjectId>
-      <Comment>on cringee</Comment>
+      <ObjectId>16484</ObjectId>
       <Owner>bob</Owner>
-      <StateNumber>515</StateNumber>
+      <StateNumber>550</StateNumber>
       <AccessMethodId>2</AccessMethodId>
     </table>
     <column id="33" parent="32" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>509</StateNumber>
+      <StateNumber>550</StateNumber>
       <DefaultExpression>nextval(&apos;kindacringedoe_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="34" parent="32" name="nimi">
+    <column id="34" parent="32" name="data">
       <Position>2</Position>
-      <DataType>text|0s</DataType>
-      <StateNumber>509</StateNumber>
-      <TypeId>25</TypeId>
-    </column>
-    <column id="35" parent="32" name="jeeason">
-      <Position>3</Position>
       <DataType>jsonb|0s</DataType>
-      <StateNumber>515</StateNumber>
+      <NotNull>1</NotNull>
+      <StateNumber>550</StateNumber>
       <TypeId>3802</TypeId>
     </column>
+    <column id="35" parent="32" name="text">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>550</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
     <index id="36" parent="32" name="kindacringedoe_pk">
-      <ObjectId>16418</ObjectId>
-      <StateNumber>509</StateNumber>
+      <ObjectId>16491</ObjectId>
+      <StateNumber>550</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -1025,8 +1021,8 @@ false Zulu
       <AccessMethodId>403</AccessMethodId>
     </index>
     <key id="37" parent="32" name="kindacringedoe_pk">
-      <ObjectId>16419</ObjectId>
-      <StateNumber>509</StateNumber>
+      <ObjectId>16492</ObjectId>
+      <StateNumber>550</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>kindacringedoe_pk</UnderlyingIndexName>

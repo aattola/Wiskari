@@ -2,11 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5abfb048-9840-4c85-80b2-b75d154c1a93" name="Changes" comment="Firebase conf enviin">
+      <change afterPath="$PROJECT_DIR$/src/commands/deploy.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat.values" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat.values" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat.values.at" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat.values.s" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat.values.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat_i" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat_i" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/storage_v2/_src_/database/testinen.IBCvuw/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/storage_v2/_src_/database/testinen.IBCvuw/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bak" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/commandLoader.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commandLoader.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/command.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/command.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,7 +57,7 @@
     <property name="DatabaseDriversLRU" value="postgresql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/Community.Material.Theme-6.1.0.zip" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/commands" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -59,9 +70,9 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\andre\Desktop\Koodia\Wiskari\src\commands" />
       <recent name="C:\Users\andre\Desktop\Koodia\Wiskari\src\events" />
       <recent name="C:\Users\andre\Desktop\Koodia\Wiskari\src\interactions" />
-      <recent name="C:\Users\andre\Desktop\Koodia\Wiskari\src\commands" />
     </key>
     <key name="es6.move.members.recent.items">
       <recent name="C:\Users\andre\Desktop\Koodia\Wiskari\src\analytics.ts" />
@@ -70,8 +81,22 @@
       <recent name="C:\Users\andre\Desktop\Koodia\Wiskari\src\logging" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev">
-    <configuration name="dev" type="js.build_tools.npm" nameIsGenerated="true">
+  <component name="RunManager" selected="npm.dev knex">
+    <configuration name="dev debug" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <package-manager value="yarn" />
+      <envs>
+        <env name="NODE_ENV" value="development" />
+        <env name="DEBUG" value="*" />
+      </envs>
+      <method v="2" />
+    </configuration>
+    <configuration name="dev knex" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
@@ -82,6 +107,19 @@
       <envs>
         <env name="NODE_ENV" value="development" />
         <env name="DEBUG" value="knex:query" />
+      </envs>
+      <method v="2" />
+    </configuration>
+    <configuration name="dev" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <package-manager value="yarn" />
+      <envs>
+        <env name="NODE_ENV" value="development" />
       </envs>
       <method v="2" />
     </configuration>
@@ -100,6 +138,8 @@
     </configuration>
     <list>
       <item itemvalue="npm.dev" />
+      <item itemvalue="npm.dev debug" />
+      <item itemvalue="npm.dev knex" />
       <item itemvalue="npm.prod" />
     </list>
   </component>
@@ -145,7 +185,8 @@
       <workItem from="1629641511447" duration="89000" />
       <workItem from="1629641614986" duration="2964000" />
       <workItem from="1629645294558" duration="495000" />
-      <workItem from="1629645817054" duration="698000" />
+      <workItem from="1629645817054" duration="1908000" />
+      <workItem from="1629647752009" duration="6244000" />
     </task>
     <task id="LOCAL-00001" summary="Uusi event ja interaction logiikka">
       <created>1629320333093</created>

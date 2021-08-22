@@ -7,6 +7,7 @@ import Discord, {
 import fs from 'fs';
 import Knex from 'knex';
 
+// import { PrismaClient } from '@prisma/client';
 import { runAnalytics } from './logging/analytics';
 import { Sentry } from './logging/sentry';
 import { loadCommands } from './commandLoader';
@@ -25,18 +26,24 @@ const client = new Discord.Client({
   intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_INVITES', 'GUILD_VOICE_STATES'],
 });
 
-client.on('ready', () => {
+// const prisma = new PrismaClient();
+
+client.on('ready', async () => {
   console.log('[Discord] Kirjauduttu sisään ja valmiina. Wiskari');
 
   loadCommands(client);
 
-  knex
-    .select('*')
-    .from('kindacringedoe')
-    .where(knex.raw(`jeeason->> 'cledos' = 'meal'`))
-    .then((b) => {
-      console.log('bs', b);
-    });
+  // await knex
+  //   .insert({ data: { cledos: 'meal' }, text: 'COCK' })
+  //   .into('kindacringedoe');
+
+  // knex
+  //   .select('*')
+  //   .from('kindacringedoe')
+  //   .where(knex.raw(`jeeason->> 'cledos' = 'meal'`))
+  //   .then((b) => {
+  //     console.log('bs', b);
+  //   });
 });
 
 const commands = new Collection();
@@ -115,7 +122,7 @@ client.on('interactionCreate', async (interaction) => {
       name: interaction.user.username,
     },
     options: (interaction as CommandInteraction).options
-      ? (interaction as CommandInteraction).options.data
+      ? (interaction as CommandInteraction).options.data.map((a) => a.name)
       : 'Ei optionei',
   };
 
@@ -131,7 +138,7 @@ client.on('interactionCreate', async (interaction) => {
     category: 'interaction',
     message: `Uusi interaction jonka id: ${interaction.id}`,
     level: Sentry.Severity.Info,
-    data: interaction,
+    data: sentryInteraction,
   });
 
   if (interaction.isButton()) {

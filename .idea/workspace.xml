@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="5abfb048-9840-4c85-80b2-b75d154c1a93" name="Changes" comment="Firebase conf enviin">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/commandLoader.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commandLoader.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,15 +43,17 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="postgresql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/events" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/Community.Material.Theme-6.1.0.zip" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.standard" value="" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="settings.editor.selected.configurable" value="discord-application" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="C:\Users\andre\Desktop\Koodia\Wiskari\node_modules\prettier" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="ts.external.directory.path" value="C:\Users\andre\Desktop\Koodia\Wiskari\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -65,7 +70,7 @@
       <recent name="C:\Users\andre\Desktop\Koodia\Wiskari\src\logging" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.prod">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="dev" type="js.build_tools.npm" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -76,6 +81,7 @@
       <package-manager value="yarn" />
       <envs>
         <env name="NODE_ENV" value="development" />
+        <env name="DEBUG" value="knex:query" />
       </envs>
       <method v="2" />
     </configuration>
@@ -126,7 +132,20 @@
       <workItem from="1629474328677" duration="7101000" />
       <workItem from="1629487211217" duration="1522000" />
       <workItem from="1629494509354" duration="129000" />
-      <workItem from="1629495444947" duration="31000" />
+      <workItem from="1629495444947" duration="2359000" />
+      <workItem from="1629544199673" duration="25000" />
+      <workItem from="1629632046251" duration="165000" />
+      <workItem from="1629632223936" duration="490000" />
+      <workItem from="1629632726444" duration="37000" />
+      <workItem from="1629632775710" duration="1485000" />
+      <workItem from="1629634343261" duration="80000" />
+      <workItem from="1629634438142" duration="459000" />
+      <workItem from="1629634915182" duration="81000" />
+      <workItem from="1629635010796" duration="2635000" />
+      <workItem from="1629641511447" duration="89000" />
+      <workItem from="1629641614986" duration="2964000" />
+      <workItem from="1629645294558" duration="495000" />
+      <workItem from="1629645817054" duration="698000" />
     </task>
     <task id="LOCAL-00001" summary="Uusi event ja interaction logiikka">
       <created>1629320333093</created>

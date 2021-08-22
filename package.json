@@ -22,7 +22,9 @@
     "ffmpeg-static": "^4.3.0",
     "firebase-admin": "^9.11.0",
     "get-urls": "^10.0.0",
+    "knex": "^0.95.10",
     "node-fetch": "^2.6.1",
+    "pg": "^8.7.1",
     "tictactoe-game-modules": "^1.0.0",
     "ts-node": "^10.2.0",
     "typescript": "4.2.4"

@@ -5,10 +5,21 @@ import Discord, {
 } from 'discord.js';
 
 import fs from 'fs';
+import Knex from 'knex';
 
 import { runAnalytics } from './logging/analytics';
 import { Sentry } from './logging/sentry';
 import { loadCommands } from './commandLoader';
+
+const knex = Knex({
+  client: 'pg',
+  connection: {
+    host: '127.0.0.1',
+    user: 'bob',
+    password: 'root',
+    database: 'testinen',
+  },
+});
 
 const client = new Discord.Client({
   intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_INVITES', 'GUILD_VOICE_STATES'],
@@ -18,6 +29,14 @@ client.on('ready', () => {
   console.log('[Discord] Kirjauduttu sisään ja valmiina. Wiskari');
 
   loadCommands(client);
+
+  knex
+    .select('*')
+    .from('kindacringedoe')
+    .where(knex.raw(`jeeason->> 'cledos' = 'meal'`))
+    .then((b) => {
+      console.log('bs', b);
+    });
 });
 
 const commands = new Collection();

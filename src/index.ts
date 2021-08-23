@@ -13,17 +13,26 @@ import { runAnalytics } from './logging/analytics';
 import { Sentry } from './logging/sentry';
 import { loadCommands } from './commandLoader';
 
-const knex = Knex({
-  client: 'pg',
-  connection: {
-    host: '127.0.0.1',
-    user: 'bob',
-    password: 'root',
-    database: 'testinen',
-  },
-});
+// const knex = Knex({
+//   client: 'pg',
+//   connection: {
+//     host: '127.0.0.1',
+//     user: 'bob',
+//     password: 'root',
+//     database: 'testinen',
+//   },
+// });
 
 const client = new Discord.Client({
+  presence: {
+    status: 'online',
+    activities: [
+      {
+        name: 'Nyt linjoilla 24/7',
+        type: 'COMPETING',
+      },
+    ],
+  },
   intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_INVITES', 'GUILD_VOICE_STATES'],
 });
 

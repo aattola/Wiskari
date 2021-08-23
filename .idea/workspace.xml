@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5abfb048-9840-4c85-80b2-b75d154c1a93" name="Changes" comment="env variable firebaseen toimintaan hienolla ja kätevällä base64 sähläyksellä">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="5abfb048-9840-4c85-80b2-b75d154c1a93" name="Changes" comment="Aktiiviteetti 12 tunnin invitellä ja jotain gitignorei">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat_i" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat_i" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/aktiiviteetti.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/aktiiviteetti.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,11 +146,11 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Docker.Dockerfile" />
       <item itemvalue="npm.dev" />
       <item itemvalue="npm.dev debug" />
       <item itemvalue="npm.dev knex" />
       <item itemvalue="npm.prod" />
-      <item itemvalue="Docker.Dockerfile" />
       <item itemvalue="npm.build" />
     </list>
     <recent_temporary>
@@ -203,7 +204,8 @@
       <workItem from="1629645294558" duration="495000" />
       <workItem from="1629645817054" duration="1908000" />
       <workItem from="1629647752009" duration="6600000" />
-      <workItem from="1629735461285" duration="7710000" />
+      <workItem from="1629735461285" duration="8278000" />
+      <workItem from="1629748405649" duration="194000" />
     </task>
     <task id="LOCAL-00001" summary="Uusi event ja interaction logiikka">
       <created>1629320333093</created>
@@ -296,7 +298,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629747028969</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Aktiiviteetti 12 tunnin invitellä ja jotain gitignorei">
+      <created>1629747233357</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1629747233357</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -328,7 +337,8 @@
     <MESSAGE value="Oikeudet automaattisesti ladattuihin kommentteihin" />
     <MESSAGE value="Docker toimintaan oisko?" />
     <MESSAGE value="env variable firebaseen toimintaan hienolla ja kätevällä base64 sähläyksellä" />
-    <option name="LAST_COMMIT_MESSAGE" value="env variable firebaseen toimintaan hienolla ja kätevällä base64 sähläyksellä" />
+    <MESSAGE value="Aktiiviteetti 12 tunnin invitellä ja jotain gitignorei" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aktiiviteetti 12 tunnin invitellä ja jotain gitignorei" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

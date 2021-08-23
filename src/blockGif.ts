@@ -3,9 +3,13 @@ import { CommandInteraction, Message } from 'discord.js';
 import getUrls from 'get-urls';
 import { crc32 } from 'crc';
 
+const data = process.env.firebase;
+const buff = Buffer.from(data, 'base64');
+const text = buff.toString('ascii');
+
 // @ts-ignore eslint-disable-next-line node/no-unpublished-import
 // eslint-disable-next-line node/no-unpublished-import
-const serviceAccount = JSON.parse(process.env.firebase);
+const serviceAccount = JSON.parse(text);
 
 firebase.initializeApp({
   credential: firebase.credential.cert(<any>serviceAccount),

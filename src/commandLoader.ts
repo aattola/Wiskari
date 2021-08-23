@@ -8,8 +8,6 @@ import fs from 'fs';
 import path from 'path';
 import { SlashCommand } from './types/command';
 
-console.log('tuol', __dirname);
-
 const commandFiles = fs
   .readdirSync(path.join(__dirname, `/commands`))
   .filter((file) => {

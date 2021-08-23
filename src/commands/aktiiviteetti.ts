@@ -66,7 +66,7 @@ const Aktiiviteetti: SlashCommand = {
     // @ts-ignore
     const apiInvite = await client.api.channels(voiceChannel.id).invites.post({
       data: {
-        max_age: 604800,
+        max_age: 43200,
         max_uses: 0,
         target_application_id: game.value,
         target_type: 2,

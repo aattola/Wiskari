@@ -8,6 +8,7 @@
     "sourceType": "module"
   },
   "rules": {
+    "@typescript-eslint/ban-types": "off",
     "array-callback-return": "off",
     "consistent-return": "off",
     "@typescript-eslint/no-explicit-any": "warn",

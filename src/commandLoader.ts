@@ -5,12 +5,17 @@ import {
   Collection,
 } from 'discord.js';
 import fs from 'fs';
+import path from 'path';
 import { SlashCommand } from './types/command';
 
-const commandFiles = fs.readdirSync(`${__dirname}\\commands`).filter((file) => {
-  if (file.endsWith('.ts')) return file;
-  if (file.endsWith('.js')) return file;
-});
+console.log('tuol', __dirname);
+
+const commandFiles = fs
+  .readdirSync(path.join(__dirname, `/commands`))
+  .filter((file) => {
+    if (file.endsWith('.ts')) return file;
+    if (file.endsWith('.js')) return file;
+  });
 
 const devGuilds = ['279272653834027008'];
 const perms = {};

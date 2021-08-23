@@ -8,6 +8,7 @@ import fs from 'fs';
 import Knex from 'knex';
 
 // import { PrismaClient } from '@prisma/client';
+import path from 'path';
 import { runAnalytics } from './logging/analytics';
 import { Sentry } from './logging/sentry';
 import { loadCommands } from './commandLoader';
@@ -49,32 +50,34 @@ client.on('ready', async () => {
 const commands = new Collection();
 const interactions = new Collection();
 
-const commandFiles = fs.readdirSync(`${__dirname}\\commands`).filter((file) => {
-  if (file.endsWith('.ts')) return file;
-  if (file.endsWith('.js')) return file;
-});
+const commandFiles = fs
+  .readdirSync(path.join(__dirname, `/commands`))
+  .filter((file) => {
+    if (file.endsWith('.ts')) return file;
+    if (file.endsWith('.js')) return file;
+  });
 
 const interactionFiles = fs
-  .readdirSync(`${__dirname}\\interactions`)
+  .readdirSync(path.join(__dirname, `/interactions`))
   .filter((file) => file.endsWith('.ts'));
 
 const eventFiles = fs
-  .readdirSync(`${__dirname}\\events`)
+  .readdirSync(path.join(__dirname, `/events`))
   .filter((file) => file.endsWith('.ts'));
 
 async function registerInteractions() {
   for (const file of commandFiles) {
-    const { default: command } = await import(`.\\commands\\${file}`);
+    const { default: command } = await import(`./commands/${file}`);
     commands.set(command.data.name, command);
   }
 
   for (const file of interactionFiles) {
-    const { default: interaction } = await import(`.\\interactions\\${file}`);
+    const { default: interaction } = await import(`./interactions/${file}`);
     interactions.set(interaction.data.name, interaction);
   }
 
   for (const file of eventFiles) {
-    const { default: event } = await import(`.\\events\\${file}`);
+    const { default: event } = await import(`./events/${file}`);
     client.on(event.data.name, event.execute);
   }
 }

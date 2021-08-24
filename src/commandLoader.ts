@@ -1,6 +1,7 @@
 import {
   ApplicationCommand,
   ApplicationCommandData,
+  ApplicationCommandPermissionData,
   Client,
   Collection,
 } from 'discord.js';
@@ -16,6 +17,7 @@ const commandFiles = fs
   });
 
 const devGuilds = ['279272653834027008'];
+const permissionGuilds = ['279272653834027008', '229499178018013184'];
 const perms = {};
 
 async function loadPerms(
@@ -41,6 +43,40 @@ const loadCommands = async (client: Client) => {
 
     if (command.permissions) {
       perms[command.data.name] = command.permissions;
+    }
+  }
+
+  if (process.env.NODE_ENV === 'production') {
+    // 1. Set global commands
+    // 2. Set permissions to permissionGuilds
+
+    client.application.commands.set(botCommands).then(() => {
+      console.log('[PROD commandLoader] Globaalit komennot asennettu!');
+    });
+
+    const globalCommands = await client.application.commands.fetch();
+
+    // eslint-disable-next-line no-restricted-syntax,guard-for-in
+    for (const commandName in perms) {
+      const commandPerms = perms[commandName];
+      const comm = globalCommands.filter(
+        (globalCommand) => globalCommand.name === commandName
+      );
+      const command = comm.first();
+
+      const fullPerms = commandPerms.map((c) => {
+        return {
+          id: command.id,
+          permissions: commandPerms,
+        };
+      });
+
+      permissionGuilds.forEach((guildId) => {
+        const guild = client.guilds.cache.get(guildId);
+        guild.commands.permissions.set({
+          fullPermissions: fullPerms,
+        });
+      });
     }
   }
 

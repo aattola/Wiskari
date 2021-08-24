@@ -4,11 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5abfb048-9840-4c85-80b2-b75d154c1a93" name="Changes" comment="Uutta workflow:ia">
+    <list default="true" id="5abfb048-9840-4c85-80b2-b75d154c1a93" name="Changes" comment="Korjattiin pari erroria tohon väliin url juttujen kanssa">
+      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat.values" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat.values" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat.values.s" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat.values.s" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat_i" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat_i" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/aktiiviteetti.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/aktiiviteetti.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commandLoader.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commandLoader.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tictac.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +77,7 @@
       <recent name="C:\Users\andre\Desktop\Koodia\Wiskari\src\logging" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="npm.prod">
     <configuration name="Dockerfile" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
       <deployment type="dockerfile">
         <settings>
@@ -223,7 +228,9 @@
       <workItem from="1629808927474" duration="610000" />
       <workItem from="1629809775235" duration="2281000" />
       <workItem from="1629812644430" duration="2868000" />
-      <workItem from="1629816220374" duration="373000" />
+      <workItem from="1629816220374" duration="400000" />
+      <workItem from="1629825296316" duration="243000" />
+      <workItem from="1629827813099" duration="5570000" />
     </task>
     <task id="LOCAL-00001" summary="Uusi event ja interaction logiikka">
       <created>1629320333093</created>
@@ -351,7 +358,28 @@
       <option name="project" value="LOCAL" />
       <updated>1629814923501</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Aktiviteetit toimintaan mars">
+      <created>1629816616499</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1629816616499</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Nyt komennot rekisteröityy jopa tuotannossa">
+      <created>1629825529074</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1629825529074</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Korjattiin pari erroria tohon väliin url juttujen kanssa">
+      <created>1629828658612</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1629828658612</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -388,7 +416,10 @@
     <MESSAGE value="Production toimintaan taas" />
     <MESSAGE value="Dev guildiksi 229499178018013184" />
     <MESSAGE value="Uutta workflow:ia" />
-    <option name="LAST_COMMIT_MESSAGE" value="Uutta workflow:ia" />
+    <MESSAGE value="Aktiviteetit toimintaan mars" />
+    <MESSAGE value="Nyt komennot rekisteröityy jopa tuotannossa" />
+    <MESSAGE value="Korjattiin pari erroria tohon väliin url juttujen kanssa" />
+    <option name="LAST_COMMIT_MESSAGE" value="Korjattiin pari erroria tohon väliin url juttujen kanssa" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

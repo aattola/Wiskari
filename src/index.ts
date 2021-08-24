@@ -43,6 +43,9 @@ client.on('ready', async () => {
 
   loadCommands(client);
 
+  // const g = await client.guilds.fetch('229499178018013184');
+  // g.commands.set([]);
+
   // await knex
   //   .insert({ data: { cledos: 'meal' }, text: 'COCK' })
   //   .into('kindacringedoe');
@@ -68,11 +71,17 @@ const commandFiles = fs
 
 const interactionFiles = fs
   .readdirSync(path.join(__dirname, `/interactions`))
-  .filter((file) => file.endsWith('.ts'));
+  .filter((file) => {
+    if (file.endsWith('.ts')) return file;
+    if (file.endsWith('.js')) return file;
+  });
 
 const eventFiles = fs
   .readdirSync(path.join(__dirname, `/events`))
-  .filter((file) => file.endsWith('.ts'));
+  .filter((file) => {
+    if (file.endsWith('.ts')) return file;
+    if (file.endsWith('.js')) return file;
+  });
 
 async function registerInteractions() {
   for (const file of commandFiles) {

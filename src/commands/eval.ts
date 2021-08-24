@@ -2,6 +2,7 @@ import { SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction } from 'discord.js';
 import ut from 'util';
 import { SlashCommand } from '../types/command';
+import { client } from '../index';
 
 function clean(text) {
   if (typeof text === 'string')
@@ -38,6 +39,8 @@ const Eval: SlashCommand = {
       try {
         const code = args;
         if (typeof code === 'string') {
+          // @ts-ignore
+          global.client = client;
           // eslint-disable-next-line no-eval
           let evaled = eval(code);
 

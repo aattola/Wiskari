@@ -15,7 +15,7 @@ const commandFiles = fs
     if (file.endsWith('.js')) return file;
   });
 
-const devGuilds = ['279272653834027008'];
+const devGuilds = ['279272653834027008', '229499178018013184'];
 const perms = {};
 
 async function loadPerms(

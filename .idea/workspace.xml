@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5abfb048-9840-4c85-80b2-b75d154c1a93" name="Changes" comment="Production toimintaan taas">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commandLoader.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commandLoader.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,7 +219,7 @@
       <workItem from="1629807496406" duration="1217000" />
       <workItem from="1629808927474" duration="610000" />
       <workItem from="1629809775235" duration="2281000" />
-      <workItem from="1629812644430" duration="779000" />
+      <workItem from="1629812644430" duration="1450000" />
     </task>
     <task id="LOCAL-00001" summary="Uusi event ja interaction logiikka">
       <created>1629320333093</created>

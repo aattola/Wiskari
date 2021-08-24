@@ -10,6 +10,7 @@ const AddBlokkilistalle: SlashCommand = {
   },
   async execute(interaction: CommandInteraction) {
     const ok = null;
+    // console.log(interaction);
   },
 };
 

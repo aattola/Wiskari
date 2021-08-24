@@ -1,5 +1,5 @@
-import {SlashCommandBuilder} from '@discordjs/builders';
-import {ContextMenuInteraction} from 'discord.js';
+import { SlashCommandBuilder } from '@discordjs/builders';
+import { ContextMenuInteraction } from 'discord.js';
 import BlockGif from '../blockGif';
 
 const Button = {

@@ -30,13 +30,20 @@ interface Blocked {
 class BlockGif {
   static blocked: Blocked[] = [];
 
-  static permissions: string[] = ['214760917810937856'];
+  static permissions: string[] = [
+    '214760917810937856',
+    '270236553865854982',
+    '229510730099982339',
+  ];
 
   static checkMessage(message: Message): void {
     if (message.author.bot) return;
     if (!message.guild) return;
     if (message.thread) return;
     const urls = getUrls(message.content);
+    if (!urls) {
+      return;
+    }
     const urlArray = [...urls];
 
     urlArray.forEach(async (url) => {
@@ -65,6 +72,12 @@ class BlockGif {
     const value = interaction.options.get('message');
     const message = <Message>value.message;
     const urls = getUrls(message.content);
+    if (!urls) {
+      return interaction.reply({
+        content: `Kusetit mua eihän tossa ole edes linkkiä`,
+        ephemeral: true,
+      });
+    }
     const urlArray = [...urls];
     if (message.author.bot) {
       return interaction.reply({
@@ -114,6 +127,12 @@ class BlockGif {
     const { value } = interaction.options.get('hash');
 
     const urls = getUrls(<string>value);
+    if (!urls) {
+      return interaction.reply({
+        content: `Kusetit mua eihän tossa ole edes linkkiä`,
+        ephemeral: true,
+      });
+    }
     const urlArray = [...urls];
 
     if (urlArray[0]) {

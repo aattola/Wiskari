@@ -61,14 +61,14 @@ const Aktiiviteetti: SlashCommand = {
     const value = interaction.options.getString('aktiiviteetti');
     // const message = <Message>value.message;
 
-    const game = embedGames.filter((a) => a.name === value)[0];
+    const game = embedGames.filter((a) => a.value === value)[0];
 
     // @ts-ignore
     const apiInvite = await client.api.channels(voiceChannel.id).invites.post({
       data: {
         max_age: 43200,
         max_uses: 0,
-        target_application_id: game.value,
+        target_application_id: value,
         target_type: 2,
         temporary: false,
       },

@@ -1,6 +1,6 @@
 import firebase from 'firebase-admin';
 import { CommandInteraction, Message } from 'discord.js';
-import getUrls from 'get-urls';
+import getUrls from 'extract-urls';
 import { crc32 } from 'crc';
 
 const data = process.env.firebase;

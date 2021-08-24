@@ -1,6 +1,6 @@
 FROM node:16-alpine3.11
 
-RUN apk add ffmpeg python2 opus g++ make libtool
+RUN apk add ffmpeg python2 opus g++ make libtool libc6-compat
 
 WORKDIR /usr/src/bot
 COPY package.json ./

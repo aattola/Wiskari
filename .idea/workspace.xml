@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5abfb048-9840-4c85-80b2-b75d154c1a93" name="Changes" comment="Production toimintaan taas">
-      <change beforePath="$PROJECT_DIR$/src/commandLoader.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commandLoader.ts" afterDir="false" />
+    <list default="true" id="5abfb048-9840-4c85-80b2-b75d154c1a93" name="Changes" comment="Dev guildiksi 229499178018013184">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/sentry.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/Deploy.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,7 +220,7 @@
       <workItem from="1629807496406" duration="1217000" />
       <workItem from="1629808927474" duration="610000" />
       <workItem from="1629809775235" duration="2281000" />
-      <workItem from="1629812644430" duration="1450000" />
+      <workItem from="1629812644430" duration="1854000" />
     </task>
     <task id="LOCAL-00001" summary="Uusi event ja interaction logiikka">
       <created>1629320333093</created>
@@ -333,7 +334,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629812902775</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Dev guildiksi 229499178018013184">
+      <created>1629814130611</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1629814130611</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -368,7 +376,8 @@
     <MESSAGE value="Aktiiviteetti 12 tunnin invitellä ja jotain gitignorei" />
     <MESSAGE value="Discord statusta botille" />
     <MESSAGE value="Production toimintaan taas" />
-    <option name="LAST_COMMIT_MESSAGE" value="Production toimintaan taas" />
+    <MESSAGE value="Dev guildiksi 229499178018013184" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dev guildiksi 229499178018013184" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

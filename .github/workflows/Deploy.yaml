@@ -1,4 +1,4 @@
-name: Sentry deploy
+name: Tuotantoa
 
 on:
   push:
@@ -19,3 +19,16 @@ jobs:
       with:
         environment: production
 
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cloning repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Push to dokku
+        uses: dokku/github-action@master
+        with:
+          git_remote_url: 'ssh://dokku@wiskari.jeffe.co:22/wiskari'
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}

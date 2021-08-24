@@ -4,19 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5abfb048-9840-4c85-80b2-b75d154c1a93" name="Changes" comment="Discord statusta botille">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat.values" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat.values" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat.values.s" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat.values.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat_i" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/fd33586b-b745-4e72-99cd-fbb92fa49089/entities/entities.dat_i" afterDir="false" />
+    <list default="true" id="5abfb048-9840-4c85-80b2-b75d154c1a93" name="Changes" comment="Production toimintaan taas">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/blockGif.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/blockGif.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commandLoader.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commandLoader.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/poistablock.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/poistablock.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logging/analytics.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/logging/analytics.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,18 +85,6 @@
           <option name="containerName" value="wiskari" />
           <option name="envVars">
             <list>
-              <DockerEnvVarImpl>
-                <option name="name" value="token" />
-                <option name="value" value="ODQ1NzUwMDU5ODQzODQ2MTQ0.YKlgHw.HI1sHVbWXPfTlRs9aMOdRA7uxtw" />
-              </DockerEnvVarImpl>
-              <DockerEnvVarImpl>
-                <option name="name" value="analytics" />
-                <option name="value" value="wOGXkcRq7DUQpoQFSVXXo2tUJetFpyHf" />
-              </DockerEnvVarImpl>
-              <DockerEnvVarImpl>
-                <option name="name" value="firebase" />
-                <option name="value" value="eyJ0eXBlIjoic2VydmljZV9hY2NvdW50IiwicHJvamVjdF9pZCI6InNsZWllci1iODU3ZSIsInByaXZhdGVfa2V5X2lkIjoiNjNiZjAwOWE5OTVmMjkyMzlhYmQ5MTZlY2YyY2NmOWJiYmYzNGYxZSIsInByaXZhdGVfa2V5IjoiLS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tXG5NSUlFdkFJQkFEQU5CZ2txaGtpRzl3MEJBUUVGQUFTQ0JLWXdnZ1NpQWdFQUFvSUJBUUN5ZEVyVVF1MVNOYUFKXG5DQVJUc3NlanByRlEybm5FTVBTdXg4Z3VtUDA1cjJaMlczMERGbDMrTUtXcjBWMGdkcDlaRkphYjFnM0JRVCs0XG5rZGpHWVNvWHFhMzdJcTFIWHZSRnJUNjlXTThrdG9kUXkwYmU5YitIaGtlRERBNDBuc1Mvc1ZZVGtSL0YyZTVWXG5sNmhSQ3VsNjlBSTFuaEVXTjR2aHI2SllkNmJRQjREclVTdXVkVWluandBdW53bk5sRGw0L1N4RERrcmR4UllkXG5CRUZOSU5CNnlhMVV2WFlDMEp4Ym9HU0w1N0JCcDRvL1BzRWNXNWhKbk9vbzZHZE5LK2JCV1ZGTjN0UzBRSGgxXG5xZW55THR0djdRTGRFZGFOeml0UmpzWHJBOU9iSzAvVHdXdGpsNkxNeDg5aHFraGtMdHFFRDRuUWtqZnBhSThjXG5TQ2Jka1ZYRkFnTUJBQUVDZ2dFQUZCblJTL04xOCtxaWFpSURDc0o2aGs2Q2JvOE5aREgzZmJCM05maDVuWVBLXG5VTTZoV0RXdXhMRUtHRDV1OVBjbm44c1g0OW5LbHRnWXExdVNSVll3ZlpYWlNRNXc0amNwNEtkUkI5YjNEaldaXG5MRnFaVXdmdldQNmhFM3ZLSmRjMFpqczliTnJONzJWSzJVMUo0a2NPWVpFV3BwOTFZVUZFZWxsa09mN1FSV0pDXG54eUdram1JVmZaeURRMUUrczltTGQxVFRoMFEyY2x4cnF3VVlmR1Bjb043dkdxeTJYbmMvQ0NnNDBtak5NY1JUXG5pall2a3Q4NXhkVDJQanAwelVHVUVUS3h0Tkdvei9uOUxPWm9OTGZ5UDMxYWR4YXBNTEFlRDkwREJJeVVYdGJXXG4wQTJ2cU5vMjZ1NTZ2eU4wNXl3a1pmVlJncEJKWGRZbi9oUmhQeUViaVFLQmdRRGdzTzBmL3FYTU5UclBPY2pmXG52SlpRR2wxc21FQWpkRFFIY1A4OEJLZXMzNnM4N1o2bVlpRFplMUMrQWpvWnFGTGo2M2ovbEUrNDZIZ1dUVU9mXG5tcThNVDFDSU5jWUVXMGpNWWpGd3ByMjhTMlVmN3NCMmgwRjdaaWdVOHFjR24zWGpPZDhYQU9aQnJubitodnByXG5FNFA5dDAxYVR1eDhzRmxhdlNqYW1xZ01Dd0tCZ1FETFVnYjZhbTR1YmZXT2hxMjZYTGphMSt1OE1qTnRLcUVDXG5OUG1YL2kzSDlYQWt2ellVUUVyYzUvZGtzZnp5akQwWGtlMDZZclJBVGgxRDFHZjhvSlNISHFQRTRWT0E0RUhHXG5tL3MrbERGcTVxMXBINFhlanBXYnZLK2dEK09IL2daZ2dIdFgxYkZSWjF2V1dNWEh1UldNd2VFUmVvSzFRUHVWXG5ERjJKQ1RGM2J3S0JnSFM3ZG5ZbzFmcEJyVXY3dVdDRG1aUUVIb1ZNbEFYWFdUQ0VoQldxVlhKNndYdmw5NFo1XG5kSmVJZVdvOXZmR1dnWG5uMi9Uc0dINzRSMnRPdU5NeWliN2JkZnROOUpKTzJvTlVnRnNHUll5Tm52djREZ1dHXG5QMzdjay9aT0duaFdYK2l0S0RuTFBkVGgwSDlyb0s0QWRaSmFxTlZDSzVxY0E5QWdkaGtjUURJQkFvR0FNakpLXG5Mc0RmK3U2QzFYRkNxdVFCYjJZbmVRc2J6elBiRkdSbnlyS2lNdC9SbEFEeEpRYktkTWVBT0lnSTN3am9mRTAyXG51RmR1RVFJNEQycjlVVTJEM2VnZW5walN1TnFrNHBmWDY1ZENyQlhQY2tpcUVFdzdlM3VXRUhwYnZsTmsxNlpnXG56VXFnd0d3NExDODJoUnlZeVd1RVdZQlpqTTVDVG9ZREFiWVhWRmtDZ1lCZHhYZTdDQmZiQkU5Z2cyemZHOHQ4XG5yR1dzUmNRZVBJM3IwZjJtc0dpMWFnSTc4UHVMTSthMUVrYTV1am15L0xKRXlLMGhoZDVTcFNlNlVncytPMXFmXG5SVWk0RW44bFh4aFhlUEY0SE9FQ3h4d29RTnBUaEg0UEhha0tQdXJORGFncEtJRUlDSVlFYVozc1VJSEJQOWdaXG5QMnZIQ05LVk1xcDN2VkNiZnB1bzl3PT1cbi0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS1cbiIsImNsaWVudF9lbWFpbCI6ImZpcmViYXNlLWFkbWluc2RrLW90c2YyQHNsZWllci1iODU3ZS5pYW0uZ3NlcnZpY2VhY2NvdW50LmNvbSIsImNsaWVudF9pZCI6IjEwNTkwNTA1OTkzNTQ2Mzg1NzMwOSIsImF1dGhfdXJpIjoiaHR0cHM6Ly9hY2NvdW50cy5nb29nbGUuY29tL28vb2F1dGgyL2F1dGgiLCJ0b2tlbl91cmkiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20vby9vYXV0aDIvdG9rZW4iLCJhdXRoX3Byb3ZpZGVyX3g1MDlfY2VydF91cmwiOiJodHRwczovL3d3dy5nb29nbGVhcGlzLmNvbS9vYXV0aDIvdjEvY2VydHMiLCJjbGllbnRfeDUwOV9jZXJ0X3VybCI6Imh0dHBzOi8vd3d3Lmdvb2dsZWFwaXMuY29tL3JvYm90L3YxL21ldGFkYXRhL3g1MDkvZmlyZWJhc2UtYWRtaW5zZGstb3RzZjIlNDBzbGVpZXItYjg1N2UuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20ifQ==" />
-              </DockerEnvVarImpl>
               <DockerEnvVarImpl>
                 <option name="name" value="NODE_ENV" />
                 <option name="value" value="production" />
@@ -242,7 +219,7 @@
       <workItem from="1629807496406" duration="1217000" />
       <workItem from="1629808927474" duration="610000" />
       <workItem from="1629809775235" duration="2281000" />
-      <workItem from="1629812644430" duration="190000" />
+      <workItem from="1629812644430" duration="779000" />
     </task>
     <task id="LOCAL-00001" summary="Uusi event ja interaction logiikka">
       <created>1629320333093</created>
@@ -349,7 +326,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629748658387</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Production toimintaan taas">
+      <created>1629812902775</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1629812902775</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -383,7 +367,8 @@
     <MESSAGE value="env variable firebaseen toimintaan hienolla ja kätevällä base64 sähläyksellä" />
     <MESSAGE value="Aktiiviteetti 12 tunnin invitellä ja jotain gitignorei" />
     <MESSAGE value="Discord statusta botille" />
-    <option name="LAST_COMMIT_MESSAGE" value="Discord statusta botille" />
+    <MESSAGE value="Production toimintaan taas" />
+    <option name="LAST_COMMIT_MESSAGE" value="Production toimintaan taas" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -34,6 +34,7 @@ class BlockGif {
     '214760917810937856',
     '270236553865854982',
     '229510730099982339',
+    '375364468634550273',
   ];
 
   static checkMessage(message: Message): void {

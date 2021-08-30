@@ -18,12 +18,14 @@
     "node/no-unsupported-features/es-syntax": 0,
     "no-console": "off",
     "@typescript-eslint/ban-ts-comment": "off",
+    "class-methods-use-this": "off",
     "prettier/prettier": [
       "error",
       {
         "bracketSpacing": true,
         "singleQuote": true,
-        "endOfLine": "crlf"
+        "endOfLine": "crlf",
+        "class-methods-use-this": false
       }
     ]
   }

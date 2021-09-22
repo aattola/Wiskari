@@ -44,21 +44,28 @@ const Eval: SlashCommand = {
           let evaled = eval(code);
 
           if (typeof evaled !== 'string') evaled = ut.inspect(evaled);
-          const splitMessage = Discord.Util.splitMessage(clean(evaled));
-          splitMessage.forEach((msg) => {
-            interaction.reply({
-              content: msg,
+          const splitMessage = Discord.Util.splitMessage(clean(evaled), {
+            maxLength: 1950,
+          });
+          if (splitMessage[1]) {
+            console.log(clean(evaled));
+            return interaction.reply({
+              content: `${splitMessage[0]}\n Loput ovat konsolissa`,
               ephemeral: true,
             });
+          }
+          await interaction.reply({
+            content: splitMessage[0],
+            ephemeral: true,
           });
         } else {
-          interaction.reply({
+          await interaction.reply({
             content: 'LAITA STRING EI SAATANA MUUTA',
             ephemeral: true,
           });
         }
       } catch (err) {
-        interaction.reply({
+        await interaction.reply({
           content: `\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``,
           ephemeral: true,
         });

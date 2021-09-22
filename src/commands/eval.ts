@@ -1,5 +1,4 @@
-import { SlashCommandBuilder } from '@discordjs/builders';
-import { CommandInteraction } from 'discord.js';
+import Discord, { CommandInteraction } from 'discord.js';
 import ut from 'util';
 import { SlashCommand } from '../types/command';
 import { client } from '../index';
@@ -45,10 +44,12 @@ const Eval: SlashCommand = {
           let evaled = eval(code);
 
           if (typeof evaled !== 'string') evaled = ut.inspect(evaled);
-
-          interaction.reply({
-            content: clean(evaled),
-            ephemeral: true,
+          const splitMessage = Discord.Util.splitMessage(clean(evaled));
+          splitMessage.forEach((msg) => {
+            interaction.reply({
+              content: msg,
+              ephemeral: true,
+            });
           });
         } else {
           interaction.reply({

@@ -242,4 +242,7 @@ client.on('interactionCreate', async (interaction) => {
 
 client.login(process.env.token);
 
+// @ts-ignore
+global.client = client;
+
 export { client };

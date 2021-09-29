@@ -83,6 +83,7 @@ const loadCommands = async (client: Client) => {
   // if (process.env.NODE_ENV === 'development') {
   devGuilds.forEach((id) => {
     client.guilds.fetch(id).then((guild) => {
+      guild.commands.set([]);
       guild.commands.set(botCommands).then(async () => {
         console.log(
           `[${

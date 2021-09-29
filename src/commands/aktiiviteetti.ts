@@ -22,6 +22,18 @@ const embedGames = [
     name: 'betrayal',
     value: '773336526917861400',
   },
+  {
+    name: "Word Snack",
+    value: "879863976006127627"
+  },
+  {
+    name: "Doodle Crew",
+    value: "878067389634314250"
+  },
+  {
+    name: "Letter Tile",
+    value: "879863686565621790"
+  }
 ];
 
 const Aktiiviteetti: SlashCommand = {

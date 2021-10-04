@@ -9,10 +9,15 @@ import Knex from 'knex';
 
 // import { PrismaClient } from '@prisma/client';
 import path from 'path';
+import dotenv from 'dotenv';
 import { runAnalytics } from './logging/analytics';
 import { Sentry } from './logging/sentry';
 import { loadCommands } from './commandLoader';
 
+dotenv.config();
+
+// eslint-disable-next-line import/first
+import './managers/s3';
 // const knex = Knex({
 //   client: 'pg',
 //   connection: {

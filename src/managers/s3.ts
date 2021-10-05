@@ -16,6 +16,7 @@ class S3Client {
 
   handleMessage(message: Message): void {
     if (message.attachments.size <= 0) return;
+    if (message.channel.id !== '229499178018013184') return;
 
     message.attachments.forEach(async (attachment) => {
       const fileName = attachment.name;

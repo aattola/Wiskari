@@ -2,8 +2,10 @@ import { Message } from 'discord.js';
 import BlockGif from '../blockGif';
 import { analytics } from '../logging/analytics';
 import { S3Client } from '../managers/s3';
+import { Nettiauto } from '../managers/nettiauto';
 
 const S3 = new S3Client();
+const nettiauto = new Nettiauto();
 
 const messageCreate = {
   data: {
@@ -12,6 +14,7 @@ const messageCreate = {
   async execute(message: Message) {
     BlockGif.checkMessage(message);
     S3.handleMessage(message);
+    nettiauto.onMessage(message);
 
     if (!message.author.bot) {
       analytics.track({

@@ -1,5 +1,5 @@
 {
-  "name": "Wiskari",
+  "name": "wiskari",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -10,10 +10,11 @@
   },
   "dependencies": {
     "@discordjs/builders": "^0.5.0",
-    "@discordjs/opus": "^0.6.0",
+    "@discordjs/opus": "^0.7.0",
     "@sentry/node": "^6.11.0",
     "@sentry/tracing": "^6.11.0",
     "analytics-node": "^5.0.0",
+    "axios": "^0.24.0",
     "crc": "^3.8.0",
     "discord-player": "^5.0.2",
     "discord.js": "^13.1.0",
@@ -25,16 +26,18 @@
     "knex": "^0.95.10",
     "node-fetch": "^2.6.1",
     "pg": "^8.7.1",
+    "qs": "^6.10.1",
+    "rs": "^0.0.1",
     "scw-object-storage": "^0.3.1",
     "tictactoe-game-modules": "^1.0.0",
     "ts-node": "^10.2.0",
-    "typescript": "4.2.4"
+    "typescript": "4.5.2"
   },
   "devDependencies": {
     "@abhijithvijayan/eslint-config": "2.6.3",
     "@abhijithvijayan/eslint-config-airbnb": "1.0.2",
     "@babel/eslint-parser": "7.12.16",
-    "@types/node": "15.6.1",
+    "@types/node": "16.11.11",
     "@typescript-eslint/eslint-plugin": "4.4.1",
     "@typescript-eslint/parser": "4.4.1",
     "babel-eslint": "10.1.0",

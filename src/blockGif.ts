@@ -1,5 +1,9 @@
 import firebase from 'firebase-admin';
-import { CommandInteraction, Message } from 'discord.js';
+import {
+  CommandInteraction,
+  ContextMenuInteraction,
+  Message,
+} from 'discord.js';
 import getUrls from 'extract-urls';
 import { crc32 } from 'crc';
 
@@ -62,7 +66,9 @@ class BlockGif {
     });
   }
 
-  static block(interaction: CommandInteraction): Promise<void> {
+  static block(
+    interaction: CommandInteraction | ContextMenuInteraction
+  ): Promise<void> {
     if (!this.checkForPerms(interaction.user.id)) {
       return interaction.reply({
         content: 'Et ole pääjehu niin et koske tähän',

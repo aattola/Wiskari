@@ -68,7 +68,11 @@ function runAnalytics(
     properties: {
       type: name,
       command: commandName,
-      interaction,
+      interaction: {
+        id: interaction.id, // @ts-ignore
+        userId: interaction.user.id,
+        username: interaction.user.username,
+      },
       executedAt: Date.now(),
     },
   });

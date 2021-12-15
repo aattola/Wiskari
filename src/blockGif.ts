@@ -6,6 +6,7 @@ import {
 } from 'discord.js';
 import getUrls from 'extract-urls';
 import { crc32 } from 'crc';
+import { Sentry } from './logging/sentry';
 
 const data = process.env.firebase;
 const buff = Buffer.from(data, 'base64');
@@ -35,10 +36,10 @@ class BlockGif {
   static blocked: Blocked[] = [];
 
   static permissions: string[] = [
-    '214760917810937856',
-    '270236553865854982',
-    '229510730099982339',
-    '375364468634550273',
+    '214760917810937856', // leevi
+    '270236553865854982', // jerry
+    '229510730099982339', // jarkko
+    '375364468634550273', // risto
   ];
 
   static checkMessage(message: Message): void {
@@ -81,7 +82,7 @@ class BlockGif {
     const urls = getUrls(message.content);
     if (!urls) {
       return interaction.reply({
-        content: `Kusetit mua eihän tossa ole edes linkkiä`,
+        content: `Kusetit mua eihän tossa ole edes linkkiä (käytännössä pystyt blokkaamaan linkkejä)`,
         ephemeral: true,
       });
     }
@@ -150,9 +151,10 @@ class BlockGif {
           .collection('estolista2000')
           .doc(urlHashed)
           .delete()
-          .catch(() => {
+          .catch((err) => {
+            Sentry.captureException(err);
             interaction.reply({
-              content: `En menestynyt poistossa en tiiä miksi. Hash: ${urlHashed}`,
+              content: `En menestynyt poistossa en tiiä miksi. Kysy leeviltä tai jtn. Hash: ${urlHashed}`,
               ephemeral: true,
             });
           });

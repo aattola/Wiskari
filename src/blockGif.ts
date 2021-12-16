@@ -97,6 +97,13 @@ class BlockGif {
 
     urlArray.forEach(async (url) => {
       const urlHashed = crc32(url).toString(16);
+
+      if (urlHashed === '39ae290f')
+        return interaction.reply({
+          content: `Tämä gif on ei blokki blokkauksen blokkilistalla joten et voi blokata sitä. Niin se menee.`,
+          ephemeral: true,
+        });
+
       await db
         .collection('estolista2000')
         .doc(urlHashed)

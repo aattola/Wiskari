@@ -40,6 +40,7 @@ class BlockGif {
     '270236553865854982', // jerry
     '229510730099982339', // jarkko
     '375364468634550273', // risto
+    '230289238455746560', // topias
   ];
 
   static checkMessage(message: Message): void {

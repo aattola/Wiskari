@@ -141,6 +141,10 @@ class Nettiauto {
       );
     }
 
+    if (car.model.name.toLowerCase().includes('fiesta')) {
+      embed.addField('Hyvä valinta.', `Laadukas auto`, true);
+    }
+
     if (car.steeringWheelLeft === false) {
       embed.addField(
         'Ohjauslaite',

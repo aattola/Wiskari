@@ -130,6 +130,17 @@ class Nettiauto {
       );
     }
 
+    if (
+      car.make.name.toLowerCase().includes('mercedes-benz') &&
+      car.kilometers > 300000
+    ) {
+      embed.addField(
+        'Romu mikä romu.',
+        `Miten tää ruostekasa edes liikkuu?`,
+        true
+      );
+    }
+
     if (car.steeringWheelLeft === false) {
       embed.addField(
         'Ohjauslaite',

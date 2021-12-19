@@ -6,7 +6,10 @@ import {
 } from 'discord.js';
 import getUrls from 'extract-urls';
 import { crc32 } from 'crc';
-import { Sentry } from './logging/sentry';
+import axios from 'axios';
+import * as crypto from 'crypto';
+import NodeCache from 'node-cache';
+import { Sentry } from '../logging/sentry';
 
 const data = process.env.firebase;
 const buff = Buffer.from(data, 'base64');
@@ -22,6 +25,9 @@ firebase.initializeApp({
 });
 
 const db = firebase.firestore();
+const cache = new NodeCache({
+  stdTTL: 0,
+});
 
 interface Blocked {
   poster: {
@@ -30,6 +36,7 @@ interface Blocked {
   };
   timestamp: number;
   url: string;
+  hash?: string;
 }
 
 class BlockGif {
@@ -43,10 +50,59 @@ class BlockGif {
     '230289238455746560', // topias
   ];
 
+  static async getGifHash(url: string): Promise<string> {
+    // eslint-disable-next-line no-async-promise-executor
+    return new Promise(async (resolve, reject) => {
+      const cacheRes: string = cache.get(url);
+      if (cacheRes) {
+        resolve(cacheRes);
+      }
+
+      const res = await axios({
+        method: 'get',
+        url,
+        responseType: 'stream',
+      });
+      res.data
+        .pipe(crypto.createHash('md5'))
+        // eslint-disable-next-line func-names
+        .on('readable', async function () {
+          if (!this.read) return;
+          const bb = this.read();
+          if (!bb) return;
+
+          const hashString = bb.toString('hex');
+          cache.set(url, hashString);
+          resolve(hashString);
+        });
+    });
+  }
+
   static checkMessage(message: Message): void {
     if (message.author.bot) return;
     if (!message.guild) return;
     if (message.thread) return;
+    message.attachments.forEach(async (attachment) => {
+      if (attachment.contentType.includes('gif')) {
+        const hash = await this.getGifHash(attachment.proxyURL);
+        for (const blocked1 of this.blocked) {
+          if (blocked1.hash) {
+            if (blocked1.hash === hash) {
+              message.delete().catch(() => null);
+
+              const dmChan = await message.author.createDM().catch(() => null);
+
+              dmChan
+                .send(
+                  `Tuo hajautusalgoritmilla laskettu numero on blokattu. joten älä laita tällästä. vammaisille: || gif on blokattu ||`
+                )
+                .catch(() => null);
+            }
+          }
+        }
+      }
+    });
+
     const urls = getUrls(message.content);
     if (!urls) {
       return;
@@ -82,10 +138,39 @@ class BlockGif {
     const message = <Message>value.message;
     const urls = getUrls(message.content);
     if (!urls) {
-      return interaction.reply({
-        content: `Kusetit mua eihän tossa ole edes linkkiä (käytännössä pystyt blokkaamaan linkkejä)`,
-        ephemeral: true,
-      });
+      if (message.attachments.size > 0) {
+        message.attachments.forEach(async (attachment) => {
+          const hash = await this.getGifHash(attachment.proxyURL);
+          await db
+            .collection('estolista2000')
+            .doc(hash)
+            .set({
+              url: attachment.url,
+              hash,
+              poster: {
+                name: message.author.username,
+                id: message.author.id,
+              },
+              blocker: {
+                name: interaction.user.username,
+                id: interaction.user.id,
+              },
+              timestamp: Date.now(),
+            });
+
+          await this.fetchBlocklist();
+          return interaction.reply({
+            content: `Blokattu gif hash blokilla.`,
+            ephemeral: true,
+          });
+        });
+      } else {
+        return interaction.reply({
+          content: `Kusetit mua eihän tossa ole edes linkkiä (käytännössä pystyt blokkaamaan linkkejä)`,
+          ephemeral: true,
+        });
+      }
+      return;
     }
     const urlArray = [...urls];
     if (message.author.bot) {
@@ -112,6 +197,10 @@ class BlockGif {
           poster: {
             name: message.author.username,
             id: message.author.id,
+          },
+          blocker: {
+            name: interaction.user.username,
+            id: interaction.user.id,
           },
           timestamp: Date.now(),
         });
@@ -144,10 +233,41 @@ class BlockGif {
 
     const urls = getUrls(<string>value);
     if (!urls) {
-      return interaction.reply({
-        content: `Kusetit mua eihän tossa ole edes linkkiä`,
-        ephemeral: true,
-      });
+      // katotaa onko hashil mitää
+
+      const res = await db
+        .collection('estolista2000')
+        .doc(<string>value)
+        .get();
+      if (!res.exists) {
+        return interaction.reply({
+          content: `Ei löytynyt blokattuja tavaroita tällä hakusanalla: ${value}`,
+          ephemeral: true,
+        });
+      }
+
+      db.collection('estolista2000')
+        .doc(<string>value)
+        .delete()
+        .catch((err) => {
+          Sentry.captureException(err);
+
+          return interaction.reply({
+            content: `En menestynyt poistossa en tiiä miksi. Kysy leeviltä tai jtn. Hash: ${value}`,
+            ephemeral: true,
+          });
+        })
+        .then((result) => {
+          this.fetchBlocklist();
+          return interaction.reply({
+            content: `Poistin hashin ${<string>(
+              value
+            )} estolistalta. Refreshaan cachen vielä.`,
+            ephemeral: true,
+          });
+        });
+
+      return;
     }
     const urlArray = [...urls];
 

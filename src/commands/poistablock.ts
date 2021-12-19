@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction } from 'discord.js';
 import getUrls from 'extract-urls';
 import { crc32 } from 'crc';
-import BlockGif from '../blockGif';
+import BlockGif from '../managers/blockGif';
 import { SlashCommand } from '../types/command';
 
 const Poistablock: SlashCommand = {

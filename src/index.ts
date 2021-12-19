@@ -14,10 +14,15 @@ import { runAnalytics } from './logging/analytics';
 import { Sentry } from './logging/sentry';
 import { loadCommands } from './commandLoader';
 
-dotenv.config();
-
 // eslint-disable-next-line import/first
 import './managers/s3';
+import {
+  ContextMenuCommandBuilder,
+  SlashCommandBuilder,
+} from '@discordjs/builders';
+import blockGif from './managers/blockGif';
+
+dotenv.config();
 // const knex = Knex({
 //   client: 'pg',
 //   connection: {
@@ -48,20 +53,25 @@ client.on('ready', async () => {
 
   loadCommands(client);
 
-  // const g = await client.guilds.fetch('229499178018013184');
-  // g.commands.set([]);
-
-  // await knex
-  //   .insert({ data: { cledos: 'meal' }, text: 'COCK' })
-  //   .into('kindacringedoe');
-
-  // knex
-  //   .select('*')
-  //   .from('kindacringedoe')
-  //   .where(knex.raw(`jeeason->> 'cledos' = 'meal'`))
-  //   .then((b) => {
-  //     console.log('bs', b);
+  // const ctxMenu = new ContextMenuCommandBuilder()
+  //   .setName('Lisää blokkilistalle')
+  //   .setType(3)
+  //   .setDefaultPermission(true);
+  //
+  // const remove = new SlashCommandBuilder()
+  //   .setName('poistablock')
+  //   .setDescription('testiblock')
+  //   .addStringOption((option) => {
+  //     option.setName('hash');
+  //     option.setDescription('test');
+  //     option.setRequired(true);
+  //     return option;
   //   });
+  //
+  // const guild = await client.guilds.fetch('566955190000025611');
+  // console.log(guild.name);
+  // await guild.commands.set([ctxMenu, remove.toJSON()]);
+  // await blockGif.fetchBlocklist();
 });
 
 const commands = new Collection();

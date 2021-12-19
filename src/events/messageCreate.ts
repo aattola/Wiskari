@@ -1,5 +1,5 @@
 import { Message } from 'discord.js';
-import BlockGif from '../blockGif';
+import BlockGif from '../managers/blockGif';
 import { analytics } from '../logging/analytics';
 import { S3Client } from '../managers/s3';
 import { Nettiauto } from '../managers/nettiauto';

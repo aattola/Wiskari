@@ -93,7 +93,7 @@ class BlockGif {
               const dmChan = await message.author.createDM().catch(() => null);
 
               const currTime = Date.now();
-              const banTime = currTime + 60000;
+              const banTime = currTime + 10000;
               await message.member
                 .timeout(banTime, 'Postasi cringeä')
                 .catch(() => null);
@@ -123,11 +123,10 @@ class BlockGif {
           const dmChan = await message.author.createDM().catch(() => null);
 
           const currTime = Date.now();
-          const banTime = currTime + 60000;
-          console.log(banTime, 'timeoutti');
+          const banTime = currTime + 10000;
           await message.member
             .timeout(banTime, 'Postasi cringeä')
-            .catch((e) => console.log(e, "can't timeout"));
+            .catch(() => null);
 
           dmChan
             .send(`Tuo on estetty joten älä laita tällästä`)

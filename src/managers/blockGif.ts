@@ -92,6 +92,12 @@ class BlockGif {
 
               const dmChan = await message.author.createDM().catch(() => null);
 
+              const currTime = Date.now();
+              const banTime = currTime + 10000;
+              if (message.member.kickable) {
+                await message.member.timeout(banTime, 'Postasi cringeä');
+              }
+
               dmChan
                 .send(
                   `Tuo hajautusalgoritmilla laskettu numero on blokattu. joten älä laita tällästä. vammaisille: || gif on blokattu ||`
@@ -104,17 +110,23 @@ class BlockGif {
     });
 
     const urls = getUrls(message.content);
+
     if (!urls) {
       return;
     }
     const urlArray = [...urls];
-
     urlArray.forEach(async (url) => {
       for (const blocked1 of this.blocked) {
         if (blocked1.url === url) {
           message.delete().catch(() => null);
 
           const dmChan = await message.author.createDM().catch(() => null);
+
+          const currTime = Date.now();
+          const banTime = currTime + 10000;
+          if (message.member.kickable) {
+            await message.member.timeout(banTime, 'Postasi cringeä');
+          }
 
           dmChan
             .send(`Tuo on estetty joten älä laita tällästä`)

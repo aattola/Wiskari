@@ -52,6 +52,7 @@ client.on('ready', async () => {
   console.log('[Discord] Kirjauduttu sisään ja valmiina. Wiskari');
 
   loadCommands(client);
+  await blockGif.fetchBlocklist();
 
   // const ctxMenu = new ContextMenuCommandBuilder()
   //   .setName('Lisää blokkilistalle')
@@ -71,7 +72,6 @@ client.on('ready', async () => {
   // const guild = await client.guilds.fetch('566955190000025611');
   // console.log(guild.name);
   // await guild.commands.set([ctxMenu, remove.toJSON()]);
-  // await blockGif.fetchBlocklist();
 });
 
 const commands = new Collection();

@@ -124,9 +124,10 @@ class BlockGif {
 
           const currTime = Date.now();
           const banTime = currTime + 60000;
+          console.log(banTime, 'timeoutti');
           await message.member
             .timeout(banTime, 'Postasi cringeä')
-            .catch(() => null);
+            .catch((e) => console.log(e, "can't timeout"));
 
           dmChan
             .send(`Tuo on estetty joten älä laita tällästä`)

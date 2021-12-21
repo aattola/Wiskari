@@ -122,11 +122,11 @@ class BlockGif {
 
           const dmChan = await message.author.createDM().catch(() => null);
 
-          const currTime = Date.now();
-          const banTime = currTime + 10000;
-          await message.member
-            .timeout(banTime, 'Postasi cringeä')
-            .catch(() => null);
+          // const currTime = Date.now();
+          // const banTime = currTime + 10000;
+          // await message.member
+          //   .timeout(banTime, 'Postasi cringeä')
+          //   .catch(() => null);
 
           dmChan
             .send(`Tuo on estetty joten älä laita tällästä`)

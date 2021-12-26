@@ -84,9 +84,22 @@ class Nettiauto {
 
     const price = new Intl.NumberFormat('fi-FI').format(car.price);
     const kilometers = new Intl.NumberFormat('fi-FI').format(car.kilometers);
-    const kw = new Intl.NumberFormat('fi-FI', {
-      maximumSignificantDigits: 3,
-    }).format(car.power * 0.745699872);
+    let power = `${car.power}`
+
+    if (car.powerUnitIsKw) {
+      const hp = new Intl.NumberFormat('fi-FI', {
+        maximumSignificantDigits: 3,
+      }).format(car.power * 1.35);
+
+      power = `${car.power} kW / ${hp} Hv`
+    } else {
+      const kw = new Intl.NumberFormat('fi-FI', {
+        maximumSignificantDigits: 3,
+      }).format(car.power * 0.745699872);
+
+      power = `${kw} kW / ${car.power} Hv`
+    }
+
 
     const embed = new MessageEmbed()
       .setColor('#e14343')
@@ -97,9 +110,7 @@ class Nettiauto {
         {
           name: 'Teho',
           value: car.power
-            ? `${Number(kw) !== 0 ? kw : 'Ei ilm.'} kW / ${
-                car.power ? car.power : 'Ei ilm.'
-              } Hv`
+            ? `${power}`
             : 'Ei ilm.',
           inline: true,
         },

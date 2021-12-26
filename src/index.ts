@@ -58,7 +58,7 @@ client.on('ready', async () => {
   //   .setName('Lisää blokkilistalle')
   //   .setType(3)
   //   .setDefaultPermission(true);
-  //
+
   // const remove = new SlashCommandBuilder()
   //   .setName('poistablock')
   //   .setDescription('testiblock')
@@ -68,10 +68,11 @@ client.on('ready', async () => {
   //     option.setRequired(true);
   //     return option;
   //   });
-  //
-  // const guild = await client.guilds.fetch('566955190000025611');
+
+  // const guild = await client.guilds.fetch('229499178018013184');
   // console.log(guild.name);
-  // await guild.commands.set([ctxMenu, remove.toJSON()]);
+  // // @ts-ignore
+  // await guild.commands.set([]);
 });
 
 const commands = new Collection();

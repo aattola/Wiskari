@@ -201,6 +201,12 @@ class BlockGif {
           ephemeral: true,
         });
 
+      if (urlHashed === 'f866c5a1')
+        return interaction.reply({
+          content: `Tämä gif on ei blokki blokkauksen blokkilistalla joten et voi blokata sitä. Niin se menee. LOPETA JERRY`,
+          ephemeral: true,
+        });
+
       await db
         .collection('estolista2000')
         .doc(urlHashed)

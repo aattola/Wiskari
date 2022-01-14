@@ -16,6 +16,11 @@ const messageCreate = {
     S3.handleMessage(message);
     nettiauto.onMessage(message);
 
+    if (message.content.toLowerCase() === 'get') {
+      // gettistä
+      message.reply(`Gettistä: ${message.id}`);
+    }
+
     if (!message.author.bot) {
       analytics.track({
         userId: message.author.id,

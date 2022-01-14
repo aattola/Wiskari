@@ -13,13 +13,13 @@ function gettistä(message: Message) {
     if (idSplit[idSplit.length - 2] === idSplit[idSplit.length - 3]) {
       if (idSplit[idSplit.length - 4] === idSplit[idSplit.length - 5]) {
         if (idSplit[idSplit.length - 5] === idSplit[idSplit.length - 6]) {
-          return message.reply(`TUPLAT HALOOOOO PENTAT ${message.id}`);
+          return message.reply(`HALOOOOO PENTAT ${message.id}`);
         }
-        return message.reply(`TUPLAT HALOOOOO QUADROT ${message.id}`);
+        return message.reply(`HALOOOOO QUADROT ${message.id}`);
       }
-      return message.reply(`TUPLAT HALOOOOO TRIPLAT ${message.id}`);
+      return message.reply(`HALOOOOO TRIPLAT ${message.id}`);
     }
-    return message.reply(`TUPLAT HALOOOOO TUPLAT ${message.id}`);
+    return message.reply(`HALOOOOO TUPLAT ${message.id}`);
   }
 
   message.reply(`Gettistä: ${message.id}`);

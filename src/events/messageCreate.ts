@@ -11,8 +11,8 @@ function gettistä(message: Message) {
   const idSplit = message.id.split('');
   if (idSplit[idSplit.length - 1] === idSplit[idSplit.length - 2]) {
     if (idSplit[idSplit.length - 2] === idSplit[idSplit.length - 3]) {
-      if (idSplit[idSplit.length - 4] === idSplit[idSplit.length - 5]) {
-        if (idSplit[idSplit.length - 5] === idSplit[idSplit.length - 6]) {
+      if (idSplit[idSplit.length - 3] === idSplit[idSplit.length - 4]) {
+        if (idSplit[idSplit.length - 4] === idSplit[idSplit.length - 5]) {
           return message.reply(`HALOOOOO PENTAT ${message.id}`);
         }
         return message.reply(`HALOOOOO QUADROT ${message.id}`);

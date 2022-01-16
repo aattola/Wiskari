@@ -13,9 +13,15 @@ function gettistä(message: Message) {
     if (idSplit[idSplit.length - 2] === idSplit[idSplit.length - 3]) {
       if (idSplit[idSplit.length - 3] === idSplit[idSplit.length - 4]) {
         if (idSplit[idSplit.length - 4] === idSplit[idSplit.length - 5]) {
-          return message.reply(`HALOOOOO PENTAT ${message.id}`);
+          return message.reply({
+            content: `HYVÄ PENTA GETTI UKKO ${message.id}`,
+            files: ['https://i.imgur.com/hwNEPfz.jpeg'],
+          });
         }
-        return message.reply(`HALOOOOO QUADROT ${message.id}`);
+        return message.reply({
+          content: `HALOOOOO QUADROT ${message.id}`,
+          files: ['https://i.imgur.com/UHndwBg.png'],
+        });
       }
       return message.reply(`HALOOOOO TRIPLAT ${message.id}`);
     }

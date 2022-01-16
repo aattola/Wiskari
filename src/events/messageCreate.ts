@@ -1,4 +1,4 @@
-import { Message } from 'discord.js';
+import { Message, MessageActionRow, MessageButton } from 'discord.js';
 import BlockGif from '../managers/blockGif';
 import { analytics } from '../logging/analytics';
 import { S3Client } from '../managers/s3';
@@ -14,12 +14,12 @@ function gettistä(message: Message) {
       if (idSplit[idSplit.length - 3] === idSplit[idSplit.length - 4]) {
         if (idSplit[idSplit.length - 4] === idSplit[idSplit.length - 5]) {
           return message.reply({
-            content: `HYVÄ PENTA GETTI UKKO ${message.id}`,
+            content: `HYVÄ **PENTA GETTI UKKO** ${message.id}`,
             files: ['https://i.imgur.com/hwNEPfz.jpeg'],
           });
         }
         return message.reply({
-          content: `HALOOOOO QUADROT ${message.id}`,
+          content: `HALOOOOO **QUADROT** ${message.id}`,
           files: ['https://i.imgur.com/UHndwBg.png'],
         });
       }
@@ -30,9 +30,21 @@ function gettistä(message: Message) {
 
   const rNumber = Math.round(Math.random() * 100);
   if (rNumber >= 95) {
-    return message.reply(
-      `Mitäs jos gettaamisen sijasta gettaisit itsellesi *ämmiä*: ${message.id}`
+    const row = new MessageActionRow().addComponents(
+      new MessageButton()
+        .setCustomId('komppaan')
+        .setStyle('SUCCESS')
+        .setLabel('Komppaan'),
+      new MessageButton()
+        .setCustomId('palautetta')
+        .setStyle('SECONDARY')
+        .setLabel('Annan rakentavaa palautetta')
     );
+
+    return message.reply({
+      content: `Mitäs jos gettaamisen sijasta gettaisit itsellesi *ämmiä*: ${message.id}`,
+      components: [row],
+    });
   }
   message.reply(`Gettistä: ${message.id}`);
 }

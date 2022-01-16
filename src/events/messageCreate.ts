@@ -23,11 +23,17 @@ function gettistä(message: Message) {
           files: ['https://i.imgur.com/UHndwBg.png'],
         });
       }
-      return message.reply(`HALOOOOO TRIPLAT ${message.id}`);
+      return message.reply(`HALOOOOO **TRIPLAT** ${message.id}`);
     }
-    return message.reply(`HALOOOOO TUPLAT ${message.id}`);
+    return message.reply(`MORO **TUPLAT** ${message.id}`);
   }
 
+  const rNumber = Math.round(Math.random() * 100);
+  if (rNumber >= 95) {
+    return message.reply(
+      `Mitäs jos gettaamisen sijasta gettaisit itsellesi *ämmiä*: ${message.id}`
+    );
+  }
   message.reply(`Gettistä: ${message.id}`);
 }
 

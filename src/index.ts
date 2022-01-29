@@ -1,13 +1,14 @@
 import Discord, {
+  ButtonInteraction,
   Collection,
   CommandInteraction,
+  ContextMenuInteraction,
+  SelectMenuInteraction,
   TextChannel,
 } from 'discord.js';
 
 import fs from 'fs';
-import Knex from 'knex';
 
-// import { PrismaClient } from '@prisma/client';
 import path from 'path';
 import dotenv from 'dotenv';
 import { runAnalytics } from './logging/analytics';
@@ -16,10 +17,6 @@ import { loadCommands } from './commandLoader';
 
 // eslint-disable-next-line import/first
 import './managers/s3';
-import {
-  ContextMenuCommandBuilder,
-  SlashCommandBuilder,
-} from '@discordjs/builders';
 import blockGif from './managers/blockGif';
 
 dotenv.config();
@@ -118,7 +115,14 @@ async function registerInteractions() {
 
 registerInteractions();
 
-function handleInteractionError(interaction, error) {
+function handleInteractionError(
+  interaction:
+    | CommandInteraction
+    | ContextMenuInteraction
+    | ButtonInteraction
+    | SelectMenuInteraction,
+  error
+) {
   console.error(error);
   Sentry.captureException(error, {
     user: interaction.user,
@@ -127,6 +131,7 @@ function handleInteractionError(interaction, error) {
     },
     extra: {
       interaction,
+      type: interaction.type,
     },
   });
   interaction.reply({
@@ -173,7 +178,7 @@ client.on('interactionCreate', async (interaction) => {
 
   Sentry.addBreadcrumb({
     category: 'interaction',
-    message: `Uusi interaction jonka id: ${interaction.id}`,
+    message: `Uusi interaction jonka id: ${interaction.id} ${interaction.type}`,
     level: Sentry.Severity.Info,
     data: sentryInteraction,
   });

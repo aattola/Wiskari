@@ -16,7 +16,7 @@ const commandFiles = fs
     if (file.endsWith('.js')) return file;
   });
 
-const devGuilds = ['279272653834027008'];
+const devGuilds = ['566955190000025611'];
 const permissionGuilds = ['279272653834027008', '229499178018013184'];
 const perms = {};
 
@@ -80,22 +80,22 @@ const loadCommands = async (client: Client) => {
     // }
   }
 
-  // if (process.env.NODE_ENV === 'development') {
-  // devGuilds.forEach((id) => {
-  //   client.guilds.fetch(id).then((guild) => {
-  //     guild.commands.set([]);
-  //     guild.commands.set(botCommands).then(async () => {
-  //       console.log(
-  //         `[${
-  //           process.env.NODE_ENV === 'development' ? 'DEV' : 'PROD'
-  //         } commandLoader] Komennot asennettu guildiin ${id}`
-  //       );
-  //       const commands2 = await guild.commands.fetch();
-  //       loadPerms(client, commands2);
-  //     });
-  //   });
-  // });
-  // }
+  if (process.env.NODE_ENV === 'development') {
+    devGuilds.forEach((id) => {
+      client.guilds.fetch(id).then((guild) => {
+        guild.commands.set([]);
+        guild.commands.set(botCommands).then(async () => {
+          console.log(
+            `[${
+              process.env.NODE_ENV === 'development' ? 'DEV' : 'PROD'
+            } commandLoader] Komennot asennettu guildiin ${id}`
+          );
+          const commands2 = await guild.commands.fetch();
+          // loadPerms(client, commands2);
+        });
+      });
+    });
+  }
 };
 
 export { loadCommands };

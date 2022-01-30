@@ -19,22 +19,23 @@ const Kares: SlashCommand = {
   async execute(interaction: CommandInteraction) {
     // jerry id "270236553865854982"
     // await interaction.deferReply({ ephemeral: true});
+    await interaction.reply('Jerry ei pitänyt jekutuksesta :( jekut loppui');
 
-    const name = interaction.options.getString('nimi');
-    if (!name) {
-      throw new Error('Joku kusi nimen saannissa');
-    }
-
-    try {
-      const kares = await interaction.guild.members.fetch('270236553865854982');
-      await kares.setNickname(name, 'Sinua on trollattu');
-      await interaction.reply({
-        content: 'Nimi vaihdettu onnistuneesti',
-        ephemeral: true,
-      });
-    } catch (e) {
-      throw new Error(e);
-    }
+    // const name = interaction.options.getString('nimi');
+    // if (!name) {
+    //   throw new Error('Joku kusi nimen saannissa');
+    // }
+    //
+    // try {
+    //   const kares = await interaction.guild.members.fetch('270236553865854982');
+    //   await kares.setNickname(name, 'Sinua on trollattu');
+    //   await interaction.reply({
+    //     content: 'Nimi vaihdettu onnistuneesti',
+    //     ephemeral: true,
+    //   });
+    // } catch (e) {
+    //   throw new Error(e);
+    // }
   },
 };
 

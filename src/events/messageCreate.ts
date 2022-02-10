@@ -54,8 +54,8 @@ function gettistä(message: Message) {
         content: `Gettistä: ${message.id}`,
         files: ['https://i.imgur.com/HFuerqW.png'],
       });
+      return;
     }
-    return;
   }
 
   message.reply(`Gettistä: ${message.id}`);

@@ -58,6 +58,13 @@ const messageCreate = {
     S3.handleMessage(message);
     nettiauto.onMessage(message);
 
+    if (message.content.toLowerCase().includes('ni11a'.replace('11', 'gg'))) {
+      message.reply({
+        content: `NYT OMPI SITÄ PEISETTIÄ`,
+        files: ['https://i.imgur.com/Psqr2Hc.png'],
+      });
+    }
+
     if (message.content.toLowerCase() === 'get') {
       // gettistä
       gettistä(message);

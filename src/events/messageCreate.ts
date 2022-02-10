@@ -59,8 +59,9 @@ const messageCreate = {
     nettiauto.onMessage(message);
 
     if (message.content.toLowerCase().includes('ni11a'.replace('11', 'gg'))) {
+      if (message.author.bot) return;
       message.reply({
-        content: `NYT OMPI SITÄ PEISETTIÄ`,
+        content: `NYT OMPI SITÄ PEISETTIÄ JATKA SAMAAN MALLIIN POSTAAMISTA`,
         files: ['https://i.imgur.com/Psqr2Hc.png'],
       });
     }

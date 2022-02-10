@@ -10,6 +10,33 @@ import { TictacManager } from '../tictac';
 const Button = {
   data: new SlashCommandBuilder().setName('button').setDescription('huutinen'),
   async execute(interaction: ButtonInteraction) {
+    if (interaction.customId === 'punainennappi') {
+      if (
+        interaction.user.id === '270236553865854982' ||
+        interaction.user.id === '214760917810937857'
+      ) {
+        const { id } = interaction.user; // jerry tossaja
+        const member = await interaction.guild.members.fetch(id);
+
+        try {
+          await member.timeout(10000, 'HÄÄHÄÄÄ');
+          await interaction.reply(
+            'Kares ampui itseään jalkaan 10% mahdollisuuksilla.'
+          );
+        } catch (e) {
+          await interaction.reply('Rikki meni');
+        }
+
+        return;
+      }
+
+      interaction.reply({
+        ephemeral: true,
+        content: 'OLETKOS SINÄ KARES JERRY???????? ETPÄ TAINNUT OLLA KLOPPI',
+      });
+      return;
+    }
+
     if (interaction.customId.startsWith('ttt')) {
       const tictac = TictacManager.getInstance();
       await tictac.handleButtonInteraction(interaction);
@@ -85,7 +112,9 @@ const Button = {
       return;
     }
 
-    await interaction.reply('testi vammainen !');
+    await interaction.reply(
+      'Hassua Leevi ei lisännyt koodia joka händläisi sinun nappien naputukset'
+    );
   },
 };
 

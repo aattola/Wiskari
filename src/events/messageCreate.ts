@@ -46,6 +46,18 @@ function gettistä(message: Message) {
       components: [row],
     });
   }
+
+  const rNumber2 = Math.round(Math.random() * 100);
+  if (message.author.id === '286963674990772226') {
+    if (rNumber2 >= 90) {
+      message.reply({
+        content: `Gettistä: ${message.id}`,
+        files: ['https://i.imgur.com/HFuerqW.png'],
+      });
+    }
+    return;
+  }
+
   message.reply(`Gettistä: ${message.id}`);
 }
 

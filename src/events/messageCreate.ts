@@ -42,7 +42,7 @@ function gettistä(message: Message) {
     );
 
     return message.reply({
-      content: `Mitäs jos gettaamisen sijasta gettaisit itsellesi *ämmiä*: ${message.id}`,
+      content: `Mitäs jos gettaamisen sijasta gettaisit itsellesi ämmiä: ${message.id}`,
       components: [row],
     });
   }

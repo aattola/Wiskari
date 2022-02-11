@@ -6,10 +6,69 @@ import {
   MessageSelectMenu,
 } from 'discord.js';
 import { TictacManager } from '../tictac';
+import { rivi1, rivi2 } from '../stuff/kanaComponents';
 
 const Button = {
   data: new SlashCommandBuilder().setName('button').setDescription('huutinen'),
   async execute(interaction: ButtonInteraction) {
+    if (interaction.customId === 'kanariisi') {
+      const message = <Message>interaction.message;
+      if (
+        message.content
+          .toLowerCase()
+          .includes(interaction.user.username.toLowerCase())
+      ) {
+        return interaction.reply({
+          ephemeral: true,
+          content: 'ÄLÄ SPÄMMI VITUN JUNTTI',
+        });
+      }
+
+      await interaction.update({
+        content: `${message.content}\n${interaction.user.username} on kanariisin puolella!\n`,
+        components: [rivi1, rivi2],
+      });
+      return;
+    }
+
+    if (interaction.customId === 'kananuudeli') {
+      const message = <Message>interaction.message;
+      if (
+        message.content
+          .toLowerCase()
+          .includes(interaction.user.username.toLowerCase())
+      ) {
+        return interaction.reply({
+          ephemeral: true,
+          content: 'ÄLÄ SPÄMMI VITUN JUNTTI',
+        });
+      }
+      await interaction.update({
+        content: `${message.content}\n${interaction.user.username} on kananuudelin puolella!\n`,
+        components: [rivi1, rivi2],
+      });
+      return;
+    }
+
+    if (interaction.customId === 'olenhomo') {
+      const message = <Message>interaction.message;
+      if (
+        message.content
+          .toLowerCase()
+          .includes(interaction.user.username.toLowerCase())
+      ) {
+        return interaction.reply({
+          ephemeral: true,
+          content: 'ÄLÄ SPÄMMI VITUN JUNTTI',
+        });
+      }
+      await interaction.update({
+        content: `${message.content}\n${interaction.user.username} on umpihomo!\n`,
+        components: [rivi1, rivi2],
+      });
+      return;
+    }
+
     if (interaction.customId === 'punainennappi') {
       if (
         interaction.user.id === '270236553865854982' ||

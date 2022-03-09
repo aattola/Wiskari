@@ -83,30 +83,30 @@ class BlockGif {
     if (!message.guild) return;
     if (message.thread) return;
     message.attachments.forEach(async (attachment) => {
-      if (attachment.contentType.includes('gif')) {
-        const hash = await this.getGifHash(attachment.proxyURL);
-        for (const blocked1 of this.blocked) {
-          if (blocked1.hash) {
-            if (blocked1.hash === hash) {
-              message.delete().catch(() => null);
+      // if (attachment.contentType.includes('gif')) {
+      const hash = await this.getGifHash(attachment.proxyURL);
+      for (const blocked1 of this.blocked) {
+        if (blocked1.hash) {
+          if (blocked1.hash === hash) {
+            message.delete().catch(() => null);
 
-              const dmChan = await message.author.createDM().catch(() => null);
+            const dmChan = await message.author.createDM().catch(() => null);
 
-              const currTime = Date.now();
-              const banTime = currTime + 10000;
-              await message.member
-                .timeout(banTime, 'Postasi cringeä')
-                .catch(() => null);
+            const currTime = Date.now();
+            const banTime = currTime + 10000;
+            await message.member
+              .timeout(banTime, 'Postasi cringeä')
+              .catch(() => null);
 
-              dmChan
-                .send(
-                  `Tuo hajautusalgoritmilla laskettu numero on blokattu. joten älä laita tällästä. vammaisille: || gif on blokattu ||`
-                )
-                .catch(() => null);
-            }
+            dmChan
+              .send(
+                `Tuo hajautusalgoritmilla laskettu numero on blokattu. joten älä laita tällästä. vammaisille: || blokattu ||`
+              )
+              .catch(() => null);
           }
         }
       }
+      // }
     });
 
     const urls = getUrls(message.content);
@@ -172,7 +172,7 @@ class BlockGif {
 
           await this.fetchBlocklist();
           return interaction.reply({
-            content: `Blokattu gif hash blokilla.`,
+            content: `Blokattu hash blokilla.`,
             ephemeral: true,
           });
         });
@@ -197,13 +197,13 @@ class BlockGif {
 
       if (urlHashed === '39ae290f')
         return interaction.reply({
-          content: `Tämä gif on ei blokki blokkauksen blokkilistalla joten et voi blokata sitä. Niin se menee.`,
+          content: `Tämä on ei blokki blokkauksen blokkilistalla joten et voi blokata sitä. Niin se menee.`,
           ephemeral: true,
         });
 
       if (urlHashed === 'f866c5a1')
         return interaction.reply({
-          content: `Tämä gif on ei blokki blokkauksen blokkilistalla joten et voi blokata sitä. Niin se menee. LOPETA JERRY`,
+          content: `Tämä on ei blokki blokkauksen blokkilistalla joten et voi blokata sitä. Niin se menee. LOPETA JERRY`,
           ephemeral: true,
         });
 

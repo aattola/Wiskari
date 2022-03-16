@@ -84,22 +84,21 @@ class Nettiauto {
 
     const price = new Intl.NumberFormat('fi-FI').format(car.price);
     const kilometers = new Intl.NumberFormat('fi-FI').format(car.kilometers);
-    let power = `${car.power}`
+    let power = `${car.power}`;
 
     if (car.powerUnitIsKw) {
       const hp = new Intl.NumberFormat('fi-FI', {
         maximumSignificantDigits: 3,
       }).format(car.power * 1.35);
 
-      power = `${car.power} kW / ${hp} Hv`
+      power = `${car.power} kW / ${hp} Hv`;
     } else {
       const kw = new Intl.NumberFormat('fi-FI', {
         maximumSignificantDigits: 3,
       }).format(car.power * 0.745699872);
 
-      power = `${kw} kW / ${car.power} Hv`
+      power = `${kw} kW / ${car.power} Hv`;
     }
-
 
     const embed = new MessageEmbed()
       .setColor('#e14343')
@@ -109,9 +108,7 @@ class Nettiauto {
       .addFields(
         {
           name: 'Teho',
-          value: car.power
-            ? `${power}`
-            : 'Ei ilm.',
+          value: car.power ? `${power}` : 'Ei ilm.',
           inline: true,
         },
         {
@@ -138,6 +135,21 @@ class Nettiauto {
     ) {
       embed.setThumbnail(
         'https://i.kym-cdn.com/photos/images/facebook/002/018/642/644.png'
+      );
+    }
+
+    if (
+      car.make.name.toLowerCase().includes('honda') &&
+      car.kilometers > 400000
+    ) {
+      embed.addField('Pitkään ajettu.', `Ruoste tässä haisee.`, true);
+    }
+
+    if (car.make.name.toLowerCase().includes('honda')) {
+      embed.addField(
+        'Japanista tuotu auto.',
+        `Mieti tarkkaan ennen kuin ostat`,
+        true
       );
     }
 

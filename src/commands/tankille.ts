@@ -66,7 +66,11 @@ const TankilleCommand: SlashCommand = {
     const embed = new MessageEmbed()
       .setTitle('Haluatko tankata edullisesti? Onnea.')
       .addFields(listaaaa);
-    await interaction.reply({ embeds: [embed] });
+
+    const juttu = await api.generateGraph('1');
+    await interaction
+      .reply({ embeds: [embed], files: [juttu] })
+      .catch((err) => console.log(err));
   },
 };
 

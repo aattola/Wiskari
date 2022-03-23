@@ -30,4 +30,18 @@ interface Asema {
   updated: string;
 }
 
-export { Asema, Tankille };
+interface AsemaReport {
+  _id: string;
+  stationId: string;
+  userId: string;
+  timestamp: string;
+  prices: AsemaReportPrice[];
+  __v: number;
+}
+interface AsemaReportPrice {
+  _id: string;
+  tag: string;
+  value: number;
+}
+
+export { Asema, Tankille, AsemaReport };

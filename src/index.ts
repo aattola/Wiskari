@@ -134,6 +134,12 @@ function handleInteractionError(
       type: interaction.type,
     },
   });
+  if (interaction.replied) {
+    interaction.editReply({
+      content: `Virhe interactionissa: ${interaction.id} ${interaction.type}`,
+    });
+    return;
+  }
   interaction.reply({
     content: `Virhe interactionissa: ${interaction.id} ${interaction.type}`,
     ephemeral: true,

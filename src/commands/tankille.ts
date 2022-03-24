@@ -1,6 +1,14 @@
-import { CommandInteraction, MessageEmbed } from 'discord.js';
+import {
+  CommandInteraction,
+  MessageActionRow,
+  MessageButton,
+  MessageEmbed,
+  MessageSelectMenu,
+  MessageSelectOptionData,
+} from 'discord.js';
 import { SlashCommand } from '../types/command';
 import { Tankille } from '../managers/tankille';
+import { Asema } from '../types/tankkiTypes';
 
 const TankilleCommand: SlashCommand = {
   data: {
@@ -8,9 +16,12 @@ const TankilleCommand: SlashCommand = {
     description: 'Tankkaus setit',
   },
   async execute(interaction: CommandInteraction) {
+    await interaction.deferReply();
+
     const api = Tankille.getInstance();
     const data = await api.getGasPrices().catch((err) => {
       console.log('joku meni paskaksi', err);
+      throw new Error('joku meni rikki');
     });
 
     if (!data) return console.log('?', data);
@@ -49,9 +60,14 @@ const TankilleCommand: SlashCommand = {
     const finalList = list.filter((a, i) => i < 3);
 
     const lopullinenList = [];
+    const ysiviisLista: Asema[] = [];
 
     ysiviitoset.forEach((bensa) => {
       const ysiviisHinta = bensa.price.filter((fuel) => fuel.tag === '95')[0];
+      ysiviisLista.push({
+        ...bensa,
+      });
+
       lopullinenList.push({
         name: `${bensa.name}`,
         value: `95: ${ysiviisHinta.price}€`,
@@ -59,17 +75,64 @@ const TankilleCommand: SlashCommand = {
       });
     });
 
+    ysiviisLista[2] = ysiviitoset[ysiviitoset.length - 1];
+
     const list1 = lopullinenList.filter((a, i) => i < 3);
+    const ysiviisListaFiltered = ysiviisLista.filter((a, i) => i < 3);
+
+    // // eslint-disable-next-line prefer-destructuring
+    // ysiviisListaFiltered[3] = kiisseli[0];
+    // // eslint-disable-next-line prefer-destructuring
+    // ysiviisListaFiltered[4] = kiisseli[1];
+    // ysiviisListaFiltered[5] = kiisseli[kiisseli.length - 1];
+
+    list1[2] = lopullinenList[lopullinenList.length - 1];
+    finalList[2] = list[list.length - 1];
 
     const listaaaa = [...list1, ...finalList];
 
     const embed = new MessageEmbed()
       .setTitle('Haluatko tankata edullisesti? Onnea.')
-      .addFields(listaaaa);
+      .setDescription(
+        'Tuossa näkyy 95 ja kiisselin hinnat. Ekana kaksi halvinta viimeisenä kallein.'
+      )
+      .addFields(listaaaa)
+      .setTimestamp()
+      .setFooter({ text: 'Tankkausbotti - Hinnat päivittyvät 10 min välein' });
 
-    const juttu = await api.generateGraph('1');
+    const options: MessageSelectOptionData[] = ysiviisListaFiltered.map(
+      (asema) => {
+        return {
+          label: `${asema.name} - 95`,
+          description: `${asema.address.street}`,
+          value: `${asema._id}`,
+        };
+      }
+    );
+
+    const row1 = new MessageActionRow().addComponents(
+      new MessageButton()
+        .setCustomId('listGas')
+        .setLabel('Näytä koko lista')
+        .setStyle('SECONDARY')
+    );
+
+    const row2 = new MessageActionRow().addComponents(
+      new MessageSelectMenu()
+        .setCustomId('bensa-asema')
+        .setPlaceholder('Mielenkiintoista, kerro lisää.')
+        .addOptions([
+          ...options,
+          {
+            label: 'Huijauskoodi irl',
+            description: 'Tapa jolla säästät rahaa',
+            value: 'olenkoyha',
+          },
+        ])
+    );
+
     await interaction
-      .reply({ embeds: [embed], files: [juttu] })
+      .editReply({ embeds: [embed], components: [row1, row2] })
       .catch((err) => console.log(err));
   },
 };

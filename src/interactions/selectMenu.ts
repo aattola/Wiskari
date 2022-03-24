@@ -1,11 +1,33 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { Message, SelectMenuInteraction } from 'discord.js';
+import { Tankille } from '../managers/tankille';
 
 const Button = {
   data: new SlashCommandBuilder()
     .setName('selectmenu')
     .setDescription('huutinen'),
   async execute(interaction: SelectMenuInteraction) {
+    if (interaction.customId === 'bensa-asema') {
+      await interaction.deferReply();
+
+      const selection = interaction.values[0];
+      if (selection === 'olenkoyha') {
+        interaction.editReply({
+          content: `<@${interaction.user.id}> Olet köyhä ymmärrän. Pistä pyöräillen HALOOOOO?`,
+        });
+
+        return;
+      }
+
+      const api = Tankille.getInstance();
+      const tiedosto = await api.generateGraph(selection);
+
+      interaction.editReply({
+        files: [tiedosto],
+      });
+      return;
+    }
+
     if (interaction.customId.startsWith('palautevalikko__')) {
       const msgId = interaction.customId.split('__')[1];
       const message = await interaction.channel.messages.fetch(msgId);

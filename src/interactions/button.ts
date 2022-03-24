@@ -3,14 +3,49 @@ import {
   ButtonInteraction,
   Message,
   MessageActionRow,
+  MessageEmbed,
   MessageSelectMenu,
 } from 'discord.js';
 import { TictacManager } from '../tictac';
 import { rivi1, rivi2 } from '../stuff/kanaComponents';
+import { Tankille } from '../managers/tankille';
 
 const Button = {
   data: new SlashCommandBuilder().setName('button').setDescription('huutinen'),
   async execute(interaction: ButtonInteraction) {
+    if (interaction.customId === 'listGas') {
+      await interaction.deferReply();
+      const api = Tankille.getInstance();
+      const bensa = await api.getGasPrices();
+
+      const listaaaa = bensa.map((asema) => {
+        const ysiviisHinta = asema.price.filter((fuel) => fuel.tag === '95')[0];
+        const dieselHinta = asema.price.filter((fuel) => fuel.tag === 'dsl')[0];
+
+        return {
+          name: asema.name,
+          value: `95: ${
+            ysiviisHinta ? ysiviisHinta.price : 'Ei löytynyt'
+          } Diesel: ${dieselHinta ? dieselHinta.price : 'Ei löytynyt'}`,
+        };
+      });
+
+      const embed = new MessageEmbed()
+        .setTitle('Haluatko tankata edullisesti? Onnea.')
+        .setDescription(
+          'Tuossa näkyy 95 ja kiisselin hinnat. Listana tälläkertaa. Ei lajiteltu hinnan mukaan.'
+        )
+        .addFields(listaaaa)
+        .setTimestamp()
+        .setFooter({ text: 'Tankkausbotti' });
+
+      interaction.editReply({
+        embeds: [embed],
+      });
+
+      return;
+    }
+
     if (interaction.customId === 'kanariisi') {
       const message = <Message>interaction.message;
       if (

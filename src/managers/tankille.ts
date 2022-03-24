@@ -3,7 +3,12 @@ import * as vega from 'vega';
 import { MessageAttachment } from 'discord.js';
 import sharp from 'sharp';
 import { sub, parseISO } from 'date-fns';
+import NodeCache from 'node-cache';
 import { Asema, AsemaReport } from '../types/tankkiTypes';
+
+const cache = new NodeCache({
+  stdTTL: 600,
+});
 
 type AccessCache = {
   data: {
@@ -201,7 +206,10 @@ class Tankille {
     return token;
   }
 
-  public async getGasPriceHistory(): Promise<AsemaReport[]> {
+  public async getGasPriceHistory(stationId: string): Promise<AsemaReport[]> {
+    const value = cache.get<AsemaReport[]>(stationId);
+    if (value !== undefined) return value;
+
     const token = await this.authenticate();
 
     const date = sub(new Date(), {
@@ -209,7 +217,7 @@ class Tankille {
     });
 
     const since = date;
-    const station = '57468337076757d9a7acf610';
+    const station = stationId || '57468337076757d9a7acf610';
     const res = await axios.get<AsemaReport[]>(
       `https://api.tankille.fi/stations/${station}/prices?since=${since}`,
       {
@@ -237,11 +245,13 @@ class Tankille {
       hintadata.push(report);
     });
 
+    cache.set(stationId, hintadata);
+
     return hintadata;
   }
 
   public async generateGraph(stationId: string): Promise<MessageAttachment> {
-    const prices = await this.getGasPriceHistory();
+    const prices = await this.getGasPriceHistory(stationId);
 
     prices.forEach((report, index) => {
       const price = report.prices.filter((a) => a.tag === '95')[0].value;
@@ -249,14 +259,11 @@ class Tankille {
         report.timestamp
       ).getUTCMonth()}`;
 
-      console.log(date);
       spec.data[0].values[index] = {
         category: date,
         amount: price,
       };
     });
-
-    console.log(spec.data[0].values);
 
     const runtime = vega.parse(spec);
     const view = new vega.View(runtime, { renderer: 'none' });
@@ -272,6 +279,9 @@ class Tankille {
   }
 
   public async getGasPrices(): Promise<Asema[]> {
+    const value = cache.get<Asema[]>('gasPrices');
+    if (value !== undefined) return value;
+
     const token = await this.authenticate();
 
     const res = await axios.get<Asema[]>(
@@ -286,6 +296,7 @@ class Tankille {
     if (!res.data) {
       throw new Error('Asemia ei löytynyt');
     }
+    cache.set('gasPrices', res.data);
     return res.data;
   }
 }

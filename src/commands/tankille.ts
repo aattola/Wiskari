@@ -10,10 +10,10 @@ const TankilleCommand: SlashCommand = {
   async execute(interaction: CommandInteraction) {
     const api = Tankille.getInstance();
     const data = await api.getGasPrices().catch((err) => {
-      console.log('joku meni paskaksi');
+      console.log('joku meni paskaksi', err);
     });
 
-    if (!data) return console.log('?');
+    if (!data) return console.log('?', data);
 
     const kiisselit = data.filter((value) => {
       if (!value.price[0]) return false;

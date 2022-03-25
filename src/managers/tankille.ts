@@ -164,8 +164,8 @@ class Tankille {
 
   private async refreshAuth(refreshToken: string): Promise<string> {
     const timeSinceLastFetch = Date.now() - this.tokenCache.lastFetch;
-    // 1 * 2 viikon cache tokeneille jne
-    if (timeSinceLastFetch <= 86400000) {
+    // 10 tunnin cache accesstokenille (vanhenee 12 tunnissa)
+    if (timeSinceLastFetch <= 36000) {
       return this.tokenCache.data.accessToken;
     }
 

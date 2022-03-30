@@ -127,7 +127,15 @@ class Nettiauto {
       )
       .setImage(car.images[0].medium.url)
       .setTimestamp()
-      .setFooter('Laadukas Nettiautobotti');
+      .setFooter({ text: 'Laadukas Nettiautobotti' });
+
+    if (car.engineSize && car.fuelType?.fi) {
+      embed.addField(
+        'Moottori',
+        `${car.engineSize} l, ${car.fuelType.fi}`,
+        true
+      );
+    }
 
     if (
       car.steeringWheelLeft === false &&

@@ -155,15 +155,15 @@ class Nettiauto {
 
     if (car.make.name.toLowerCase().includes('honda')) {
       embed.addField(
-        'Japanista tuotu auto.',
-        `Mieti tarkkaan ennen kuin ostat`,
+        'Japanilainen auto.',
+        `Mieti tarkkaan ennen kun harkitset muita autoja`,
         true
       );
     }
 
     if (
       car.make.name.toLowerCase().includes('mercedes-benz') &&
-      car.kilometers > 300000
+      car.kilometers > 400000
     ) {
       embed.addField(
         'Romu mikä romu.',

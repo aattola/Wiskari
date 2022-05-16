@@ -183,8 +183,6 @@ client.on('interactionCreate', async (interaction) => {
     },
   });
 
-  console.log(transaction, 1, Sentry);
-
   Sentry.addBreadcrumb({
     category: 'interaction',
     message: `Uusi interaction jonka id: ${interaction.id} ${interaction.type}`,
@@ -199,7 +197,7 @@ client.on('interactionCreate', async (interaction) => {
       runAnalytics('button', interaction.customId, interaction);
       // @ts-ignore
       await inter.execute(interaction);
-      // transaction.setStatus('ok');
+      transaction.setStatus('ok');
     } catch (error) {
       handleInteractionError(interaction, error);
     }
@@ -225,7 +223,7 @@ client.on('interactionCreate', async (interaction) => {
 
       // @ts-ignore
       await inter.execute(interaction);
-      // transaction.setStatus('ok');
+      transaction.setStatus('ok');
     } catch (error) {
       handleInteractionError(interaction, error);
     }
@@ -242,7 +240,7 @@ client.on('interactionCreate', async (interaction) => {
 
       // @ts-ignore
       await inter.execute(interaction);
-      // transaction.setStatus('ok');
+      transaction.setStatus('ok');
     } catch (error) {
       handleInteractionError(interaction, error);
     }
@@ -262,8 +260,7 @@ client.on('interactionCreate', async (interaction) => {
 
     // @ts-ignore
     await command.execute(interaction, client);
-    console.log(transaction);
-    // transaction.setStatus('ok');
+    transaction.setStatus('ok');
   } catch (error) {
     handleInteractionError(interaction, error);
   }

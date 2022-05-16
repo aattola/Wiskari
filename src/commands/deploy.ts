@@ -17,9 +17,10 @@ const Deploy: SlashCommand = {
     },
   ],
   async execute(interaction: CommandInteraction) {
+    if (!interaction.guild) return console.log('ei guild1');
     const guildi = client.guilds.cache.get(interaction.guild.id);
 
-    await guildi.commands.create({
+    await guildi?.commands.create({
       name: 'Lisää blokkilistalle',
       type: 'MESSAGE',
       defaultPermission: true,

@@ -30,7 +30,7 @@ const Button = {
 
     if (interaction.customId.startsWith('palautevalikko__')) {
       const msgId = interaction.customId.split('__')[1];
-      const message = await interaction.channel.messages.fetch(msgId);
+      const message = await interaction.channel?.messages.fetch(msgId);
       if (!message) {
         await interaction.update({
           content:

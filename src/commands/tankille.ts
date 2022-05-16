@@ -59,7 +59,7 @@ const TankilleCommand: SlashCommand = {
 
     const finalList = list.filter((a, i) => i < 3);
 
-    const lopullinenList = [];
+    const lopullinenList: any[] = [];
     const ysiviisLista: Asema[] = [];
 
     ysiviitoset.forEach((bensa) => {

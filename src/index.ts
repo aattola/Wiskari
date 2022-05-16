@@ -122,9 +122,9 @@ function handleInteractionError(
     | ContextMenuInteraction
     | ButtonInteraction
     | SelectMenuInteraction,
-  error
+  error: any
 ) {
-  console.error(error);
+  console.error('[KOMENTO VIRHE]', error);
   Sentry.captureException(error, {
     user: interaction.user,
     tags: {
@@ -159,12 +159,12 @@ client.on('interactionCreate', async (interaction) => {
     type: interaction.type,
     token: interaction.token,
     channel: {
-      id: interaction.channel.id,
+      id: interaction.channel?.id,
       name: (interaction.channel as TextChannel).name,
     },
     guild: {
-      id: interaction.guild.id,
-      name: interaction.guild.name,
+      id: interaction.guild?.id,
+      name: interaction.guild?.name,
     },
     user: {
       id: interaction.user.id,
@@ -183,6 +183,8 @@ client.on('interactionCreate', async (interaction) => {
     },
   });
 
+  console.log(transaction, 1, Sentry);
+
   Sentry.addBreadcrumb({
     category: 'interaction',
     message: `Uusi interaction jonka id: ${interaction.id} ${interaction.type}`,
@@ -197,7 +199,7 @@ client.on('interactionCreate', async (interaction) => {
       runAnalytics('button', interaction.customId, interaction);
       // @ts-ignore
       await inter.execute(interaction);
-      transaction.setStatus('ok');
+      // transaction.setStatus('ok');
     } catch (error) {
       handleInteractionError(interaction, error);
     }
@@ -223,7 +225,7 @@ client.on('interactionCreate', async (interaction) => {
 
       // @ts-ignore
       await inter.execute(interaction);
-      transaction.setStatus('ok');
+      // transaction.setStatus('ok');
     } catch (error) {
       handleInteractionError(interaction, error);
     }
@@ -240,7 +242,7 @@ client.on('interactionCreate', async (interaction) => {
 
       // @ts-ignore
       await inter.execute(interaction);
-      transaction.setStatus('ok');
+      // transaction.setStatus('ok');
     } catch (error) {
       handleInteractionError(interaction, error);
     }
@@ -260,7 +262,8 @@ client.on('interactionCreate', async (interaction) => {
 
     // @ts-ignore
     await command.execute(interaction, client);
-    transaction.setStatus('ok');
+    console.log(transaction);
+    // transaction.setStatus('ok');
   } catch (error) {
     handleInteractionError(interaction, error);
   }

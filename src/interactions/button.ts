@@ -110,7 +110,8 @@ const Button = {
         interaction.user.id === '214760917810937857'
       ) {
         const { id } = interaction.user; // jerry tossaja
-        const member = await interaction.guild.members.fetch(id);
+        const member = await interaction.guild?.members.fetch(id);
+        if (!member) return;
 
         try {
           await member.timeout(10000, 'HÄÄHÄÄÄ');

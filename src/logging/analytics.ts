@@ -51,7 +51,7 @@ interface Analytiikka {
   group(options: GroupOptions): void;
 }
 
-const analytics: Analytiikka = new Analytics(process.env.analytics);
+const analytics: Analytiikka = new Analytics(process.env.analytics ?? '');
 
 function runAnalytics(
   name: string,
@@ -81,7 +81,7 @@ function runAnalytics(
     userId: interaction.user.id,
     traits: {
       name: interaction.user.username,
-      avatar: interaction.user.avatarURL({ format: 'png', size: 512 }),
+      avatar: interaction.user.avatarURL({ format: 'png', size: 512 }) ?? '',
       createdAt: SnowflakeUtil.deconstruct(interaction.user.id).date.toString(),
       id: interaction.user.id,
     },

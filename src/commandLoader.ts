@@ -20,19 +20,19 @@ const devGuilds = ['566955190000025611'];
 const permissionGuilds = ['279272653834027008', '229499178018013184'];
 const perms = {};
 
-async function loadPerms(
-  client: Client,
-  komennot: Collection<string, ApplicationCommand<{}>>
-) {
-  komennot.forEach((komento) => {
-    const permission = perms[komento.name];
-    if (permission) {
-      komento.permissions.set({
-        permissions: permission,
-      });
-    }
-  });
-}
+// async function loadPerms(
+//   client: Client,
+//   komennot: Collection<string, ApplicationCommand<{}>>
+// ) {
+//   komennot.forEach((komento) => {
+//     const permission = perms[komento.name];
+//     if (permission) {
+//       komento.permissions.set({
+//         permissions: permission,
+//       });
+//     }
+//   });
+// }
 
 const loadCommands = async (client: Client) => {
   const botCommands: ApplicationCommandData[] = [];
@@ -41,16 +41,16 @@ const loadCommands = async (client: Client) => {
     const command: SlashCommand = de.default;
     botCommands.push(command.data);
 
-    if (command.permissions) {
-      perms[command.data.name] = command.permissions;
-    }
+    // if (command.permissions) {
+    //   perms[command.data.name] = command.permissions;
+    // }
   }
 
   if (process.env.NODE_ENV === 'production') {
     // 1. Set global commands
     // 2. Set permissions to permissionGuilds
 
-    client.application.commands.set(botCommands).then(() => {
+    client.application?.commands.set(botCommands).then(() => {
       console.log('[PROD commandLoader] Globaalit komennot asennettu!');
     });
 

@@ -5,7 +5,11 @@ import { Message } from 'discord.js';
 import got from 'got';
 import { createHash } from 'crypto';
 
-const s3 = new S3(process.env.s3AccessKey, process.env.s3SecretKey, 'nl-ams');
+const s3 = new S3(
+  process.env.s3AccessKey ?? '',
+  process.env.s3SecretKey ?? '',
+  'nl-ams'
+);
 
 class S3Client {
   getFiles(): void {
@@ -21,6 +25,8 @@ class S3Client {
     message.attachments.forEach(async (attachment) => {
       const fileName = attachment.name;
       const fileUrl = attachment.url;
+
+      if (!fileName) return;
 
       await this.getFile(fileUrl, fileName);
       await this.uploadToS3(fileName, message.author.id);

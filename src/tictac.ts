@@ -8,7 +8,7 @@ import {
 } from 'discord.js';
 import { Board } from 'tictactoe-game-modules';
 
-function* times(x) {
+function* times(x: any) {
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < x; i++) yield i;
 }
@@ -53,11 +53,11 @@ class TictacManager {
     (buttonPressed as MessageButton).label = XsTurn ? 'X' : 'O';
     (buttonPressed as MessageButton).style = XsTurn ? 'SUCCESS' : 'DANGER';
 
-    const styleToNumber = (style) =>
+    const styleToNumber = (style: string | null) =>
       // eslint-disable-next-line no-nested-ternary
       style === 'SECONDARY' ? 2 : style === 'SUCCESS' ? 3 : 4;
 
-    const components = [];
+    const components: any[] = [];
 
     for (const actionRow of message.components) {
       components.push({ type: 1, components: [] });
@@ -72,7 +72,7 @@ class TictacManager {
     }
 
     const boardArray = (components as MessageActionRow[]).map((b) => {
-      return b.components.map((a: MessageButton) => {
+      return b.components.map((a: any) => {
         return a.label;
       });
     });
@@ -152,7 +152,7 @@ class TictacManager {
   }
 
   createGame(interaction: CommandInteraction) {
-    const koko = interaction.options.get('koko').value;
+    const koko = interaction.options.get('koko')?.value;
     const vastustaja = interaction.options.getMember('vastustaja');
 
     const rivit: MessageActionRow[] = [];

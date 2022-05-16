@@ -6,7 +6,7 @@
     "rootDir": "./",
     "outDir": "./build",
     "esModuleInterop": true,
-    "strict": false,
+    "strict": true,
     "sourceMap": true,
     "inlineSources": true
   }

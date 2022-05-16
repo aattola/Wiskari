@@ -6,6 +6,7 @@ const messageCreate = {
     name: 'presenceUpdate',
   },
   async execute(oldPresence: Presence, newPresence: Presence) {
+    if (!newPresence.user) return;
     analytics.track({
       userId: newPresence.user.id,
       event: 'presenceUpdate',

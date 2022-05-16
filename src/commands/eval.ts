@@ -3,7 +3,7 @@ import ut from 'util';
 import { SlashCommand } from '../types/command';
 import { client } from '../index';
 
-function clean(text) {
+function clean(text: any) {
   if (typeof text === 'string')
     return text
       .replace(/`/g, `\`${String.fromCharCode(8203)}`)
@@ -34,7 +34,7 @@ const Eval: SlashCommand = {
   ],
   async execute(interaction: CommandInteraction) {
     if (interaction.user.id === '214760917810937856') {
-      const args = interaction.options.get('koodi').value;
+      const args = interaction.options.get('koodi')?.value;
       try {
         const code = args;
         if (typeof code === 'string') {

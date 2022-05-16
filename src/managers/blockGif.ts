@@ -4,6 +4,7 @@ import {
   ContextMenuInteraction,
   Message,
 } from 'discord.js';
+// @ts-ignore
 import getUrls from 'extract-urls';
 import { crc32 } from 'crc';
 import axios from 'axios';
@@ -12,7 +13,7 @@ import NodeCache from 'node-cache';
 import { Sentry } from '../logging/sentry';
 
 const data = process.env.firebase;
-const buff = Buffer.from(data, 'base64');
+const buff = Buffer.from(data as any, 'base64');
 const text = buff.toString('ascii');
 
 // @ts-ignore eslint-disable-next-line node/no-unpublished-import
@@ -50,10 +51,10 @@ class BlockGif {
     '230289238455746560', // topias
   ];
 
-  static async getGifHash(url: string): Promise<string> {
+  static async getGifHash(url: string): Promise<any> {
     // eslint-disable-next-line no-async-promise-executor
     return new Promise(async (resolve, reject) => {
-      const cacheRes: string = cache.get(url);
+      const cacheRes = cache.get(url);
       if (cacheRes) {
         resolve(cacheRes);
       }
@@ -67,7 +68,9 @@ class BlockGif {
         .pipe(crypto.createHash('md5'))
         // eslint-disable-next-line func-names
         .on('readable', async function () {
+          // @ts-ignore
           if (!this.read) return;
+          // @ts-ignore
           const bb = this.read();
           if (!bb) return;
 
@@ -94,12 +97,12 @@ class BlockGif {
 
             const currTime = Date.now();
             const banTime = currTime + 10000;
-            await message.member
-              .timeout(banTime, 'Postasi cringeä')
+            message.member
+              ?.timeout(banTime, 'Postasi cringeä')
               .catch(() => null);
 
             dmChan
-              .send(
+              ?.send(
                 `Tuo hajautusalgoritmilla laskettu numero on blokattu. joten älä laita tällästä. vammaisille: || blokattu ||`
               )
               .catch(() => null);
@@ -129,7 +132,7 @@ class BlockGif {
           //   .catch(() => null);
 
           dmChan
-            .send(`Tuo on estetty joten älä laita tällästä`)
+            ?.send(`Tuo on estetty joten älä laita tällästä`)
             .catch(() => null);
         }
       }
@@ -147,7 +150,7 @@ class BlockGif {
     }
 
     const value = interaction.options.get('message');
-    const message = <Message>value.message;
+    const message = <Message>value?.message;
     const urls = getUrls(message.content);
     if (!urls) {
       if (message.attachments.size > 0) {
@@ -182,6 +185,7 @@ class BlockGif {
           ephemeral: true,
         });
       }
+      // @ts-ignore
       return;
     }
     const urlArray = [...urls];
@@ -247,7 +251,7 @@ class BlockGif {
         ephemeral: true,
       });
     }
-    const { value } = interaction.options.get('hash');
+    const value = interaction.options.get('hash')?.value;
 
     const urls = getUrls(<string>value);
     if (!urls) {
@@ -339,7 +343,7 @@ class BlockGif {
     const estoTesto = db.collection('estolista2000');
     const snapshot = await estoTesto.get();
 
-    const blockedArray = [];
+    const blockedArray: any[] = [];
     snapshot.forEach((doc) => {
       const docci = doc.data();
       blockedArray.push(<Blocked>docci);

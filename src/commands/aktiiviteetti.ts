@@ -54,7 +54,8 @@ const Aktiiviteetti: SlashCommand = {
     interaction: CommandInteraction,
     client: Client
   ): Promise<void> {
-    const guildId = interaction.guild.id;
+    const guildId = interaction.guild?.id;
+    if (!guildId) return console.log('ei guildid');
 
     const guild = await client.guilds.fetch(guildId);
     const guildMember = await guild.members.fetch(interaction.user.id);

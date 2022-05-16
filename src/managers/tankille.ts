@@ -118,7 +118,7 @@ class Tankille {
     data: <any>{},
   };
 
-  accessToken: string = null;
+  accessToken: unknown;
 
   protected static instance: Tankille;
 
@@ -162,7 +162,7 @@ class Tankille {
     return res.data.refreshToken;
   }
 
-  private async refreshAuth(refreshToken: string): Promise<string> {
+  private async refreshAuth(refreshToken: unknown): Promise<string> {
     const timeSinceLastFetch = Date.now() - this.tokenCache.lastFetch;
     // 10 tunnin cache accesstokenille (vanhenee 12 tunnissa)
     if (timeSinceLastFetch <= 36000) {
@@ -231,7 +231,7 @@ class Tankille {
       throw new Error('aseman historiaa ei löytynyt');
     }
 
-    const uniikkiTest = [];
+    const uniikkiTest: string[] = [];
     const hintadata: AsemaReport[] = [];
 
     res.data.forEach((report) => {

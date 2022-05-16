@@ -51,7 +51,7 @@ class Nettiauto {
     return this.tokenCache;
   }
 
-  async fetchCarInfo(adId: string): Promise<NettiautoListing> {
+  async fetchCarInfo(adId: string): Promise<NettiautoListing | null> {
     const token = await this.getAccessToken();
     if (!token) return null;
 
@@ -67,7 +67,7 @@ class Nettiauto {
     return axiosResponse.data;
   }
 
-  parseUrl(url: string): string {
+  parseUrl(url: string): string | null {
     if (!url.includes('https://www.nettiauto.com/')) return null;
     const osat = url.split('/');
     if (osat.length !== 6) return null;

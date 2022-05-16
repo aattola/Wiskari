@@ -1,4 +1,6 @@
 import * as Sentry from '@sentry/node';
+// @ts-ignore
+import * as Tracking from '@sentry/tracing';
 import os from 'os';
 
 const dev = process.env.NODE_ENV;

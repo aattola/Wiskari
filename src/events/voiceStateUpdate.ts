@@ -7,6 +7,8 @@ const messageCreate = {
   },
   async execute(oldUser: VoiceState, newUser: VoiceState) {
     const { member } = newUser;
+    if (!member) return;
+    if (!oldUser.member) return;
 
     if (!member.voice.channel) {
       analytics.track({
@@ -14,7 +16,7 @@ const messageCreate = {
         event: 'leaveChannel',
         properties: {
           type: 'voiceChannel',
-          channel: oldUser.member.voice.channel,
+          channel: oldUser.member.voice.channel as any,
           executedAt: Date.now(),
         },
       });

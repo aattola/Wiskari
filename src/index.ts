@@ -3,6 +3,7 @@ import Discord, {
   Collection,
   CommandInteraction,
   ContextMenuInteraction,
+  ModalSubmitInteraction,
   SelectMenuInteraction,
   TextChannel,
 } from 'discord.js';
@@ -121,7 +122,8 @@ function handleInteractionError(
     | CommandInteraction
     | ContextMenuInteraction
     | ButtonInteraction
-    | SelectMenuInteraction,
+    | SelectMenuInteraction
+    | ModalSubmitInteraction,
   error: any
 ) {
   console.error('[KOMENTO VIRHE]', error);
@@ -135,12 +137,13 @@ function handleInteractionError(
       type: interaction.type,
     },
   });
-  if (interaction.replied) {
+  if (interaction.replied || interaction.deferred) {
     interaction.editReply({
       content: `Virhe interactionissa: ${interaction.id} ${interaction.type}`,
     });
     return;
   }
+
   interaction.reply({
     content: `Virhe interactionissa: ${interaction.id} ${interaction.type}`,
     ephemeral: true,
@@ -189,6 +192,19 @@ client.on('interactionCreate', async (interaction) => {
     level: Sentry.Severity.Info,
     data: sentryInteraction,
   });
+
+  if (interaction.isModalSubmit()) {
+    try {
+      const inter = interactions.get('modalsubmit');
+
+      runAnalytics('modalSubmit', interaction.customId, interaction);
+      // @ts-ignore
+      await inter.execute(interaction);
+      transaction.setStatus('ok');
+    } catch (error) {
+      handleInteractionError(interaction, error);
+    }
+  }
 
   if (interaction.isButton()) {
     try {

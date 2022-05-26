@@ -28,11 +28,17 @@ const TankilleCommand: SlashCommand = {
 
     const kiisselit = data.filter((value) => {
       if (!value.price[0]) return false;
+      // vitun klopit ei laita diisselin hintoja vaikka kiisselin hinta löytyisi
+      const diisselihinta = value.price.filter((a) => a.tag === 'dsl');
+      if (!diisselihinta[0]) return false;
       return value.fuels.includes('dsl');
     });
 
     const ysiviis = data.filter((value) => {
       if (!value.price[0]) return false;
+      // sama bensalle
+      const bensahinta = value.price.filter((a) => a.tag === '95');
+      if (!bensahinta[0]) return false;
       return value.fuels.includes('95');
     });
 
@@ -45,6 +51,8 @@ const TankilleCommand: SlashCommand = {
     const kiisseli = kiisselit.sort((a, b) => {
       const kiisseliObj = a.price.filter((fuel) => fuel.tag === 'dsl')[0];
       const kiisseliObjB = b.price.filter((fuel) => fuel.tag === 'dsl')[0];
+
+      if (!kiisseliObj || !kiisseliObjB) return 0;
       return kiisseliObj.price - kiisseliObjB.price;
     });
 

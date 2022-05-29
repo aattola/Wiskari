@@ -231,6 +231,8 @@ class BlockGif {
     if (urlArray[0]) {
       this.fetchBlocklist().then(() => null);
 
+      message.delete();
+
       return interaction.reply({
         content: `Ihan ok mut [toi](${message.url}) meni estolistalle`,
         ephemeral: true,

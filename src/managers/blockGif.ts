@@ -38,6 +38,10 @@ interface Blocked {
   timestamp: number;
   url: string;
   hash?: string;
+  blocker?: {
+    id?: string;
+    name?: string;
+  };
 }
 
 class BlockGif {
@@ -132,7 +136,12 @@ class BlockGif {
           //   .catch(() => null);
 
           dmChan
-            ?.send(`Tuo on estetty joten älä laita tällästä`)
+            ?.send(
+              `Tuo on estetty joten älä laita tällästä. Tuon esti ukko nimeltä: ${
+                blocked1.blocker?.name ??
+                'ei löytynyt nimeä koska roope trollas'
+              }`
+            )
             .catch(() => null);
         }
       }

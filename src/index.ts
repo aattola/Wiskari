@@ -36,7 +36,7 @@ const client = new Discord.Client({
     status: 'online',
     activities: [
       {
-        name: 'Asari menot 11.6.2022',
+        name: 'Asari menot 18.6.2022',
         type: 'WATCHING',
       },
     ],

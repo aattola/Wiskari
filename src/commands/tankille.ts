@@ -118,12 +118,12 @@ const TankilleCommand: SlashCommand = {
       }
     );
 
-    const row1 = new MessageActionRow().addComponents(
-      new MessageButton()
-        .setCustomId('listGas')
-        .setLabel('Näytä koko lista')
-        .setStyle('SECONDARY')
-    );
+    // const row1 = new MessageActionRow().addComponents(
+    //   new MessageButton()
+    //     .setCustomId('listGas')
+    //     .setLabel('Näytä koko lista')
+    //     .setStyle('SECONDARY')
+    // );
 
     const row2 = new MessageActionRow().addComponents(
       new MessageSelectMenu()
@@ -140,7 +140,7 @@ const TankilleCommand: SlashCommand = {
     );
 
     await interaction
-      .editReply({ embeds: [embed], components: [row1, row2] })
+      .editReply({ embeds: [embed], components: [row2] })
       .catch((err) => console.log(err));
   },
 };

@@ -24,7 +24,7 @@ const TankilleCommand: SlashCommand = {
       throw new Error('joku meni rikki');
     });
 
-    if (!data) return console.log('?', data);
+    if (!data) throw new Error('Ei saatu bensadataa');
 
     const kiisselit = data.filter((value) => {
       if (!value.price[0]) return false;
@@ -60,7 +60,16 @@ const TankilleCommand: SlashCommand = {
       const kiisseliHinta = track.price.filter((fuel) => fuel.tag === 'dsl')[0];
       return {
         name: `${track.name}`,
-        value: `Kiisseli: ${kiisseliHinta.price}€`,
+        value: `Kiisseli: [${
+          kiisseliHinta.price
+        }€](https://www.google.com/maps/search/?api=1&query=${track.name
+          .replace(' ', '%20')
+          .replace(' ', '%20')
+          .replace(' ', '%20')
+          .replace(' ', '%20')
+          .replace(' ', '%20')
+          .replace(' ', '%20')
+          .replace(' ', '%20')})`,
         inline: true,
       };
     });
@@ -78,7 +87,14 @@ const TankilleCommand: SlashCommand = {
 
       lopullinenList.push({
         name: `${bensa.name}`,
-        value: `95: ${ysiviisHinta.price}€`,
+        value: `95: [${
+          ysiviisHinta.price
+        }€](https://www.google.com/maps/search/?api=1&query=${bensa.name
+          .replace(' ', '%20')
+          .replace(' ', '%20')
+          .replace(' ', '%20')
+          .replace(' ', '%20')
+          .replace(' ', '%20')})`,
         inline: true,
       });
     });
@@ -140,7 +156,7 @@ const TankilleCommand: SlashCommand = {
     );
 
     await interaction
-      .editReply({ embeds: [embed], components: [row2] })
+      .editReply({ embeds: [embed] })
       .catch((err) => console.log(err));
   },
 };

@@ -8,7 +8,10 @@ import {
 interface SlashCommand {
   data: ApplicationCommandData;
   permissions?: ApplicationCommandPermissionData[];
-  execute(interaction: CommandInteraction, client: Client): Promise<void>;
+  execute(
+    interaction: CommandInteraction,
+    client: Client
+  ): Promise<void | undefined>;
 }
 
 export { SlashCommand };

@@ -19,6 +19,7 @@
     "no-console": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "class-methods-use-this": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
     "prettier/prettier": [
       "error",
       {

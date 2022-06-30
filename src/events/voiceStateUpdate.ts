@@ -42,10 +42,10 @@ const messageCreate = {
               '229499178018013184'
             )!) as TextChannel;
             await chatti.send(
-              '<@286963674990772226> Häipyi afkiin koska afkasi minuutin!'
+              '<@286963674990772226> Häipyi afkiin koska afkasi 5 minuuttia!'
             );
           }
-        }, 60 * 1000);
+        }, 60 * 1000 * 5);
       }
     }
 

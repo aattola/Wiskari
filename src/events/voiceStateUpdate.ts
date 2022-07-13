@@ -24,30 +24,30 @@ const messageCreate = {
       return;
     }
 
-    if (member.id === '286963674990772226') {
-      if (newUser.member?.voice.deaf) {
-        // ukko 286963674990772226 on laittanut deafen moden päälle
-        if (newUser.member.voice.channel?.id === '704392425338175610') return;
+    // if (member.id === '286963674990772226') {
+    //   if (newUser.member?.voice.deaf) {
+    //     // ukko 286963674990772226 on laittanut deafen moden päälle
+    //     if (newUser.member.voice.channel?.id === '704392425338175610') return;
 
-        setTimeout(async () => {
-          // tsekataan uusiksi onko deafen
-          const guild = await client.guilds.fetch('229499178018013184');
-          const gmember = await guild.members.fetch('286963674990772226');
-          if (!gmember.voice) return;
-          if (gmember.voice.deaf) {
-            await gmember.voice.setChannel('704392425338175610').catch(() => {
-              console.log('huutis ei oikeuksia');
-            });
-            const chatti = (await guild.channels.cache.get(
-              '229499178018013184'
-            )!) as TextChannel;
-            await chatti.send(
-              '<@286963674990772226> Häipyi afkiin koska afkasi 5 minuuttia!'
-            );
-          }
-        }, 60 * 1000 * 5);
-      }
-    }
+    //     setTimeout(async () => {
+    //       // tsekataan uusiksi onko deafen
+    //       const guild = await client.guilds.fetch('229499178018013184');
+    //       const gmember = await guild.members.fetch('286963674990772226');
+    //       if (!gmember.voice) return;
+    //       if (gmember.voice.deaf) {
+    //         await gmember.voice.setChannel('704392425338175610').catch(() => {
+    //           console.log('huutis ei oikeuksia');
+    //         });
+    //         const chatti = (await guild.channels.cache.get(
+    //           '229499178018013184'
+    //         )!) as TextChannel;
+    //         await chatti.send(
+    //           '<@286963674990772226> Häipyi afkiin koska afkasi 5 minuuttia!'
+    //         );
+    //       }
+    //     }, 60 * 1000 * 5);
+    //   }
+    // }
 
     analytics.track({
       userId: member.id,

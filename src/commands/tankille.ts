@@ -9,6 +9,7 @@ import {
 import { SlashCommand } from '../types/command';
 import { Tankille } from '../managers/tankille';
 import { Asema } from '../types/tankkiTypes';
+import { Sentry } from '../logging/sentry';
 
 const TankilleCommand: SlashCommand = {
   data: {
@@ -20,8 +21,8 @@ const TankilleCommand: SlashCommand = {
 
     const api = Tankille.getInstance();
     const data = await api.getGasPrices().catch((err) => {
-      console.log('joku meni paskaksi', err);
-      throw new Error('joku meni rikki');
+      Sentry.captureException(err);
+      throw new Error(err);
     });
 
     if (!data) throw new Error('Ei saatu bensadataa');

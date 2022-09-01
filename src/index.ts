@@ -36,13 +36,13 @@ const client = new Discord.Client({
     status: 'online',
     activities: [
       {
-        name: 'Asari menot 18.6.2022',
+        name: 'Kanglu menot 1.10.22',
         type: 'WATCHING',
       },
     ],
   },
-  intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_INVITES', 'GUILD_VOICE_STATES'],
-  ws: { properties: { $browser: 'Discord iOS' } },
+  intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_INVITES', 'GUILD_VOICE_STATES']
+  // ws: { properties: { $browser: 'Discord iOS' } },
 });
 
 // const prisma = new PrismaClient();

@@ -17,10 +17,22 @@ interface AsemaHinta {
   reporter: string;
   _id: string;
 }
+
+type Fuels =
+  | '95'
+  | '98'
+  | 'dsl'
+  | 'ngas'
+  | 'bgas'
+  | '98+'
+  | 'dsl+'
+  | '85'
+  | 'hvo';
+
 interface Asema {
   address: AsemaOsoite;
   location: AsemaLocation;
-  fuels: string[];
+  fuels: Fuels[];
   _id: string;
   name: string;
   chain: string;
@@ -28,6 +40,11 @@ interface Asema {
   price: AsemaHinta[];
   __v: number;
   updated: string;
+}
+
+export interface AsemaNormalized extends Asema {
+  95: number | false;
+  diesel: number | false;
 }
 
 interface AsemaReport {

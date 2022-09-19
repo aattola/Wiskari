@@ -27,9 +27,11 @@ const TankilleCommand: SlashCommand = {
 
     if (!data) throw new Error('Ei saatu bensadataa');
 
+    // SIIS TÄMÄ ON YKSI "TOIMIIPA AINAKIN" KOODIPÄTKÄ
+
     const kiisselit = data.filter((value) => {
       if (!value.price[0]) return false;
-      // vitun klopit ei laita diisselin hintoja vaikka kiisselin hinta löytyisi
+      // klopit ei laita diisselin hintoja vaikka kiisselin hinta löytyisi
       const diisselihinta = value.price.filter((a) => a.tag === 'dsl');
       if (!diisselihinta[0]) return false;
       return value.fuels.includes('dsl');

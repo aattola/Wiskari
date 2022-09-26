@@ -6,19 +6,19 @@ import Discord, {
   ModalSubmitInteraction,
   SelectMenuInteraction,
   TextChannel,
-} from 'discord.js';
+} from "discord.js";
 
-import fs from 'fs';
+import fs from "fs";
 
-import path from 'path';
-import dotenv from 'dotenv';
-import { runAnalytics } from './logging/analytics';
-import { Sentry } from './logging/sentry';
-import { loadCommands } from './commandLoader';
+import path from "path";
+import dotenv from "dotenv";
+import { runAnalytics } from "./logging/analytics";
+import { Sentry } from "./logging/sentry";
+import { loadCommands } from "./commandLoader";
 
 // eslint-disable-next-line import/first
-import './managers/s3';
-import blockGif from './managers/blockGif';
+import "./managers/s3";
+import blockGif from "./managers/blockGif";
 
 dotenv.config();
 // const knex = Knex({
@@ -33,22 +33,22 @@ dotenv.config();
 
 const client = new Discord.Client({
   presence: {
-    status: 'online',
+    status: "online",
     activities: [
       {
-        name: 'Kanglu menot 1.10.22',
-        type: 'WATCHING',
+        name: "Kanglu menot 7.10.22",
+        type: "WATCHING",
       },
     ],
   },
-  intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_INVITES', 'GUILD_VOICE_STATES']
+  intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_INVITES", "GUILD_VOICE_STATES"],
   // ws: { properties: { $browser: 'Discord iOS' } },
 });
 
 // const prisma = new PrismaClient();
 
-client.on('ready', async () => {
-  console.log('[Discord] Kirjauduttu sisään ja valmiina. Wiskari');
+client.on("ready", async () => {
+  console.log("[Discord] Kirjauduttu sisään ja valmiina. Wiskari");
 
   loadCommands(client);
   await blockGif.fetchBlocklist();
@@ -80,22 +80,22 @@ const interactions = new Collection();
 const commandFiles = fs
   .readdirSync(path.join(__dirname, `/commands`))
   .filter((file) => {
-    if (file.endsWith('.ts')) return file;
-    if (file.endsWith('.js')) return file;
+    if (file.endsWith(".ts")) return file;
+    if (file.endsWith(".js")) return file;
   });
 
 const interactionFiles = fs
   .readdirSync(path.join(__dirname, `/interactions`))
   .filter((file) => {
-    if (file.endsWith('.ts')) return file;
-    if (file.endsWith('.js')) return file;
+    if (file.endsWith(".ts")) return file;
+    if (file.endsWith(".js")) return file;
   });
 
 const eventFiles = fs
   .readdirSync(path.join(__dirname, `/events`))
   .filter((file) => {
-    if (file.endsWith('.ts')) return file;
-    if (file.endsWith('.js')) return file;
+    if (file.endsWith(".ts")) return file;
+    if (file.endsWith(".js")) return file;
   });
 
 async function registerInteractions() {
@@ -126,11 +126,11 @@ function handleInteractionError(
     | ModalSubmitInteraction,
   error: any
 ) {
-  console.error('[KOMENTO VIRHE]', error);
+  console.error("[KOMENTO VIRHE]", error);
   Sentry.captureException(error, {
     user: interaction.user,
     tags: {
-      bug: 'interaction',
+      bug: "interaction",
     },
     extra: {
       interaction,
@@ -150,7 +150,7 @@ function handleInteractionError(
   });
 }
 
-client.on('interactionCreate', async (interaction) => {
+client.on("interactionCreate", async (interaction) => {
   Sentry.setUser({
     username: interaction.user.username,
     id: interaction.user.id,
@@ -175,7 +175,7 @@ client.on('interactionCreate', async (interaction) => {
     },
     options: (interaction as CommandInteraction).options
       ? (interaction as CommandInteraction).options.data.map((a) => a.name)
-      : 'Ei optionei',
+      : "Ei optionei",
   };
 
   const transaction = Sentry.startTransaction({
@@ -187,7 +187,7 @@ client.on('interactionCreate', async (interaction) => {
   });
 
   Sentry.addBreadcrumb({
-    category: 'interaction',
+    category: "interaction",
     message: `Uusi interaction jonka id: ${interaction.id} ${interaction.type}`,
     level: Sentry.Severity.Info,
     data: sentryInteraction,
@@ -195,12 +195,12 @@ client.on('interactionCreate', async (interaction) => {
 
   if (interaction.isModalSubmit()) {
     try {
-      const inter = interactions.get('modalsubmit');
+      const inter = interactions.get("modalsubmit");
 
-      runAnalytics('modalSubmit', interaction.customId, interaction);
+      runAnalytics("modalSubmit", interaction.customId, interaction);
       // @ts-ignore
       await inter.execute(interaction);
-      transaction.setStatus('ok');
+      transaction.setStatus("ok");
     } catch (error) {
       handleInteractionError(interaction, error);
     }
@@ -208,12 +208,12 @@ client.on('interactionCreate', async (interaction) => {
 
   if (interaction.isButton()) {
     try {
-      const inter = interactions.get('button');
+      const inter = interactions.get("button");
 
-      runAnalytics('button', interaction.customId, interaction);
+      runAnalytics("button", interaction.customId, interaction);
       // @ts-ignore
       await inter.execute(interaction);
-      transaction.setStatus('ok');
+      transaction.setStatus("ok");
     } catch (error) {
       handleInteractionError(interaction, error);
     }
@@ -228,18 +228,18 @@ client.on('interactionCreate', async (interaction) => {
       if (!inter) {
         await interaction.reply({
           content:
-            'Virhe contextissa. Tuollaista nappulaa ei ole koodattu' +
-            ' (ei löytynyt interaction kansiosta oikealla nimellä)',
+            "Virhe contextissa. Tuollaista nappulaa ei ole koodattu" +
+            " (ei löytynyt interaction kansiosta oikealla nimellä)",
           ephemeral: true,
         });
         return;
       }
 
-      runAnalytics('contextMenu', interaction.commandName, interaction);
+      runAnalytics("contextMenu", interaction.commandName, interaction);
 
       // @ts-ignore
       await inter.execute(interaction);
-      transaction.setStatus('ok');
+      transaction.setStatus("ok");
     } catch (error) {
       handleInteractionError(interaction, error);
     }
@@ -250,13 +250,13 @@ client.on('interactionCreate', async (interaction) => {
 
   if (interaction.isSelectMenu()) {
     try {
-      const inter = interactions.get('selectmenu');
+      const inter = interactions.get("selectmenu");
 
-      runAnalytics('selectMenu', interaction.customId, interaction);
+      runAnalytics("selectMenu", interaction.customId, interaction);
 
       // @ts-ignore
       await inter.execute(interaction);
-      transaction.setStatus('ok');
+      transaction.setStatus("ok");
     } catch (error) {
       handleInteractionError(interaction, error);
     }
@@ -272,11 +272,11 @@ client.on('interactionCreate', async (interaction) => {
   if (!command) return;
 
   try {
-    runAnalytics('command', interaction.commandName, interaction);
+    runAnalytics("command", interaction.commandName, interaction);
 
     // @ts-ignore
     await command.execute(interaction, client);
-    transaction.setStatus('ok');
+    transaction.setStatus("ok");
   } catch (error) {
     handleInteractionError(interaction, error);
   }

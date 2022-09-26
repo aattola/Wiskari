@@ -9,9 +9,9 @@ import Discord, {
 } from "discord.js";
 
 import fs from "fs";
-
 import path from "path";
 import dotenv from "dotenv";
+import cron from "node-cron";
 import { runAnalytics } from "./logging/analytics";
 import { Sentry } from "./logging/sentry";
 import { loadCommands } from "./commandLoader";
@@ -19,6 +19,7 @@ import { loadCommands } from "./commandLoader";
 // eslint-disable-next-line import/first
 import "./managers/s3";
 import blockGif from "./managers/blockGif";
+import { Tankille } from "./managers/tankille";
 
 dotenv.config();
 // const knex = Knex({
@@ -52,6 +53,24 @@ client.on("ready", async () => {
 
   loadCommands(client);
   await blockGif.fetchBlocklist();
+
+  cron
+    .schedule("0 * * * *", async () => {
+      const instance = Tankille.getInstance();
+      const res = await instance.getCheapestGas();
+
+      if (res) {
+        if (res.muutosProsenteissa <= -4) {
+          const channel = await client.channels.fetch("229499178018013184");
+          if (channel && channel.isText()) {
+            channel.send(
+              `Hoi bensan hinta on pudonnut jopa 4% tässä lähiaikoina. ${res.hinnatKeskiarvo} -> ${res.cheapestGas["95"]}`
+            );
+          }
+        }
+      }
+    })
+    .start();
 
   // const ctxMenu = new ContextMenuCommandBuilder()
   //   .setName('Lisää blokkilistalle')

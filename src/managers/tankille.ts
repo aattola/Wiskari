@@ -4,7 +4,7 @@ import { MessageAttachment } from 'discord.js';
 import sharp from 'sharp';
 import { sub, parseISO } from 'date-fns';
 import NodeCache from 'node-cache';
-import { Asema, AsemaReport } from '../types/tankkiTypes';
+import { Asema, AsemaNormalized, AsemaReport } from '../types/tankkiTypes';
 
 const cache = new NodeCache({
   stdTTL: 600,
@@ -119,6 +119,8 @@ class Tankille {
   };
 
   accessToken: unknown;
+
+  lastPrices95: number[] = [];
 
   protected static instance: Tankille;
 
@@ -276,6 +278,60 @@ class Tankille {
       outputBuff,
       'Kaavio jeffe and co trademark.png'
     );
+  }
+
+  async getCheapestGas() {
+    const prices = await this.getGasPrices();
+
+    const usefulPrices = prices.reduce((acc, value) => {
+      if (
+        value.fuels.includes('dsl') ||
+        value.fuels.includes('dsl+') ||
+        value.fuels.includes('95')
+      ) {
+        const ninetyFive =
+          value.price.filter((a) => a.tag === '95')[0]?.price ?? false;
+        const diesel =
+          value.price.filter((a) => a.tag === 'dsl' || 'dsl+')[0]?.price ??
+          false;
+
+        if (ninetyFive && diesel) {
+          acc.push({
+            ...value,
+            '95': ninetyFive,
+            diesel,
+          });
+        }
+      }
+      return acc;
+    }, [] as AsemaNormalized[]);
+
+    const cheapestGas = usefulPrices.sort(
+      (a, b) => (a['95'] || 0) - (b['95'] || 0)
+    );
+
+    if (this.lastPrices95.length > 2) {
+      const laskettu = this.lastPrices95.reduce(
+        (previousValue, currentValue) => previousValue + currentValue,
+        0
+      );
+      const hinnatKeskiarvo = laskettu / this.lastPrices95.length;
+      const muutosProsenteissa =
+        ((+cheapestGas[0]['95'] - hinnatKeskiarvo) / hinnatKeskiarvo) * 100;
+
+      if (muutosProsenteissa >= 5) {
+        return {
+          cheapestGas: cheapestGas[0],
+          muutosProsenteissa,
+          hinnatKeskiarvo,
+        };
+      }
+      this.lastPrices95.push(+cheapestGas[0]['95']);
+      return false;
+    }
+
+    this.lastPrices95.push(+cheapestGas[0]['95']);
+    return false;
   }
 
   public async getGasPrices(): Promise<Asema[]> {

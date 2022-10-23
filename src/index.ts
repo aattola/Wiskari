@@ -37,7 +37,7 @@ const client = new Discord.Client({
     status: 'online',
     activities: [
       {
-        name: 'Fortnite',
+        name: 'NEBI AGT',
         type: 'PLAYING',
       },
     ],
@@ -53,24 +53,6 @@ client.on('ready', async () => {
 
   loadCommands(client);
   await blockGif.fetchBlocklist();
-
-  cron
-    .schedule('0 * * * *', async () => {
-      const instance = Tankille.getInstance();
-      const res = await instance.getCheapestGas();
-
-      if (res) {
-        if (res.muutosProsenteissa <= -4) {
-          const channel = await client.channels.fetch('229499178018013184');
-          if (channel && channel.isText()) {
-            channel.send(
-              `Hoi bensan hinta on pudonnut jopa 4% tässä lähiaikoina. ${res.hinnatKeskiarvo} -> ${res.cheapestGas['95']}`
-            );
-          }
-        }
-      }
-    })
-    .start();
 
   // const ctxMenu = new ContextMenuCommandBuilder()
   //   .setName('Lisää blokkilistalle')

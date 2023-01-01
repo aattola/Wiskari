@@ -19,7 +19,7 @@ import { loadCommands } from './commandLoader';
 // eslint-disable-next-line import/first
 import './managers/s3';
 import blockGif from './managers/blockGif';
-import { Tankille } from './managers/tankille';
+import { laskePaivat } from './managers/paivalaskuri';
 
 dotenv.config();
 // const knex = Knex({
@@ -33,20 +33,19 @@ dotenv.config();
 // });
 
 const client = new Discord.Client({
-  presence: {
-    status: 'online',
-    activities: [
-      {
-        name: 'NEBI AGT',
-        type: 'PLAYING',
-      },
-    ],
-  },
   intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_INVITES', 'GUILD_VOICE_STATES'],
   // ws: { properties: { $browser: 'Discord iOS' } },
 });
 
 // const prisma = new PrismaClient();
+
+cron.schedule('0 */30 * * * *', () => {
+  const { hours, days } = laskePaivat();
+
+  if (client.isReady()) {
+    client.user.setActivity(`TJ ${days}`);
+  }
+});
 
 client.on('ready', async () => {
   console.log('[Discord] Kirjauduttu sisään ja valmiina. Wiskari');

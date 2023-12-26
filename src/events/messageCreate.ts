@@ -68,25 +68,25 @@ const messageCreate = {
   async execute(message: Message) {
     BlockGif.checkMessage(message);
     S3.handleMessage(message);
-    nettiauto.onMessage(message);
-
-    if (message.content.toLowerCase().includes('ni11a'.replace('11', 'gg'))) {
-      if (message.author.bot) return;
-      message.reply({
-        content: `NYT OMPI SITÄ PEISETTIÄ JATKA SAMAAN MALLIIN POSTAAMISTA`,
-        files: ['https://i.imgur.com/Psqr2Hc.png'],
-      });
-    }
-
-    if (message.content.toLowerCase() === 'get') {
-      // gettistä
-      gettistä(message);
-    }
-
-    if (message.content.toLowerCase() === 'gettistä') {
-      // gettistä
-      gettistä(message);
-    }
+    // nettiauto.onMessage(message);
+    //
+    // if (message.content.toLowerCase().includes('ni11a'.replace('11', 'gg'))) {
+    //   if (message.author.bot) return;
+    //   message.reply({
+    //     content: `NYT OMPI SITÄ PEISETTIÄ JATKA SAMAAN MALLIIN POSTAAMISTA`,
+    //     files: ['https://i.imgur.com/Psqr2Hc.png'],
+    //   });
+    // }
+    //
+    // if (message.content.toLowerCase() === 'get') {
+    //   // gettistä
+    //   gettistä(message);
+    // }
+    //
+    // if (message.content.toLowerCase() === 'gettistä') {
+    //   // gettistä
+    //   gettistä(message);
+    // }
 
     if (!message.author.bot) {
       analytics.track({
